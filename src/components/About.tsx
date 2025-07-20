@@ -6,35 +6,37 @@ const About = () => {
   const highlights = [
     {
       icon: Target,
-      title: "Strategic Vision",
-      description: "Focused on long-term goals with a clear strategic mindset"
+      title: "Cloud Infrastructure",
+      description: "Expertise in AWS services, Terraform, and infrastructure-as-code practices"
     },
     {
       icon: Users,
-      title: "Team Leadership",
-      description: "Experience building and leading high-performing teams"
+      title: "Leadership",
+      description: "Vice President of IEEE, managing teams and leading diversity initiatives"
     },
     {
       icon: Lightbulb,
       title: "Innovation",
-      description: "Passionate about implementing creative solutions"
+      description: "Developing AI solutions and inventory management systems"
     },
     {
       icon: Award,
-      title: "Excellence",
-      description: "Committed to delivering exceptional results"
+      title: "Academic Excellence",
+      description: "3.43 GPA pursuing dual degrees in Computer Engineering Technology"
     }
   ];
 
   const skills = [
-    "Strategic Planning",
+    "AWS (ECS, Lambda, S3, Bedrock)",
+    "Terraform & Infrastructure-as-Code",
+    "Python Development",
+    "Cloud Architecture",
+    "Software Engineering",
     "Team Leadership",
-    "Project Management",
-    "Business Development",
+    "VHDL & Circuit Design",
+    "Docker & DevOps",
     "Data Analysis",
-    "Communication",
-    "Problem Solving",
-    "Innovation"
+    "Project Management"
   ];
 
   return (
@@ -43,7 +45,7 @@ const About = () => {
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-bold mb-4">About Me</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional with a passion for excellence and innovation, dedicated to making a meaningful impact in every endeavor.
+            Computer Engineering Technology student with hands-on experience in cloud infrastructure, software development, and leadership roles across diverse organizations.
           </p>
         </div>
         
@@ -54,13 +56,13 @@ const About = () => {
               <h3 className="text-2xl font-semibold mb-4 text-primary">My Journey</h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Throughout my career, I've been driven by a commitment to excellence and a passion for creating meaningful solutions. My experience spans various industries and roles, each contributing to a well-rounded professional perspective.
+                  Currently pursuing dual degrees at Central Connecticut State University - a Master's in Computer Information Technology and Bachelor's in Computer Engineering Technology. My academic journey began at Gateway Community College where I earned an Electronics Technician Certification.
                 </p>
                 <p>
-                  I believe in the power of collaboration, continuous learning, and strategic thinking. Whether leading teams, developing strategies, or solving complex challenges, I approach every opportunity with dedication and enthusiasm.
+                  As a Cloud and Reliability Engineering Intern at The Hartford Insurance, I work with AWS infrastructure, Terraform, and develop innovative solutions like document chatbots using ECS, Lambda, and Bedrock. My experience spans from software development to leadership roles.
                 </p>
                 <p>
-                  My goal is to leverage my skills and experience to drive positive outcomes while building lasting professional relationships and contributing to organizational success.
+                  Through leadership positions like Vice President of IEEE and various internships, I've developed strong technical skills in cloud computing, software engineering, and team management while maintaining a 3.43 GPA and earning multiple certifications.
                 </p>
               </div>
             </Card>

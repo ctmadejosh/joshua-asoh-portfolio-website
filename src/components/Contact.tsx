@@ -10,26 +10,26 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "joshua.asoh@email.com",
-      href: "mailto:joshua.asoh@email.com"
+      value: "Joshua.asoh@my.ccsu.edu",
+      href: "mailto:Joshua.asoh@my.ccsu.edu"
     },
     {
       icon: Phone,
       label: "Phone", 
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
+      value: "203-613-0475",
+      href: "tel:2036130475"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Your City, State",
+      value: "New Haven, CT",
       href: null
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "linkedin.com/in/joshuaasoh",
-      href: "https://linkedin.com/in/joshuaasoh"
+      value: "linkedin.com/in/joshua-asoh",
+      href: "https://www.linkedin.com/in/joshua-asoh"
     }
   ];
 

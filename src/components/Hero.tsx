@@ -32,7 +32,7 @@ const Hero = () => {
               </h1>
               
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Professional focused on driving innovation and excellence. Passionate about creating meaningful solutions and building strong relationships in the business world.
+                Computer Engineering Technology student and Cloud Engineering Intern passionate about AWS infrastructure, software development, and innovation in technology.
               </p>
             </div>
             

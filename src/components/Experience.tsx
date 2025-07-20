@@ -5,45 +5,87 @@ import { Calendar, MapPin, Building } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
-      title: "Senior Professional",
-      company: "Leading Organization",
-      location: "City, State",
-      period: "2020 - Present",
-      type: "Full-time",
-      description: "Leading strategic initiatives and driving operational excellence across multiple departments. Responsible for team leadership, project management, and business development.",
+      title: "Cloud and Reliability Engineering Intern",
+      company: "The Hartford Insurance",
+      location: "Hartford, CT",
+      period: "May 2025 – Present",
+      type: "Internship",
+      description: "Designing and deploying AWS infrastructure using Terraform, developing AI solutions for engineering teams, and gaining hands-on experience with cloud architecture and DevOps practices.",
       achievements: [
-        "Increased operational efficiency by 25%",
-        "Led cross-functional teams of 15+ members",
-        "Implemented strategic initiatives resulting in significant growth",
-        "Developed and maintained key client relationships"
+        "Designed and deployed AWS infrastructure using Terraform with reusable modules",
+        "Developed document chatbot for engineers using AWS ECS, Lambda, S3, and Bedrock",
+        "Gained expertise in AWS architecture and observability tools",
+        "Participated in agile ceremonies and DevOps culture initiatives"
       ]
     },
     {
-      title: "Professional Role",
-      company: "Previous Company",
-      location: "City, State", 
-      period: "2018 - 2020",
-      type: "Full-time",
-      description: "Managed complex projects and collaborated with diverse teams to deliver exceptional results. Focused on process improvement and stakeholder engagement.",
+      title: "College Operations Intern and Assistant Trainer",
+      company: "Connecticut Center for Arts and Technology",
+      location: "New Haven, CT",
+      period: "May 2024 – January 2025",
+      type: "Internship",
+      description: "Managing inventory systems, developing SOPs, and training staff on software tools while supporting BioLaunch operations and ensuring compliance with best practices.",
       achievements: [
-        "Successfully delivered 20+ projects on time",
-        "Improved client satisfaction scores by 30%",
-        "Streamlined processes reducing costs by 15%",
-        "Mentored junior team members"
+        "Managed inventory using Monday.com and Quartzy for efficient tracking",
+        "Developed and maintained SOPs for inventory management systems",
+        "Implemented critical software solutions for improved operations",
+        "Trained staff on software tools and best practices compliance"
       ]
     },
     {
-      title: "Associate Position",
-      company: "Earlier Organization",
-      location: "City, State",
-      period: "2016 - 2018", 
-      type: "Full-time",
-      description: "Contributed to team objectives while developing core professional skills. Gained valuable experience in analysis, planning, and execution.",
+      title: "Resident Assistant",
+      company: "Central Connecticut State University",
+      location: "New Britain, CT",
+      period: "August 2024 – May 2025",
+      type: "Part-time",
+      description: "Providing support and guidance to residents while fostering a safe and inclusive community environment through educational programs and conflict mediation.",
       achievements: [
-        "Completed comprehensive training program",
-        "Contributed to team goals and objectives",
-        "Developed analytical and technical skills",
-        "Built foundation for career advancement"
+        "Provided support and guidance to residents in university housing",
+        "Planned and executed educational and social programs",
+        "Mediated conflicts and enforced university policies",
+        "Served as liaison between residents and university administration"
+      ]
+    },
+    {
+      title: "Software Engineering Extern",
+      company: "FactSet Research Systems Inc.",
+      location: "Norwalk, CT",
+      period: "May 2024",
+      type: "Externship",
+      description: "Selected as one of 15 participants for an intensive two-week program focused on software engineering, AI/ML concepts, and professional development in the financial technology sector.",
+      achievements: [
+        "Selected as 1 of 15 participants for exclusive externship program",
+        "Developed Kate AI smart portfolio manager for hackathon competition",
+        "Completed intensive Python training and AI/ML workshops",
+        "Engaged in professional development and networking activities"
+      ]
+    },
+    {
+      title: "Lab Software Developer Intern",
+      company: "Alexion-AstraZeneca Rare Disease Unit",
+      location: "New Haven, CT",
+      period: "October 2023 – December 2023",
+      type: "Internship",
+      description: "Led development of comprehensive inventory management system for biological samples and chemical compounds, supporting protocol compliance and laboratory operations.",
+      achievements: [
+        "Led development of inventory management system using Python and Neptyne",
+        "Managed 1,600+ biological samples and 20,000+ chemical inventory items",
+        "Designed real-time database system for inventory tracking and retrieval",
+        "Ensured BSL2 protocol compliance and laboratory safety standards"
+      ]
+    },
+    {
+      title: "Vice President",
+      company: "Institute of Electrical and Electronics Engineering (IEEE)",
+      location: "New Britain, CT",
+      period: "July 2023 – April 2024",
+      type: "Leadership",
+      description: "Led membership recruitment and organizational initiatives while establishing partnerships with major technology and insurance companies for diversity-focused hiring events.",
+      achievements: [
+        "Recruited approximately 40 new members during involvement fair",
+        "Overhauled Discord server with improved information organization",
+        "Established partnerships with FactSet, COCC, The Hartford, and Travelers",
+        "Spearheaded diversity-focused hiring initiatives and events"
       ]
     }
   ];
@@ -54,7 +96,7 @@ const Experience = () => {
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-bold mb-4">Professional Experience</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A track record of driving results and building meaningful professional relationships across various roles and industries.
+            A comprehensive journey through technology, leadership, and innovation across diverse organizations and roles.
           </p>
         </div>
         
