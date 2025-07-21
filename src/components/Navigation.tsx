@@ -40,7 +40,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="font-bold text-xl">
-            <span className="gradient-primary bg-clip-text text-transparent">
+            <span className="text-foreground">
               Joshua Asoh
             </span>
           </div>
