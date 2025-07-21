@@ -19,15 +19,20 @@ const Navigation = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
+    { name: 'Projects', href: '#projects' }, // Use #projects for scrolling
     { name: 'Contact', href: '#contact' }
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsMobileMenuOpen(false);
+    } else {
+      window.location.href = href; // For /projects and other routes
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -40,7 +45,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="font-bold text-xl">
-            <span className="gradient-primary bg-clip-text text-transparent">
+            <span className="text-foreground">
               Joshua Asoh
             </span>
           </div>

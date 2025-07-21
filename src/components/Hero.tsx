@@ -26,7 +26,7 @@ const Hero = () => {
               
               <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">
                 Hi, I'm{" "}
-                <span className="gradient-primary bg-clip-text text-transparent">
+                <span className="text-primary">
                   Joshua Asoh
                 </span>
               </h1>
@@ -37,15 +37,18 @@ const Hero = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg" className="group">
-                <Mail className="w-4 h-4 mr-2 group-hover:animate-bounce" />
-                Get In Touch
-              </Button>
-              
-              <Button variant="outline" size="lg" className="group">
-                <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
-                Download Resume
-              </Button>
+              <a href="mailto:Joshua.asoh@my.ccsu.edu">
+                <Button variant="hero" size="lg" className="group">
+                  <Mail className="w-4 h-4 mr-2 group-hover:animate-bounce" />
+                  Get In Touch
+                </Button>
+              </a>
+              <a href="/resume_joshua_asoh_071725.pdf" download>
+                <Button variant="outline" size="lg" className="group">
+                  <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
+                  Download Resume
+                </Button>
+              </a>
             </div>
             
             <div className="flex items-center gap-6 pt-4">
