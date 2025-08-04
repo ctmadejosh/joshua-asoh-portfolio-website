@@ -1,73 +1,74 @@
-# Welcome to your Lovable project
+# Joshua Asoh Portfolio Website
 
-## Project info
+Welcome to the source code for Joshua Asoh's portfolio website. This project showcases professional experience, skills, and projects using a modern React-based stack.
 
-**URL**: https://lovable.dev/projects/b08ca87c-d510-47ef-8cc4-a00c1434df29
+## Table of Contents
+- [About](#about)
+- [Experience](#experience)
+- [Projects](#projects)
+- [Contact](#contact)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Development](#development)
+- [Deployment](#deployment)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## About
+This website presents Joshua Asoh, a Computer Engineering Technology student with hands-on experience in cloud infrastructure, software development, and leadership roles. The About section highlights academic background, certifications, and core skills such as AWS, Terraform, Python, and project management.
 
-**Use Lovable**
+## Experience
+A timeline of professional roles, including:
+- Cloud and Reliability Engineering Intern at The Hartford Insurance
+- College Operations Intern at Connecticut Center for Arts and Technology
+- Resident Assistant at Central Connecticut State University
+- Software Engineering Extern at FactSet
+- Lab Software Developer Intern at Alexion-AstraZeneca
+- Vice President of IEEE (CCSU Chapter)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b08ca87c-d510-47ef-8cc4-a00c1434df29) and start prompting.
+Each role details responsibilities, achievements, and technologies used.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Projects
+The Projects section features selected works and contributions, focusing on cloud solutions, AI, and inventory management systems. (See website for details.)
 
-**Use your preferred IDE**
+## Contact
+A contact form is available for professional inquiries and networking.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Tech Stack
+- **Framework:** React (with Vite)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS, shadcn-ui
+- **State/UI:** Custom hooks, Radix UI, Lucide icons
+- **Other:** PostCSS, ESLint
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Getting Started
+1. **Clone the repository:**
+   ```sh
+   git clone <YOUR_GIT_URL>
+   cd joshua-asoh-portfolio-website
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Start the development server:**
+   ```sh
+   npm run dev
+   ```
+   The site will be available at `http://localhost:5173` by default.
 
-Follow these steps:
+## Development
+- Main entry: `src/main.tsx`
+- App root: `src/App.tsx`
+- Components: `src/components/`
+- Styles: `src/App.css`, `src/index.css`
+- Public assets: `public/`
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Deployment
+You can deploy this site using [Lovable](https://lovable.dev/) or your preferred static hosting provider. For custom domains, see the Lovable documentation.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+**Author:** Joshua Asoh
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b08ca87c-d510-47ef-8cc4-a00c1434df29) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For more information, see the [live website](https://lovable.dev/projects/b08ca87c-d510-47ef-8cc4-a00c1434df29) or contact via the form on the site.

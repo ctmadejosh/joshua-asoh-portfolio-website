@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center space-y-6">
           {/* Logo */}
           <div className="font-bold text-2xl">
-            <span className="gradient-primary bg-clip-text text-transparent">
+            <span className="text-primary"> 
               Joshua Asoh
             </span>
           </div>
