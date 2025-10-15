@@ -9,7 +9,7 @@ const projects = [
   {
     title: "Personal Website",
     description: "This portfolio website built with React, Vite, and Tailwind CSS.",
-    link: "https://github.com/yourusername/portfolio-website",
+    link: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website",
   },
   {
     title: "IoT Sensor Dashboard",

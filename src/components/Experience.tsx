@@ -5,17 +5,33 @@ import { Calendar, MapPin, Building } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
+      title: "Digital Manufacturing Intern",
+      company: "Zygo AMETEK Precision Metrology",
+      location: "Middlefield, CT",
+      period: "September 2025 – Present",
+      type: "Internship",
+      description: "Creating digital work instructions and leveraging data analytics to enhance manufacturing efficiency through process optimization and documentation.",
+      achievements: [
+          "Developed and documented digital work instructions for manufacturing machines and processes",
+    "Queried company databases using SQL to identify high-frequency operations and workflow patterns",
+    "Created detailed, step-by-step digital guides for operators and technicians based on data-driven insights",
+    "Analyzed downtime, runtime, and task duration metrics to recommend efficiency improvements"
+        
+      ]
+    },
+    {
       title: "Cloud and Reliability Engineering Intern",
       company: "The Hartford Insurance",
       location: "Hartford, CT",
-      period: "May 2025 – Present",
+      period: "May 2025 – August 2025",
       type: "Internship",
-      description: "Designing and deploying AWS infrastructure using Terraform, developing AI solutions for engineering teams, and gaining hands-on experience with cloud architecture and DevOps practices.",
+      description: "Engineered generative AI and cloud solutions to improve documentation accessibility and automation for engineering teams using AWS, Terraform, and modern frontend frameworks.",
       achievements: [
-        "Designed and deployed AWS infrastructure using Terraform with reusable modules",
-        "Developed document chatbot for engineers using AWS ECS, Lambda, S3, and Bedrock",
-        "Gained expertise in AWS architecture and observability tools",
-        "Participated in agile ceremonies and DevOps culture initiatives"
+      "Provisioned cloud infrastructure with Terraform while ensuring compliance with AWS IAM and security protocols",
+    "Developed and deployed a responsive Angular UI integrated with AWS Bedrock for real-time chatbot interactions",
+    "Led prompt engineering and modular pipeline design for processing unstructured internal documentation",
+    "Deployed agentic workflows for autonomous information retrieval, reducing queries by 80% across 800+ engineers",
+    "Engineered a GenAI-powered document chatbot using Claude 3.5 Sonnet and Bedrock, integrating AWS ECS, Lambda, and S3 within a Retrieval-Augmented Generation (RAG) workflow"
       ]
     },
     {
