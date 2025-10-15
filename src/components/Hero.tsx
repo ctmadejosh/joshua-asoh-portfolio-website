@@ -43,7 +43,7 @@ const Hero = () => {
                   Get In Touch
                 </Button>
               </a>
-              <a href="/resume_joshua_asoh_071725.pdf" download>
+              <a href="/Josh_Asoh_Resume 100325.pdf" download>
                 <Button variant="outline" size="lg" className="group">
                   <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
                   Download Resume
