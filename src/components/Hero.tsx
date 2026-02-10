@@ -32,7 +32,7 @@ const Hero = () => {
               </h1>
               
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Computer Engineering Technology student and Cloud Engineering Intern passionate about AWS infrastructure, software development, and innovation in technology.
+                T&O LDP Associate – DevOps Engineer at The Hartford, pursuing a Master's in Computer Information Technology. Passionate about cloud infrastructure, automation, and building impactful software solutions.
               </p>
             </div>
             
@@ -43,7 +43,7 @@ const Hero = () => {
                   Get In Touch
                 </Button>
               </a>
-              <a href="/Josh_Asoh_Resume 100325.pdf" download>
+              <a href="/Josh_Asoh_Resume_020926.pdf" download>
                 <Button variant="outline" size="lg" className="group">
                   <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
                   Download Resume

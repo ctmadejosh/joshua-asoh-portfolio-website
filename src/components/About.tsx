@@ -6,8 +6,8 @@ const About = () => {
   const highlights = [
     {
       icon: Target,
-      title: "Cloud Infrastructure",
-      description: "Expertise in AWS services, Terraform, and infrastructure-as-code practices"
+      title: "DevOps & Cloud",
+      description: "AWS infrastructure, Terraform, CI/CD pipelines, and infrastructure-as-code at The Hartford"
     },
     {
       icon: Users,
@@ -17,26 +17,31 @@ const About = () => {
     {
       icon: Lightbulb,
       title: "Innovation",
-      description: "Developing AI solutions and inventory management systems"
+      description: "GenAI chatbots with RAG, agentic workflows, and IIoT solutions"
     },
     {
       icon: Award,
       title: "Academic Excellence",
-      description: "3.43 GPA pursuing dual degrees in Computer Engineering Technology"
+      description: "3.44 BS GPA, 3.66 MS GPA, 3x Dean's List, pursuing dual degrees at CCSU"
     }
   ];
 
   const skills = [
     "AWS (ECS, Lambda, S3, Bedrock)",
-    "Terraform & Infrastructure-as-Code",
-    "Python Development",
-    "Cloud Architecture",
-    "Software Engineering",
+    "Terraform & IaC",
+    "Python",
+    "Java",
+    "Angular",
+    "C/C++",
+    "Docker",
+    "Jenkins",
+    "SQL",
+    "VHDL",
+    "Prompt & Retrieval Engineering",
+    "RAG & Agentic Workflows",
+    "SOLIDWORKS",
+    "Agile/Scrum",
     "Team Leadership",
-    "VHDL & Circuit Design",
-    "Docker & DevOps",
-    "Data Analysis",
-    "Project Management"
   ];
 
   return (
@@ -56,13 +61,13 @@ const About = () => {
               <h3 className="text-2xl font-semibold mb-4 text-primary">My Journey</h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Currently pursuing dual degrees at Central Connecticut State University - a Master's in Computer Information Technology and Bachelor's in Computer Engineering Technology. My academic journey began at Gateway Community College where I earned an Electronics Technician Certification.
+                  Currently a T&O LDP Associate – DevOps Engineer at The Hartford Insurance, while pursuing a Master's in Computer Information Technology and Bachelor's in Computer Engineering Technology at CCSU. A 3x Dean's List student with a 3.66 MS GPA and 3.44 BS GPA.
                 </p>
                 <p>
-                  As a Cloud and Reliability Engineering Intern at The Hartford Insurance, I work with AWS infrastructure, Terraform, and develop innovative solutions like document chatbots using ECS, Lambda, and Bedrock. My experience spans from software development to leadership roles.
+                  Previously interned at Zygo AMETEK in digital manufacturing, built a GenAI-powered document chatbot using Claude 3.5 Sonnet and AWS Bedrock at The Hartford, and developed inventory systems at Alexion-AstraZeneca. My experience spans DevOps, cloud infrastructure, AI/ML, and IIoT.
                 </p>
                 <p>
-                  Through leadership positions like Vice President of IEEE and various internships, I've developed strong technical skills in cloud computing, software engineering, and team management while maintaining a 3.43 GPA and earning multiple certifications.
+                  Certified in BioLaunch Lab Operations, SolidWorks, OSHA-10, and Electronics Technician. Active in NSBE, ColorStack, Epsilon Pi Tau, and served as IEEE Vice President.
                 </p>
               </div>
             </Card>
