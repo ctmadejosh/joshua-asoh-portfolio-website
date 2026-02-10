@@ -19,7 +19,8 @@ const Navigation = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' }, // Use #projects for scrolling
+    { name: 'Certifications', href: '#certifications' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' }
   ];
 
