@@ -200,3 +200,34 @@
     transform: none;
   }
 }
+
+/* Logo hover: the pipeline stroke redraws, then the deploy node pulses. */
+@media (prefers-reduced-motion: no-preference) {
+  .group:hover .logo-stroke,
+  .group:focus-visible .logo-stroke {
+    stroke-dasharray: 1;
+    animation: logo-draw 700ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  .group:hover .logo-bar,
+  .group:focus-visible .logo-bar {
+    stroke-dasharray: 1;
+    animation: logo-draw 300ms 450ms ease-out both;
+  }
+  .group:hover .logo-node,
+  .group:focus-visible .logo-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: logo-node 450ms 650ms ease-out both;
+  }
+}
+
+@keyframes logo-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes logo-node {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}

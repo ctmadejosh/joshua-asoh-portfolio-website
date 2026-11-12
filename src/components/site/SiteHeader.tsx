@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, Moon, Search, Sun, X } from "lucide-react";
 import { OPEN_PALETTE_EVENT } from "./CommandPalette";
+import Logo from "./Logo";
 import { NAV_PAGES, SITE_NAME } from "@/data/site";
 import { setTheme, useIsDark } from "@/lib/theme";
 
@@ -85,12 +86,7 @@ const SiteHeader = () => {
       <div className="mx-auto flex h-16 max-w-site items-center justify-between gap-4 px-6 md:px-10">
         <div className="flex items-center gap-10">
           <Link to="/" className="group flex shrink-0 items-center gap-2.5" aria-label={`${SITE_NAME}, home`}>
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-md bg-primary font-mono text-xs font-bold text-primary-foreground transition-transform group-hover:-rotate-6"
-            >
-              ja
-            </span>
+            <Logo className="h-8 w-8" />
             <span className="font-display font-semibold tracking-tight">{SITE_NAME}</span>
           </Link>
           <nav aria-label="Main" className="hidden md:block">

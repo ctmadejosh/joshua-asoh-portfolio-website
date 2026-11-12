@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import { NAV_PAGES, SITE_NAME } from "@/data/site";
 import SocialLinks from "./SocialLinks";
+import Logo from "./Logo";
 
 const SiteFooter = () => (
   <footer className="mt-24 border-t border-border">
     <div className="mx-auto flex max-w-site flex-col gap-8 px-6 py-12 md:flex-row md:items-start md:justify-between md:px-10">
       <div>
-        <p className="font-display font-semibold tracking-tight">{SITE_NAME}</p>
+        <p className="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+          <Logo className="h-7 w-7" />
+          {SITE_NAME}
+        </p>
         <p className="mt-1 text-sm text-muted-foreground">
           Platform engineering, CI/CD, and developer experience. Connecticut.
         </p>
