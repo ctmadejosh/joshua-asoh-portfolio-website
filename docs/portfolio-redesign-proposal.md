@@ -1,9 +1,9 @@
-# PROP-PR-5 v1.1 — Multi-page Portfolio Redesign
+# PROP-PR-5 v1.2 — Multi-page Portfolio Redesign
 
 **Status:** Proposal
 
 - **Proposal ID:** `PROP-PR-5`
-- **Version:** `1.1`
+- **Version:** `1.2`
 - **Source PR:** #5
 
 **Scope:** Product and implementation direction only; this document does not authorize or include website changes.
@@ -82,6 +82,15 @@ The project currently uses React Router and Cloudflare static assets configured 
 3. **Content pages:** Build the home hub and indexes, then add case-study and experience templates backed by local typed content.
 4. **Polish and verification:** Refine interactions, accessibility, metadata, performance, and direct-route behavior across screen sizes.
 
+## Optional, later-phase features
+
+These are not launch requirements. Consider them only after the core portfolio is complete, with original design and behavior rather than copied reference-site implementations:
+
+- **Portfolio Q&A assistant:** An optional chat assistant answers only from approved portfolio content, clearly identifies its limits, protects visitor privacy, and offers a useful non-AI path to browse the site or contact Joshua. Any AI credentials must stay server-side and never be exposed in client code.
+- **Light and dark themes:** Let visitors choose a theme, preserve readable contrast and focus states in both, and respect their system preference by default.
+- **Seasonal accents:** Offer optional, restrained holiday or seasonal details that never obscure content, reduce usability, or replace the normal default experience.
+- **Achievement photo gallery:** Show photos only when publicly accessible or supplied and approved by Joshua. Pair each with a concise caption and dates and achievement claims verified by Joshua; do not scrape or infer content from LinkedIn.
+
 ## Risks and mitigations
 
 | Risk | Mitigation |
@@ -114,7 +123,7 @@ The project currently uses React Router and Cloudflare static assets configured 
 - The projects to feature, their preferred order, and which deserve full case studies.
 - For each selected case study: confirmed context, Joshua's role, challenge, approach, outcome, technologies, and any approved metrics.
 - Verified experience entries, dates, descriptions, and the resume file or URL if it should be linked.
-- Approved project screenshots, illustrations, video, or other media, plus any required attribution.
+- Approved project screenshots, illustrations, video, or other media, plus any required attribution; achievement-gallery photos and verified captions/dates if that optional feature is pursued.
 - Confirmed public links (for example, source repositories or live demos) and contact destinations.
 - Any visual preferences or constraints beyond the requirement for an original identity.
 
