@@ -10,5 +10,6 @@
     { "pattern": "juasoh.com", "custom_domain": true },
     { "pattern": "www.juasoh.com", "custom_domain": true }
   ],
+  "previews": {},
   "observability": { "enabled": true, "head_sampling_rate": 1 }
 }
