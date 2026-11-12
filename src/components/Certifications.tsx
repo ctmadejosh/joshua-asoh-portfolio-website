@@ -1,72 +1,47 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Award, Calendar } from "lucide-react";
-
 const certifications = [
   {
     name: "Terraform for the Absolute Beginners with Labs",
     date: "August 2025",
-    icon: "🏗️",
     description: "Udemy course covering Terraform fundamentals and hands-on infrastructure-as-code labs.",
   },
   {
     name: "BioLaunch Laboratory Operations",
     date: "February 2024",
-    icon: "🧬",
-    description: "Certified in laboratory operations, safety protocols, and compliance for biotech environments.",
+    description: "Laboratory operations, safety protocols, and compliance for biotech environments.",
   },
   {
     name: "Electronics Technician Certification",
     date: "May 2023",
-    icon: "🔌",
-    description: "Proficiency in electronic circuit analysis, troubleshooting, and repair techniques.",
+    description: "Electronic circuit analysis, troubleshooting, and repair techniques.",
   },
   {
     name: "SolidWorks Associate (CSWA)",
     date: "March 2021",
-    icon: "📐",
-    description: "Competency in 3D modeling, assembly design, and engineering drawings using SolidWorks.",
+    description: "3D modeling, assembly design, and engineering drawings in SolidWorks.",
   },
   {
     name: "OSHA-10",
     date: "March 2019",
-    icon: "🛡️",
-    description: "Occupational safety and health standards for general industry workplace environments.",
+    description: "Occupational safety and health standards for general industry.",
   },
 ];
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-bold mb-4">Certifications</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional certifications demonstrating expertise across engineering, safety, and laboratory operations.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-          {certifications.map((cert, index) => (
-            <Card
-              key={cert.name}
-              className="p-6 shadow-card hover:shadow-elegant transition-smooth group text-center animate-fade-up"
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              <div className="text-4xl mb-4">{cert.icon}</div>
-              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-smooth">
-                {cert.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                {cert.description}
-              </p>
-              <Badge variant="secondary" className="gap-1">
-                <Calendar className="w-3 h-3" />
-                {cert.date}
-              </Badge>
-            </Card>
+    <section id="certifications" className="py-20 lg:py-28">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[1fr_2fr] lg:gap-20">
+        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Certifications</h2>
+        <ul className="divide-y divide-border border-y border-border">
+          {certifications.map((cert) => (
+            <li key={cert.name} className="grid gap-x-8 gap-y-1 py-5 sm:grid-cols-[1fr_9rem]">
+              <div>
+                <h3 className="font-sans text-lg font-semibold">{cert.name}</h3>
+                <p className="mt-1 text-muted-foreground">{cert.description}</p>
+              </div>
+              <p className="text-muted-foreground sm:text-right">{cert.date}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -18,7 +18,14 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['"Instrument Sans Variable"', 'system-ui', 'sans-serif'],
+				display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif']
+			},
 			colors: {
+				ink: 'hsl(var(--ink))',
+				signal: 'hsl(var(--signal))',
+				sky: 'hsl(var(--sky))',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

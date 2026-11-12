@@ -1,69 +1,74 @@
-
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Send } from "lucide-react";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+const fieldClass =
+  "mt-1.5 w-full rounded-md border border-input bg-white px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30";
+
 const ContactForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
     if (!form.current) return;
-
-    emailjs
-      .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then(
-        () => {
-          setSent(true);
-          setLoading(false);
-        },
-        () => {
-          setError("Failed to send message. Please try again.");
-          setLoading(false);
-        }
-      );
+    setStatus("sending");
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY).then(
+      () => setStatus("sent"),
+      () => setStatus("failed")
+    );
   };
 
-  if (sent) {
-    return <div className="text-green-600 font-semibold">Message sent! Thank you.</div>;
+  if (status === "sent") {
+    return (
+      <div role="status" className="py-10">
+        <p className="font-display text-3xl font-semibold tracking-tight">Message sent.</p>
+        <p className="mt-2 text-muted-foreground">
+          Thanks for writing. I usually reply within a business day.
+        </p>
+      </div>
+    );
   }
 
   return (
-    <form ref={form} onSubmit={sendEmail} className="space-y-6">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Name</label>
-          <Input name="user_name" required placeholder="Your name" />
-        </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Email</label>
-          <Input name="user_email" type="email" required placeholder="your.email@example.com" />
-        </div>
+    <form ref={form} onSubmit={sendEmail} className="space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="block text-[0.95rem] font-semibold">
+          Name
+          <input name="user_name" required autoComplete="name" className={fieldClass} />
+        </label>
+        <label className="block text-[0.95rem] font-semibold">
+          Email
+          <input name="user_email" type="email" required autoComplete="email" className={fieldClass} />
+        </label>
       </div>
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Subject</label>
-        <Input name="subject" required placeholder="What's this about?" />
-      </div>
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Message</label>
-        <Textarea name="message" required rows={6} placeholder="Your message..." />
-      </div>
-      {error && <div className="text-red-600">{error}</div>}
-      <Button type="submit" disabled={loading} className="w-full group" size="lg">
-        {loading ? "Sending..." : "Send Message"}
-      </Button>
+      <label className="block text-[0.95rem] font-semibold">
+        Subject
+        <input name="subject" required className={fieldClass} />
+      </label>
+      <label className="block text-[0.95rem] font-semibold">
+        Message
+        <textarea name="message" required rows={6} className={`${fieldClass} resize-y`} />
+      </label>
+
+      {status === "failed" && (
+        <p role="alert" className="font-medium text-destructive">
+          The message didn't send. Try again, or email Joshua.asoh@my.ccsu.edu directly.
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-60"
+      >
+        <Send className="h-4 w-4" />
+        {status === "sending" ? "Sending message" : "Send message"}
+      </button>
     </form>
   );
 };
