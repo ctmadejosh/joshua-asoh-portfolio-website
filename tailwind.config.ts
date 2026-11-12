@@ -20,7 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['"Instrument Sans Variable"', 'system-ui', 'sans-serif'],
-				display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif']
+				display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif'],
+				mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace']
 			},
 			colors: {
 				signal: 'hsl(var(--signal))',

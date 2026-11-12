@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import type { CaseStudy } from "@/data/work";
+import { readingMinutes, type CaseStudy } from "@/data/work";
+import FlowDiagram from "./FlowDiagram";
 import type { Project } from "@/data/projects";
 
 export const PageIntro = ({
@@ -12,7 +13,7 @@ export const PageIntro = ({
   title: string;
   children?: React.ReactNode;
 }) => (
-  <div className="max-w-3xl pb-12 pt-16 md:pt-24" data-reveal>
+  <div className="max-w-3xl pb-12 pt-16 md:pt-24">
     <p className="eyebrow mb-4">{eyebrow}</p>
     <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">{title}</h1>
     {children && (
@@ -51,12 +52,17 @@ export const CaseStudyCard = ({ study, index = 0 }: { study: CaseStudy; index?: 
     data-reveal-delay={index * 70}
     className="surface-card group flex h-full flex-col px-6 py-6 hover:border-border-strong"
   >
-    <p className="eyebrow mb-3">{study.eyebrow}</p>
-    <h3 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-primary-ink sm:text-2xl">
+    <p className="eyebrow mb-3">
+      {study.eyebrow} · {readingMinutes(study)} min
+    </p>
+    <h3 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-primary-ink">
       {study.title}
     </h3>
     <p className="mt-2 text-muted-foreground">{study.lede}</p>
-    <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+    <div className="mt-5 overflow-hidden" aria-hidden="true">
+      <FlowDiagram flow={study.flow.slice(0, 3)} compact />
+    </div>
+    <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
       {study.facts.slice(0, 2).map((fact) => (
         <li key={fact.label}>
           <span className="font-semibold">{fact.value}</span>{" "}

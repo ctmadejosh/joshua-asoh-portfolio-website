@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "theme";
-const THEME_COLORS = { light: "#F6F7FA", dark: "#0B0E15" };
+const THEME_COLORS = { light: "#F9F8F5", dark: "#0B0E15" };
 
 /** Sets the theme class, the browser chrome colour, and remembers the choice. */
 export function setTheme(dark: boolean) {

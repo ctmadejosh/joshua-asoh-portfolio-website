@@ -35,7 +35,7 @@ The Projects section features selected works and contributions, focusing on clou
 A contact form is available for professional inquiries and networking.
 
 ## Tech Stack
-- **Framework:** React (with Vite)
+- **Framework:** React (with Vite), pre-rendered to static HTML at build time
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS, shadcn-ui
 - **State/UI:** Custom hooks, Radix UI, Lucide icons
@@ -58,11 +58,27 @@ A contact form is available for professional inquiries and networking.
    The site will be available at `http://localhost:8080` by default.
 
 ## Development
-- Main entry: `src/main.tsx`
-- App root: `src/App.tsx`
-- Components: `src/components/`
-- Styles: `src/App.css`, `src/index.css`
-- Public assets: `public/`
+- Browser entry: `src/main.tsx` (hydrates pre-rendered HTML; renders from scratch in `bun run dev`)
+- Pre-render entry: `src/entry-server.tsx`, run by `scripts/prerender.mjs`
+- Routes: `src/App.tsx`; pages in `src/pages/`; shared layout and UI in `src/components/site/`
+- Content: `src/data/` (`work.ts` case studies, `projects.ts`, `experience.ts`, `site.ts`). Headline numbers live once in `proofPoints` in `site.ts`.
+- Styles and design tokens (light and dark): `src/index.css`, `tailwind.config.ts`
+
+## SEO
+`bun run build` builds the client, then pre-renders every route to its own HTML file
+(`dist/work.html`, `dist/work/<slug>.html`, …) with that page's title, description, canonical
+URL, Open Graph tags, and JSON-LD (ProfilePage/Person on home, Article on case studies,
+BreadcrumbList on inner pages). It also writes `dist/sitemap.xml` from the route list and a
+`dist/404.html` that Cloudflare serves with a real 404 status. Add a case study to
+`src/data/work.ts` and it gets a page, sitemap entry, and metadata automatically.
+
+After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
+
+## Analytics
+Google Analytics 4 loads only when `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`) is set at
+**build** time; set it under the Worker's *Settings → Build → Variables and secrets* in
+Cloudflare. It sends one `page_view` per route change, plus these events:
+`resume_download`, `contact_submit`, `email_copied`, and `command_palette_open`.
 
 ## Deployment
 The site is deployed to Cloudflare Workers (static assets) and served at [juasoh.com](https://juasoh.com). Pushing to `main` triggers a build (`bun install --frozen-lockfile && bun run build`) and deploy using `wrangler.jsonc`.

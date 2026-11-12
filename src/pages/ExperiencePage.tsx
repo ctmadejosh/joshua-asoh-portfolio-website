@@ -1,32 +1,73 @@
+import { useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { Download, Plus } from "lucide-react";
 import Seo from "@/components/site/Seo";
 import { Container, PageIntro } from "@/components/site/Cards";
 import { experiences } from "@/data/experience";
 import { RESUME_PATH, certifications, education } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
-const ExperiencePage = () => (
+const FILTERS = [
+  { label: "All", match: () => true },
+  { label: "Engineering", match: (type: string, title: string) => /engineer|developer|technician|software/i.test(title) },
+  { label: "Internships", match: (type: string) => /intern|extern/i.test(type) },
+  { label: "Leadership & campus", match: (type: string) => /leadership|part-time/i.test(type) },
+] as const;
+
+const ExperiencePage = () => {
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]["label"]>("All");
+  const match = FILTERS.find((f) => f.label === filter)!.match;
+  const visible = experiences.map((exp, index) => ({ exp, index })).filter(({ exp }) => match(exp.type, exp.title));
+
+  return (
   <Container>
     <Seo
       title="Experience"
       description="Joshua Asoh's roles, education, and certifications, from IT support and lab software to platform engineering at The Hartford."
+      breadcrumbs={[["Experience", "/experience"]]}
     />
     <PageIntro eyebrow="Experience" title="Where I've worked">
       <p>Ten roles since 2022, newest first. Open any of them for the details.</p>
-      <a href={RESUME_PATH} download className="btn-secondary mt-6 h-11 text-base">
+      <a
+        href={RESUME_PATH}
+        download
+        onClick={() => trackEvent("resume_download", { location: "experience" })}
+        className="btn-secondary mt-6 h-11 text-base"
+      >
         <Download aria-hidden="true" className="h-4 w-4" />
         Download resume (PDF)
       </a>
     </PageIntro>
+
+    <div role="group" aria-label="Filter roles" className="mb-6 flex flex-wrap gap-2">
+      {FILTERS.map((f) => {
+        const count = experiences.filter((e) => f.match(e.type, e.title)).length;
+        const on = f.label === filter;
+        return (
+          <button
+            key={f.label}
+            type="button"
+            aria-pressed={on}
+            onClick={() => setFilter(f.label)}
+            className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
+              on
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border-strong text-muted-foreground hover:border-primary hover:text-foreground"
+            }`}
+          >
+            {f.label} <span className="opacity-70">{count}</span>
+          </button>
+        );
+      })}
+    </div>
 
     <Accordion.Root
       type="single"
       collapsible
       defaultValue="role-0"
       className="border-t border-border-strong"
-      data-reveal
     >
-      {experiences.map((exp, index) => (
+      {visible.map(({ exp, index }) => (
         <Accordion.Item key={exp.title + exp.period} value={`role-${index}`} className="border-b border-border">
           <Accordion.Header asChild>
             <h2 className="font-sans">
@@ -101,6 +142,7 @@ const ExperiencePage = () => (
       </section>
     </div>
   </Container>
-);
+  );
+};
 
 export default ExperiencePage;

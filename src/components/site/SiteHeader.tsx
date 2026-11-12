@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Search, Sun, X } from "lucide-react";
+import { OPEN_PALETTE_EVENT } from "./CommandPalette";
 import { NAV_PAGES, SITE_NAME } from "@/data/site";
 import { setTheme, useIsDark } from "@/lib/theme";
 
@@ -56,7 +57,7 @@ const SiteHeader = () => {
             [
               variant === "menu"
                 ? "block border-l-2 py-3 pl-3 text-base"
-                : "border-b-2 pb-1 text-[0.95rem]",
+                : "border-b-2 py-1 text-[0.95rem]",
               "transition-colors",
               isActive
                 ? "border-primary font-medium text-foreground"
@@ -81,22 +82,40 @@ const SiteHeader = () => {
       >
         Skip to content
       </a>
-      <div className="relative mx-auto flex h-[4.5rem] max-w-site items-center justify-between gap-4 px-6 md:px-10">
-        <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE_NAME}, home`}>
-          <span
-            aria-hidden="true"
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground font-display text-sm font-bold tracking-tight text-background"
-          >
-            JA
-          </span>
-          <span className="hidden font-display font-semibold tracking-tight sm:inline">{SITE_NAME}</span>
-        </Link>
-
-        <nav aria-label="Main" className="hidden md:block lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-          <ul className="flex items-center gap-x-8">{links("inline")}</ul>
-        </nav>
+      <div className="mx-auto flex h-16 max-w-site items-center justify-between gap-4 px-6 md:px-10">
+        <div className="flex items-center gap-10">
+          <Link to="/" className="group flex shrink-0 items-center gap-2.5" aria-label={`${SITE_NAME}, home`}>
+            <span
+              aria-hidden="true"
+              className="flex h-8 w-8 items-center justify-center rounded-md bg-primary font-mono text-xs font-bold text-primary-foreground transition-transform group-hover:-rotate-6"
+            >
+              ja
+            </span>
+            <span className="font-display font-semibold tracking-tight">{SITE_NAME}</span>
+          </Link>
+          <nav aria-label="Main" className="hidden md:block">
+            <ul className="flex items-center gap-x-7">{links("inline")}</ul>
+          </nav>
+        </div>
 
         <div className="flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+            className="hidden h-10 items-center gap-2 rounded-full border border-border bg-card pl-3.5 pr-2 text-sm text-muted-foreground transition-colors hover:border-border-strong hover:text-foreground sm:inline-flex"
+          >
+            <Search aria-hidden="true" className="h-4 w-4" />
+            Search
+            <span className="kbd ml-2" aria-hidden="true">⌘K</span>
+          </button>
+          <button
+            type="button"
+            aria-label="Search the site"
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+            className={`${iconButton} sm:hidden`}
+          >
+            <Search className="h-[1.1rem] w-[1.1rem]" />
+          </button>
           <button
             type="button"
             aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}

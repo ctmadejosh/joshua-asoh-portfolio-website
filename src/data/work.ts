@@ -20,6 +20,11 @@ export type CaseStudy = {
   period: string;
   stack: string[];
   facts: { value: string; label: string }[];
+  /** Three-line summary shown above the full story. */
+  tldr: { problem: string; did: string; result: string };
+  /** Left-to-right flow for the case study's diagram. */
+  flow: { label: string; detail?: string; mine?: boolean }[];
+  flowNote?: string;
   sections: CaseStudySection[];
   links?: { label: string; url: string }[];
 };
@@ -39,6 +44,19 @@ export const caseStudies: CaseStudy[] = [
       { value: "144", label: "Pull requests merged" },
       { value: "80%+", label: "Coverage threshold on shared tooling" },
     ],
+    tldr: {
+      problem: "Shared provisioning and onboarding automation runs for many teams, often more than once, and has to be safe every time.",
+      did: "Built idempotent Harness workflows, build-farm smoke tests, and a tested release path for the platform's IDE and CLI tools.",
+      result: "144 merged pull requests across 21 repositories, with shared tooling held to an 80%+ coverage threshold.",
+    },
+    flow: [
+      { label: "Team request", detail: "New project or onboarding" },
+      { label: "Provision", detail: "Idempotent Harness workflow", mine: true },
+      { label: "Smoke test", detail: "Build farm checks", mine: true },
+      { label: "Integration tests", detail: "Cross-platform, 80%+ coverage", mine: true },
+      { label: "Ship", detail: "VS Code, desktop, CLI, docs", mine: true },
+    ],
+    flowNote: "Highlighted steps are the parts I built or hardened; the platform itself is a team effort.",
     sections: [
       {
         label: "Team context",
@@ -87,6 +105,16 @@ export const caseStudies: CaseStudy[] = [
       { value: "Guide → video", label: "Written guides become narrated walkthroughs" },
       { value: "Onboarding", label: "Built for new developers on the platform" },
     ],
+    tldr: {
+      problem: "Onboarding guides are written text, and recording walkthrough videos by hand can't keep up when the guides change.",
+      did: "Built Atlas Studio, an AI-enabled tool that turns guide content into a narrated walkthrough video.",
+      result: "When a guide changes, its walkthrough can be regenerated instead of re-recorded.",
+    },
+    flow: [
+      { label: "Written guide", detail: "Existing onboarding content" },
+      { label: "Atlas Studio", detail: "AI-enabled generation", mine: true },
+      { label: "Narrated walkthrough", detail: "Video for new developers", mine: true },
+    ],
     sections: [
       {
         label: "Team context",
@@ -124,6 +152,19 @@ export const caseStudies: CaseStudy[] = [
       { value: "1–2 hrs", label: "Saved per documentation lookup" },
       { value: "800+", label: "Engineers supported" },
     ],
+    tldr: {
+      problem: "Engineers spent one to two hours per question digging through unstructured internal documentation.",
+      did: "Led prompt engineering and designed a modular RAG pipeline on AWS Bedrock with Claude 3.5 Sonnet, plus an Angular chat UI.",
+      result: "Lookups got one to two hours faster per query, and the chatbot scaled to 800+ engineers.",
+    },
+    flow: [
+      { label: "Unstructured docs", detail: "Internal documentation" },
+      { label: "Processing pipeline", detail: "Modular ingestion", mine: true },
+      { label: "Retrieval", detail: "RAG workflow", mine: true },
+      { label: "Claude 3.5 Sonnet", detail: "On AWS Bedrock", mine: true },
+      { label: "Chat UI", detail: "Responsive Angular app", mine: true },
+    ],
+    flowNote: "Runs across AWS ECS, Lambda, and S3, provisioned with Terraform within IAM and security policy.",
     sections: [
       {
         label: "The problem",
@@ -166,6 +207,16 @@ export const caseStudies: CaseStudy[] = [
       { value: "1,600+", label: "Biological samples tracked" },
       { value: "20,000+", label: "BSL2 chemical inventory items" },
     ],
+    tldr: {
+      problem: "A research unit needed a live view of a large sample and chemical inventory without reconciling spreadsheets by hand.",
+      did: "Led development of a barcode-driven, real-time inventory system in Python and Neptyne.",
+      result: "One source of truth for 1,600+ biological samples and a 20,000+ item BSL2 chemical inventory.",
+    },
+    flow: [
+      { label: "Barcode scan", detail: "Sample or compound" },
+      { label: "Real-time database", detail: "Python + Neptyne", mine: true },
+      { label: "Live inventory view", detail: "Quantities and unique IDs", mine: true },
+    ],
     sections: [
       {
         label: "The problem",
@@ -191,6 +242,15 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+/** Minutes to read the whole case study, at ~220 words a minute. */
+export const readingMinutes = (study: CaseStudy) => {
+  const text = [
+    study.lede,
+    ...study.sections.flatMap((section) => [section.title, ...section.body, ...(section.bullets ?? [])]),
+  ].join(" ");
+  return Math.max(1, Math.round(text.split(/\s+/).length / 220));
+};
 
 export const getCaseStudy = (slug: string | undefined) =>
   caseStudies.find((study) => study.slug === slug);

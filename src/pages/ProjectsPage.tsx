@@ -9,6 +9,7 @@ const ProjectsPage = () => (
     <Seo
       title="Projects"
       description="Side projects by Joshua Asoh: AI lead generation, a hackathon portfolio manager, AI developer tooling, and this website."
+      breadcrumbs={[["Projects", "/projects"]]}
     />
     <PageIntro eyebrow="Projects" title="Things I've built on my own">
       Smaller projects with public code. For longer write-ups of team work, see the{" "}

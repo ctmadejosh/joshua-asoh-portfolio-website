@@ -1,4 +1,5 @@
-import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Copy, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { copyEmail } from "@/components/site/CommandPalette";
 import Seo from "@/components/site/Seo";
 import ContactForm from "@/components/ContactForm";
 import { Container, PageIntro } from "@/components/site/Cards";
@@ -16,6 +17,7 @@ const ContactPage = () => (
     <Seo
       title="Contact"
       description="Get in touch with Joshua Asoh about platform engineering, CI/CD, developer experience, or opportunities."
+      breadcrumbs={[["Contact", "/contact"]]}
     />
     <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
       <div>
@@ -23,7 +25,11 @@ const ContactPage = () => (
           I'm open to new opportunities and glad to talk shop about platform engineering. I
           usually reply within a business day.
         </PageIntro>
-        <ul className="divide-y divide-border border-y border-border" data-reveal>
+        <button type="button" onClick={copyEmail} className="btn-secondary mb-8 h-11 text-base">
+          <Copy aria-hidden="true" className="h-4 w-4" />
+          Copy my email address
+        </button>
+        <ul className="divide-y divide-border border-y border-border">
           {contactInfo.map((info) => (
             <li key={info.label} className="flex items-center gap-4 py-4">
               <info.icon aria-hidden="true" className="h-5 w-5 shrink-0 text-primary-ink" />
@@ -45,7 +51,7 @@ const ContactPage = () => (
         </ul>
       </div>
 
-      <div className="surface-card self-start p-6 sm:p-8 lg:mt-24" data-reveal data-reveal-delay={120}>
+      <div className="surface-card self-start p-6 sm:p-8 lg:mt-24">
         <ContactForm />
       </div>
     </div>

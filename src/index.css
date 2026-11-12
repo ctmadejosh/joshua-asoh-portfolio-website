@@ -7,7 +7,7 @@
    inline script in index.html picks the theme before first paint. */
 @layer base {
   :root {
-    --background: 220 23% 97%;
+    --background: 40 30% 97%;
     --foreground: 224 38% 11%;
 
     --card: 0 0% 100%;
@@ -25,9 +25,9 @@
     /* Amber, used sparingly: the pipeline run and focus rings. */
     --signal: 41 100% 50%;
 
-    --secondary: 220 20% 93%;
+    --secondary: 40 18% 92%;
     --secondary-foreground: 224 38% 11%;
-    --muted: 220 20% 93%;
+    --muted: 40 18% 92%;
     --muted-foreground: 222 14% 36%;
     --subtle: 222 10% 46%;
     --accent: 228 90% 95%;
@@ -36,8 +36,8 @@
     --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 16% 88%;
-    --border-strong: 220 14% 76%;
+    --border: 36 14% 86%;
+    --border-strong: 36 10% 72%;
     --input: 220 14% 78%;
     --ring: 230 78% 48%;
 
@@ -147,22 +147,56 @@
     @apply rounded-full border border-border-strong px-2.5 py-1 text-xs text-muted-foreground;
   }
 
+  /* Faint engineering-paper grid behind the hero. */
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.7) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.7) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 75%);
+  }
+
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-border-strong bg-background px-1 font-mono text-[0.7rem] text-muted-foreground;
+  }
+
   .text-link {
     @apply font-medium text-primary-ink underline decoration-primary/30 decoration-2 underline-offset-4 transition-colors hover:decoration-primary;
   }
 }
 
-/* Scroll reveal. Content is visible by default; the fade only applies once the
-   reveal script adds `js-reveal` to <html>, so nothing can get stuck hidden if
-   JavaScript fails or the visitor prefers reduced motion. */
-.js-reveal [data-reveal] {
-  opacity: 0;
-  transform: translateY(14px);
+/* Scroll reveal. Content is visible by default; the fade only applies under
+   the `js` class that index.html adds when scripts run and motion is allowed
+   (and removes again if the app fails to start), so nothing can get stuck
+   hidden. */
+.js [data-reveal] {
   transition: opacity 600ms ease-out, transform 600ms ease-out;
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.js-reveal [data-reveal].is-revealed {
-  opacity: 1;
-  transform: none;
+.js [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Terminal typing effect (TerminalCard). Only under `.js`, so the full text
+   shows when scripts don't run or motion is reduced. */
+.js .term-cmd {
+  display: inline-block;
+  max-width: calc(var(--n, 0) * 1ch);
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.js .term-line[data-on="false"] {
+  opacity: 0;
+}
+
+@media print {
+  .js [data-reveal]:not(.is-revealed),
+  .js .term-line[data-on="false"] {
+    opacity: 1;
+    transform: none;
+  }
 }

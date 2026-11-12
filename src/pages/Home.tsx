@@ -1,177 +1,265 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Download, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Copy, Download, Linkedin, Mail } from "lucide-react";
 import heroPortrait from "@/assets/hero-portrait.jpg";
 import Pipeline from "@/components/Pipeline";
 import Seo from "@/components/site/Seo";
-import SocialLinks from "@/components/site/SocialLinks";
-import { CaseStudyCard, Container, ProjectCard, SectionHeading } from "@/components/site/Cards";
-import { caseStudies } from "@/data/work";
-import { projects } from "@/data/projects";
-import { RESUME_PATH, SITE_NAME, SITE_ROLE, skillGroups } from "@/data/site";
+import TerminalCard from "@/components/site/TerminalCard";
+import FlowDiagram from "@/components/site/FlowDiagram";
+import { copyEmail } from "@/components/site/CommandPalette";
+import { CaseStudyCard, Container, SectionHeading } from "@/components/site/Cards";
+import { caseStudies, readingMinutes } from "@/data/work";
+import { experiences } from "@/data/experience";
+import {
+  GITHUB_URL,
+  LINKEDIN_URL,
+  RESUME_PATH,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  proofPoints,
+  skillGroups,
+} from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
-const Home = () => (
-  <>
-    <Seo description="Joshua Asoh is a platform engineer at The Hartford building CI/CD automation, developer tooling, and cloud infrastructure." />
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  url: `${SITE_URL}/`,
+  mainEntity: {
+    "@type": "Person",
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
+    image: `${SITE_URL}/og-image.jpg`,
+    jobTitle: "Platform Engineer",
+    worksFor: { "@type": "Organization", name: "The Hartford" },
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Central Connecticut State University" },
+    address: { "@type": "PostalAddress", addressRegion: "CT", addressCountry: "US" },
+    knowsAbout: ["Platform engineering", "CI/CD", "Harness", "Developer experience", "AWS", "Terraform", "Retrieval-augmented generation"],
+    sameAs: [LINKEDIN_URL, GITHUB_URL],
+  },
+};
 
-    <Container>
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+};
+
+const Home = () => {
+  const [featured, ...rest] = caseStudies;
+
+  return (
+    <>
+      <Seo description={SITE_DESCRIPTION} ogType="profile" jsonLd={[personJsonLd, websiteJsonLd]} />
+
       {/* Hero */}
-      <section className="flex min-h-[calc(100svh-4.5rem)] flex-col justify-center py-16 lg:min-h-[calc(100svh-10rem)]">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-16">
-          <div className="max-w-2xl">
-            <div className="mb-6 flex items-center gap-4 lg:hidden" data-reveal>
+      <section className="relative overflow-hidden border-b border-border">
+        <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
+        <Container className="relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+          <div>
+            <div className="mb-6 flex items-center gap-3">
               <img
                 src={heroPortrait}
-                alt=""
-                width={64}
-                height={64}
-                className="h-16 w-16 rounded-full border border-border object-cover object-[56%_40%]"
+                alt="Portrait of Joshua Asoh"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full border border-border object-cover object-[56%_40%]"
               />
-              <div>
-                <p className="font-semibold">{SITE_NAME}</p>
-                <p className="text-sm text-subtle">{SITE_ROLE}</p>
-              </div>
+              <p className="text-sm leading-tight">
+                <span className="block font-semibold">{SITE_NAME}</span>
+                <span className="text-subtle">Platform Engineer · The Hartford</span>
+              </p>
             </div>
-            <p className="eyebrow mb-5 hidden lg:block" data-reveal>
-              Platform engineering · CI/CD · Developer experience
-            </p>
-            <h1
-              className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-              data-reveal
-              data-reveal-delay={60}
-            >
-              I build the automation and tools engineers ship with.
+            <h1 className="text-[2.6rem] font-bold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.25rem]">
+              I build the pipelines and tools{" "}
+              <span className="text-primary-ink underline decoration-signal decoration-[0.09em] underline-offset-[0.14em] [text-decoration-skip-ink:none]">
+                engineers ship with
+              </span>
+              .
             </h1>
-            <p
-              className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
-              data-reveal
-              data-reveal-delay={120}
-            >
-              I'm Joshua, a platform engineer in The Hartford's Technology &amp; Operations
-              Leadership Development Program. I work on Harness CI/CD automation, IDE and CLI
-              tooling, and the onboarding that gets engineers productive on our developer
-              platform.
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Harness CI/CD automation, IDE and CLI tooling, and the onboarding that gets engineers
+              productive on The Hartford's developer platform. Before that: a GenAI documentation
+              chatbot on AWS Bedrock, digital manufacturing, and lab software.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3" data-reveal data-reveal-delay={180}>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link to="/work" className="btn-primary">
-                See my work
+                Read the case studies
                 <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
-              <Link to="/contact" className="btn-secondary">
-                Get in touch
-                <Mail aria-hidden="true" className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="mt-8" data-reveal data-reveal-delay={240}>
-              <SocialLinks />
+              <a
+                href={RESUME_PATH}
+                download
+                onClick={() => trackEvent("resume_download", { location: "home_hero" })}
+                className="btn-secondary"
+              >
+                <Download aria-hidden="true" className="h-4 w-4" />
+                Resume
+              </a>
+              <button type="button" onClick={copyEmail} className="btn-secondary px-4" aria-label="Copy email address">
+                <Copy aria-hidden="true" className="h-4 w-4" />
+                <span className="hidden sm:inline">Copy email</span>
+              </button>
             </div>
           </div>
 
-          <aside
-            className="surface-card hidden flex-col items-center p-6 text-center lg:flex"
-            data-reveal
-            data-reveal-delay={160}
-            aria-label="Profile"
-          >
-            <img
-              src={heroPortrait}
-              alt="Joshua Asoh working on a laptop at his desk"
-              width={160}
-              height={160}
-              className="h-36 w-36 rounded-full border border-border object-cover object-[56%_40%]"
-            />
-            <p className="mt-4 font-display text-lg font-semibold">{SITE_NAME}</p>
-            <p className="inline-flex items-center gap-1 text-sm text-subtle">
-              <MapPin aria-hidden="true" className="h-3.5 w-3.5" />
-              Connecticut
-            </p>
-            <div className="mt-5 w-full border-t border-border pt-5">
-              <p className="font-display text-3xl font-bold tracking-tight">144</p>
-              <p className="mt-1 text-sm text-subtle">pull requests merged across 21 platform repositories</p>
-            </div>
-            <a
-              href={RESUME_PATH}
-              download
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary-ink"
+          <TerminalCard />
+        </Container>
+      </section>
+
+      <Container>
+        {/* Proof strip: every figure comes from proofPoints and links to its evidence. */}
+        <section aria-label="Results at a glance" className="grid grid-cols-2 border-b border-border lg:grid-cols-4">
+          {proofPoints.map((point, i) => (
+            <Link
+              key={point.label}
+              to={`/work/${point.source}`}
+              data-reveal
+              data-reveal-delay={i * 60}
+              className={`group py-8 pr-4 ${i % 2 === 1 ? "pl-4 sm:pl-6" : ""} ${i > 0 ? "lg:border-l lg:pl-6" : ""} ${i % 2 === 1 ? "border-l" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} border-border`}
             >
-              <Download aria-hidden="true" className="h-4 w-4" />
-              Download resume (PDF)
-            </a>
-          </aside>
-        </div>
-      </section>
-
-      {/* Pipeline */}
-      <section aria-label="My work, stage by stage" className="surface-card px-6 py-8 sm:px-10" data-reveal>
-        <Pipeline />
-      </section>
-
-      {/* Selected work */}
-      <section className="pt-24 md:pt-32">
-        <SectionHeading
-          title="Selected work"
-          description="Case studies from the platform team and earlier roles: the problem, what I did, and what changed."
-          action={{ label: "All case studies", to: "/work" }}
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          {caseStudies.slice(0, 2).map((study, i) => (
-            <CaseStudyCard key={study.slug} study={study} index={i} />
+              <p className="font-display text-3xl font-bold tracking-tight sm:text-4xl">{point.value}</p>
+              <p className="mt-1 font-medium">{point.label}</p>
+              <p className="mt-1 text-sm text-subtle">{point.context}</p>
+              <p className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary-ink opacity-70 transition-opacity group-hover:opacity-100">
+                See the evidence <ArrowRight aria-hidden="true" className="h-3 w-3" />
+              </p>
+            </Link>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* Toolbox */}
-      <section className="pt-24 md:pt-32">
-        <SectionHeading title="What I work with" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skillGroups.map((group, i) => (
-            <div key={group.name} className="surface-card px-6 py-5" data-reveal data-reveal-delay={i * 60}>
-              <h3 className="font-sans text-base font-semibold">{group.name}</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li key={item} className="chip">
-                    {item}
-                  </li>
+        {/* Featured case study */}
+        <section className="pt-20 md:pt-28">
+          <SectionHeading
+            title="Selected work"
+            description="Each case study opens with a three-line summary and a diagram of the system, so you can stop there or keep reading."
+            action={{ label: "All case studies", to: "/work" }}
+          />
+          <Link
+            to={`/work/${featured.slug}`}
+            data-reveal
+            className="surface-card group grid gap-8 p-6 hover:border-border-strong sm:p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+          >
+            <div>
+              <p className="eyebrow mb-3">
+                Featured · {featured.eyebrow} · {readingMinutes(featured)} min read
+              </p>
+              <h3 className="text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary-ink sm:text-3xl">
+                {featured.title}
+              </h3>
+              <dl className="mt-5 space-y-3 text-[0.95rem]">
+                {(
+                  [
+                    ["Problem", featured.tldr.problem],
+                    ["What I did", featured.tldr.did],
+                    ["Result", featured.tldr.result],
+                  ] as const
+                ).map(([term, text]) => (
+                  <div key={term} className="grid gap-1 sm:grid-cols-[6.5rem_1fr]">
+                    <dt className="font-semibold">{term}</dt>
+                    <dd className="text-muted-foreground">{text}</dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
+              <span className="mt-6 inline-flex items-center gap-1.5 font-medium text-primary-ink">
+                Read the case study
+                <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section className="pt-24 md:pt-32">
-        <SectionHeading
-          title="Side projects"
-          description="Smaller things I've built on my own and at hackathons."
-          action={{ label: "All projects", to: "/projects" }}
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          {projects.slice(0, 2).map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* Contact finale */}
-      <section className="flex min-h-[60vh] flex-col justify-center border-t border-border pt-16 mt-24 md:mt-32" data-reveal>
-        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">Let's talk.</h2>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          I'm glad to talk shop about platform engineering, CI/CD, and developer experience,
-          or about opportunities where that work matters. I usually reply within a business day.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link to="/contact" className="btn-primary h-14 px-8 text-lg">
-            <Mail aria-hidden="true" className="h-5 w-5" />
-            Send me a message
+            <div className="self-center rounded-lg border border-border bg-background/60 p-4 sm:p-5">
+              <FlowDiagram flow={featured.flow} note={featured.flowNote} vertical />
+            </div>
           </Link>
-          <a href={RESUME_PATH} download className="btn-secondary h-14 px-8 text-lg">
-            <Download aria-hidden="true" className="h-5 w-5" />
-            Resume
-          </a>
-        </div>
-      </section>
-    </Container>
-  </>
-);
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {rest.map((study, i) => (
+              <CaseStudyCard key={study.slug} study={study} index={i} />
+            ))}
+          </div>
+        </section>
+
+        {/* How I work */}
+        <section className="grid gap-6 pt-20 md:pt-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+          <div className="surface-card px-6 py-8 sm:px-8" data-reveal>
+            <h2 className="mb-6 text-2xl font-bold tracking-tight sm:text-3xl">How I work, stage by stage</h2>
+            <Pipeline />
+          </div>
+          <div className="surface-card px-6 py-8 sm:px-8" data-reveal data-reveal-delay={80}>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Toolbox</h2>
+            <dl className="mt-5 space-y-4">
+              {skillGroups.map((group) => (
+                <div key={group.name}>
+                  <dt className="text-sm font-semibold">{group.name}</dt>
+                  <dd className="mt-1.5 flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <span key={item} className="chip">
+                        {item}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* Recent roles */}
+        <section className="pt-20 md:pt-28">
+          <SectionHeading
+            title="Recent roles"
+            description="Ten roles since 2022. The three most recent:"
+            action={{ label: "Full experience", to: "/experience" }}
+          />
+          <ol className="relative border-l border-border pl-6" data-reveal>
+            {experiences.slice(0, 3).map((exp) => (
+              <li key={exp.title + exp.period} className="relative pb-8 last:pb-0">
+                <span aria-hidden="true" className="absolute -left-[1.85rem] top-1.5 h-3 w-3 rounded-full border-2 border-primary bg-background" />
+                <p className="text-sm text-subtle">{exp.period}</p>
+                <h3 className="mt-0.5 font-display text-lg font-semibold">{exp.title}</h3>
+                <p className="text-muted-foreground">{exp.company}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Contact */}
+        <section
+          className="mt-20 overflow-hidden rounded-2xl bg-foreground px-6 py-12 text-background sm:px-12 sm:py-16 md:mt-28"
+          data-reveal
+        >
+          <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+            <div>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Have a platform problem worth solving?</h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed opacity-80">
+                I'm open to new opportunities and glad to talk shop about CI/CD, developer experience,
+                and internal tooling. I usually reply within a business day.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Link
+                to="/contact"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-background px-6 font-semibold text-foreground transition-opacity hover:opacity-90"
+              >
+                <Mail aria-hidden="true" className="h-4 w-4" />
+                Send me a message
+              </Link>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-background/30 px-6 font-semibold transition-colors hover:border-background"
+              >
+                <Linkedin aria-hidden="true" className="h-4 w-4" />
+                Connect on LinkedIn
+                <span className="sr-only"> (opens in a new tab)</span>
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+      </Container>
+    </>
+  );
+};
 
 export default Home;

@@ -6,6 +6,21 @@ export const EMAIL = "Joshua.asoh@my.ccsu.edu";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/joshua-asoh";
 export const GITHUB_URL = "https://github.com/ctmadejosh";
 
+export const SITE_DESCRIPTION =
+  "Joshua Asoh is a platform engineer at The Hartford building CI/CD automation, developer tooling, and cloud infrastructure.";
+
+/**
+ * Headline numbers. Each one is defined once, here, and every page reads it
+ * from this list, so the site can never show two versions of the same figure.
+ * `source` says where it comes from, for anyone checking.
+ */
+export const proofPoints = [
+  { value: "144", label: "pull requests merged", context: "across 21 platform repositories at The Hartford", source: "harness-platform-automation" },
+  { value: "800+", label: "engineers supported", context: "by the GenAI documentation chatbot I built", source: "documentation-chatbot" },
+  { value: "1–2 hrs", label: "saved per lookup", context: "on internal documentation questions", source: "documentation-chatbot" },
+  { value: "20,000+", label: "inventory items tracked", context: "in a real-time BSL2 lab inventory system", source: "lab-inventory-system" },
+] as const;
+
 export const NAV_PAGES = [
   { label: "Work", to: "/work" },
   { label: "Projects", to: "/projects" },

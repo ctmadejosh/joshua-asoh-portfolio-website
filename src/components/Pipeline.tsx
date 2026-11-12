@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 
 const stages = [
@@ -27,27 +27,48 @@ const stages = [
 const STEP_MS = 750;
 
 /**
- * The hero's pipeline run. It plays through once on load, then each stage
+ * The pipeline run. It plays through once when scrolled into view, then each stage
  * stays selectable so visitors can read what Joshua works on at that step.
  */
 const Pipeline = () => {
   const last = stages.length - 1;
-  const reducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const [reached, setReached] = useState(reducedMotion ? last : -1);
-  const [selected, setSelected] = useState(reducedMotion ? last : 0);
+  const [reached, setReached] = useState(-1);
+  const [selected, setSelected] = useState(0);
   const [userPicked, setUserPicked] = useState(false);
+  const [instant, setInstant] = useState(false);
+  const [started, setStarted] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reached >= last) return;
+    const el = rootRef.current;
+    if (!el || !("IntersectionObserver" in window)) return setStarted(true);
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setStarted(true);
+        io.disconnect();
+      }
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Reduced motion: skip the run and show the finished pipeline.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInstant(true);
+      setReached(last);
+      setSelected(last);
+    }
+  }, [last]);
+
+  useEffect(() => {
+    if (!started || instant || reached >= last) return;
     const timer = window.setTimeout(
       () => setReached((r) => r + 1),
       reached === -1 ? 500 : STEP_MS
     );
     return () => window.clearTimeout(timer);
-  }, [reached, last]);
+  }, [reached, last, instant, started]);
 
   // Until the visitor picks a stage, the detail follows the run.
   useEffect(() => {
@@ -57,7 +78,7 @@ const Pipeline = () => {
   const progress = Math.max(reached, 0) / last;
 
   return (
-    <div>
+    <div ref={rootRef}>
       <p className="eyebrow">My work at The Hartford, stage by stage</p>
 
       <div className="relative mt-6">

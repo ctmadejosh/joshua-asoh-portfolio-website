@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Send } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -18,8 +19,14 @@ const ContactForm: React.FC = () => {
     if (!form.current) return;
     setStatus("sending");
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY).then(
-      () => setStatus("sent"),
-      () => setStatus("failed")
+      () => {
+        setStatus("sent");
+        trackEvent("contact_submit", { result: "sent" });
+      },
+      () => {
+        setStatus("failed");
+        trackEvent("contact_submit", { result: "failed" });
+      }
     );
   };
 
