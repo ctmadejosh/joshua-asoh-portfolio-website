@@ -6,15 +6,38 @@
     <title>Joshua Asoh | Platform Engineer</title>
     <meta name="description" content="Platform Engineer in The Hartford's Technology &amp; Operations Leadership Development Program and M.S. Computer Information Technology student, focused on CI/CD automation, developer experience, and cloud infrastructure." />
     <meta name="author" content="Joshua Asoh" />
-    <meta name="theme-color" content="#1B3BDB" />
+    <meta name="theme-color" content="#F9F8F5" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <script>
+      // Pick the theme before first paint: a saved choice wins, else the system setting.
+      // `js` turns on motion effects that degrade to plain, visible content without it.
+      (function () {
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("js");
+          // If the app hasn't started in 4s (blocked script, slow network), show everything.
+          setTimeout(function () {
+            if (!window.__appStarted) document.documentElement.classList.remove("js");
+          }, 4000);
+        }
+        var dark;
+        try { dark = localStorage.getItem("theme"); } catch (e) {}
+        dark = dark ? dark === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) {
+          document.documentElement.classList.add("dark");
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#0B0E15");
+        }
+      })();
+    </script>
     <link rel="canonical" href="https://juasoh.com/" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Joshua Asoh" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://juasoh.com/" />
     <meta property="og:title" content="Joshua Asoh | Platform Engineer" />
     <meta property="og:description" content="Platform Engineer at The Hartford. CI/CD automation, developer tooling, and cloud infrastructure." />
@@ -27,6 +50,7 @@
     <meta name="twitter:title" content="Joshua Asoh | Platform Engineer" />
     <meta name="twitter:description" content="Platform Engineer at The Hartford. CI/CD automation, developer tooling, and cloud infrastructure." />
     <meta name="twitter:image" content="https://juasoh.com/og-image.jpg" />
+
   </head>
 
   <body>

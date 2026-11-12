@@ -1,13 +1,14 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Send } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const fieldClass =
-  "mt-1.5 w-full rounded-md border border-input bg-white px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30";
+  "mt-1.5 w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30";
 
 const ContactForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -18,8 +19,14 @@ const ContactForm: React.FC = () => {
     if (!form.current) return;
     setStatus("sending");
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY).then(
-      () => setStatus("sent"),
-      () => setStatus("failed")
+      () => {
+        setStatus("sent");
+        trackEvent("contact_submit", { result: "sent" });
+      },
+      () => {
+        setStatus("failed");
+        trackEvent("contact_submit", { result: "failed" });
+      }
     );
   };
 
@@ -64,7 +71,7 @@ const ContactForm: React.FC = () => {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:opacity-60"
       >
         <Send className="h-4 w-4" />
         {status === "sending" ? "Sending message" : "Send message"}

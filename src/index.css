@@ -2,114 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Design tokens. Every colour is an HSL triple so Tailwind can add alpha
+   (`bg-card/70`). Light is the default; `.dark` on <html> swaps the set. The
+   inline script in index.html picks the theme before first paint. */
 @layer base {
   :root {
-    /* Paper, ink, cobalt, signal amber, sky */
-    --ink: 224 64% 13%;
-    --signal: 41 100% 55%;
-    --sky: 226 100% 93%;
-
-    --background: 223 47% 97%;
-    --foreground: 224 64% 13%;
+    --background: 40 30% 97%;
+    --foreground: 224 38% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 64% 13%;
-
+    --card-foreground: 224 38% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 224 64% 13%;
+    --popover-foreground: 224 38% 11%;
 
+    /* Cobalt for actions; `primary-ink` is the text-safe shade for links. */
     --primary: 230 78% 48%;
     --primary-foreground: 0 0% 100%;
     --primary-hover: 230 78% 42%;
+    --primary-ink: 230 72% 44%;
+    --primary-surface: 228 90% 95%;
 
-    --secondary: 226 60% 94%;
-    --secondary-foreground: 224 64% 13%;
+    /* Amber, used sparingly: the pipeline run and focus rings. */
+    --signal: 41 100% 50%;
 
-    --muted: 226 40% 93%;
-    --muted-foreground: 224 22% 36%;
-
-    --accent: 226 100% 93%;
-    --accent-foreground: 230 78% 40%;
+    --secondary: 40 18% 92%;
+    --secondary-foreground: 224 38% 11%;
+    --muted: 40 18% 92%;
+    --muted-foreground: 222 14% 36%;
+    --subtle: 222 10% 46%;
+    --accent: 228 90% 95%;
+    --accent-foreground: 230 72% 40%;
 
     --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 224 30% 85%;
-    --input: 224 30% 78%;
+    --border: 36 14% 86%;
+    --border-strong: 36 10% 72%;
+    --input: 220 14% 78%;
     --ring: 230 78% 48%;
 
-    --radius: 0.5rem;
-
-    --gradient-primary: hsl(var(--primary));
-    --gradient-secondary: hsl(var(--secondary));
-    --gradient-hero: hsl(var(--primary));
-    --shadow-elegant: none;
-    --shadow-card: none;
-    --shadow-glow: none;
-    --transition-smooth: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    --transition-bounce: transform 0.2s ease;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.800%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 215 50% 8%;
-    --foreground: 215 20% 95%;
+    --background: 225 30% 6%;
+    --foreground: 220 20% 94%;
 
-    --card: 215 45% 10%;
-    --card-foreground: 215 20% 95%;
+    --card: 225 26% 9%;
+    --card-foreground: 220 20% 94%;
+    --popover: 225 26% 9%;
+    --popover-foreground: 220 20% 94%;
 
-    --popover: 215 45% 10%;
-    --popover-foreground: 215 20% 95%;
+    --primary: 228 92% 68%;
+    --primary-foreground: 225 30% 8%;
+    --primary-hover: 228 92% 74%;
+    --primary-ink: 228 95% 76%;
+    --primary-surface: 230 40% 16%;
 
-    --primary: 215 100% 60%;
-    --primary-foreground: 215 50% 8%;
-    --primary-hover: 215 100% 65%;
+    --signal: 41 100% 58%;
 
-    --secondary: 215 40% 15%;
-    --secondary-foreground: 215 20% 95%;
+    --secondary: 224 22% 14%;
+    --secondary-foreground: 220 20% 94%;
+    --muted: 224 22% 14%;
+    --muted-foreground: 220 12% 70%;
+    --subtle: 220 10% 58%;
+    --accent: 230 40% 16%;
+    --accent-foreground: 228 95% 76%;
 
-    --muted: 215 40% 15%;
-    --muted-foreground: 215 20% 65%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 225 30% 8%;
 
-    --accent: 215 40% 15%;
-    --accent-foreground: 215 100% 60%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 215 20% 95%;
-
-    --border: 215 40% 18%;
-    --input: 215 40% 18%;
-    --ring: 215 100% 60%;
-    
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(215 100% 60%), hsl(225 100% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(215 45% 10%), hsl(215 40% 15%));
-    --gradient-hero: linear-gradient(135deg, hsl(215 100% 60%) 0%, hsl(225 100% 70%) 50%, hsl(240 100% 80%) 100%);
-    
-    /* Dark mode shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(215 100% 60% / 0.3);
-    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
-    --shadow-glow: 0 0 40px hsl(215 100% 60% / 0.2);
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 224 18% 17%;
+    --border-strong: 224 14% 28%;
+    --input: 224 14% 28%;
+    --ring: 228 92% 68%;
   }
 }
 
@@ -118,18 +84,24 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased transition-colors;
     font-size: 1.0625rem;
     line-height: 1.6;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
-  section[id] {
-    scroll-margin-top: 4.5rem;
+  [id] {
+    scroll-margin-top: 6rem;
   }
 
   h1, h2, h3 {
@@ -153,66 +125,113 @@ All colors MUST be HSL.
   }
 }
 
-@layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
+@layer components {
+  /* The small uppercase label above headings and inside cards. */
+  .eyebrow {
+    @apply font-display text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-subtle;
   }
-  
-  .gradient-secondary {
-    background: var(--gradient-secondary);
+
+  .surface-card {
+    @apply rounded-xl border border-border bg-card/70 shadow-sm backdrop-blur-sm transition-colors;
   }
-  
-  .gradient-hero {
-    background: var(--gradient-hero);
+
+  .btn-primary {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 font-semibold text-primary-foreground transition-colors hover:bg-primary-hover;
   }
-  
-  .shadow-elegant {
-    box-shadow: var(--shadow-elegant);
+
+  .btn-secondary {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg border-2 border-border-strong px-6 font-semibold transition-colors hover:border-primary hover:text-primary-ink;
   }
-  
-  .shadow-card {
-    box-shadow: var(--shadow-card);
+
+  .chip {
+    @apply rounded-full border border-border-strong px-2.5 py-1 text-xs text-muted-foreground;
   }
-  
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
+
+  /* Faint engineering-paper grid behind the hero. */
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.7) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.7) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 75%);
   }
-  
-  .transition-smooth {
-    transition: var(--transition-smooth);
+
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-border-strong bg-background px-1 font-mono text-[0.7rem] text-muted-foreground;
   }
-  
-  .transition-bounce {
-    transition: var(--transition-bounce);
-  }
-  
-  .animate-fade-up {
-    animation: fade-up 0.6s ease-out;
-  }
-  
-  .animate-scale-in {
-    animation: scale-in 0.5s ease-out;
+
+  .text-link {
+    @apply font-medium text-primary-ink underline decoration-primary/30 decoration-2 underline-offset-4 transition-colors hover:decoration-primary;
   }
 }
 
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
+/* Scroll reveal. Content is visible by default; the fade only applies under
+   the `js` class that index.html adds when scripts run and motion is allowed
+   (and removes again if the app fails to start), so nothing can get stuck
+   hidden. */
+.js [data-reveal] {
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Terminal typing effect (TerminalCard). Only under `.js`, so the full text
+   shows when scripts don't run or motion is reduced. */
+.js .term-cmd {
+  display: inline-block;
+  max-width: calc(var(--n, 0) * 1ch);
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.js .term-line[data-on="false"] {
+  opacity: 0;
+}
+
+@media print {
+  .js [data-reveal]:not(.is-revealed),
+  .js .term-line[data-on="false"] {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
+/* Logo hover: a signal runs along the circuit traces, then the solder pads light up. */
+@media (prefers-reduced-motion: no-preference) {
+  .group:hover .logo-stroke,
+  .group:focus-visible .logo-stroke {
+    stroke-dasharray: 1;
+    animation: logo-draw 700ms cubic-bezier(0.65, 0, 0.35, 1) both;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  .group:hover .logo-bar,
+  .group:focus-visible .logo-bar {
+    stroke-dasharray: 1;
+    animation: logo-draw 300ms 450ms ease-out both;
   }
+  .group:hover .logo-node,
+  .group:focus-visible .logo-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: logo-node 450ms 650ms ease-out both;
+  }
+  .group:hover .logo-node-2,
+  .group:focus-visible .logo-node-2 {
+    animation-delay: 760ms;
+  }
+}
+
+@keyframes logo-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes logo-node {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.35); }
+  100% { transform: scale(1); }
 }
