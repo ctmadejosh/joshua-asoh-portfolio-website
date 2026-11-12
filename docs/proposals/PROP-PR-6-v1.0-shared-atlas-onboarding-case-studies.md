@@ -1,7 +1,7 @@
 # PROP-PR-6 v1.0 — Shared Atlas & Onboarding Case Studies
 
-**Status:** Proposal  
-**Prepared for:** Joshua Asoh portfolio  
+**Status:** Proposal
+**Prepared for:** Joshua Asoh portfolio
 **Scope:** Content and presentation proposal only; no website implementation is included.
 
 ## Summary
