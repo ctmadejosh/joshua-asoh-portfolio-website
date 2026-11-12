@@ -1,4 +1,4 @@
-# PROP-PR-6 v1.0 — Shared Atlas & Onboarding Case Studies
+# PROP-PR-6 v1.1 — Shared Atlas & Onboarding Case Studies
 
 **Status:** Proposal
 **Prepared for:** Joshua Asoh portfolio
@@ -40,6 +40,14 @@ The portfolio and the public reference currently show different platform scale f
 
 **Visual direction:** A high-level onboarding journey (for example, entry point → approved setup/support steps → ready-to-contribute milestone). Label it as a conceptual or verified process map, as applicable; do not imply every step is automated or delivered by Atlas Studio.
 
+## Textual reference notes
+
+These public pages are cited as content and structure inspiration only. Use original portfolio language and approved facts; do not reuse their copy or embed screenshots.
+
+- [Brignano.io home page](https://brignano.io/) — Connects a clear role and platform context to a small set of scannable work highlights. Consider a similarly quick orientation before the deeper case studies, while keeping Joshua's role and claims independently verified.
+- [Atlas developer platform case study](https://brignano.io/work/atlas-developer-platform) — Organizes the story around the platform problem, its parts, adoption, and what remains in progress. This supports a clear separation between current capabilities, team context, and future plans in Joshua's proposed Atlas story.
+- [Self-service developer onboarding case study](https://brignano.io/work/self-service-developer-onboarding) — Explains what the onboarding measures mean and distinguishes the enterprise baseline from a single-machine setup result, goals, and unmeasured outcomes. Use that kind of explicit metric qualification as a model for verification, not its wording or claims.
+
 ## Attribution and verification rules
 
 | Item | Current evidence | Publication rule |
@@ -57,7 +65,7 @@ For every published metric, retain an internal verification note with the metric
 - Keep the case studies separate, with reciprocal links only if the team confirms that Atlas and the onboarding story are meaningfully connected.
 - Use a consistent case-study structure: context, problem, approach, Joshua's role, outcome/evidence, and reflection.
 - Put team context before individual contribution, and visually distinguish the two. Use explicit labels such as **Team context**, **My contribution**, and **Team outcome**.
-- Prefer concrete artifacts and clear diagrams over unsupported superlatives. Use sanitized screenshots or diagrams only after permission and content review.
+- Prefer concrete, permission-cleared diagrams or descriptions over unsupported superlatives. Cite external inspiration with text links; do not embed screenshots.
 - Avoid copying Anthony's wording or layout. Write original copy from verified facts and use the public page only as a signal of shared context and a prompt for metric reconciliation.
 - Avoid confidential architecture, internal documentation, customer information, and unapproved product details.
 - If an outcome cannot be verified, describe the deliverable and its intended purpose without implying measured impact.
