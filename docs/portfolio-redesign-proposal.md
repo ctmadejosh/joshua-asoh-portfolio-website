@@ -1,9 +1,9 @@
-# PROP-PR-5 v1.0 — Multi-page Portfolio Redesign
+# PROP-PR-5 v1.1 — Multi-page Portfolio Redesign
 
 **Status:** Proposal
 
 - **Proposal ID:** `PROP-PR-5`
-- **Version:** `1.0`
+- **Version:** `1.1`
 - **Source PR:** #5
 
 **Scope:** Product and implementation direction only; this document does not authorize or include website changes.
@@ -48,6 +48,10 @@ Develop an original visual system that fits the existing portfolio and Joshua's 
 
 Interactions should support a real task: navigating between sections, opening a case study, scanning related work, or understanding a timeline. Use restrained transitions and progressive reveals only where they improve orientation. Essential content and navigation must remain available without animation, on touch devices, and with reduced motion enabled.
 
+## LinkedIn connection
+
+Include a prominent, accessible link to Joshua's existing LinkedIn profile (`https://www.linkedin.com/in/joshua-asoh`) in shared site navigation, the footer, and contact content. Use a clear accessible name, a visible focus state, and an external-link treatment that remains understandable to assistive technology. Reference the same verified profile URL in the site's Person structured data. This is a profile link only; do not add LinkedIn OAuth, API feeds, or login.
+
 ## Content model and implementation approach
 
 Keep portfolio content local and data-driven, using typed TypeScript data for structured project and experience fields. Use Markdown only if case-study narrative length makes it materially easier to author and review; do not introduce a CMS or runtime content service. Reuse the current React, TypeScript, Vite, and React Router stack where practical, and build page layouts from existing project conventions rather than adding a second application framework.
@@ -61,7 +65,11 @@ Content records should support stable slugs, titles, summaries, optional categor
 - Provide text alternatives for supplied meaningful images; treat decorative media as decorative.
 - Respect `prefers-reduced-motion` and ensure motion never carries information by itself.
 - Keep pages lightweight: optimize supplied images, avoid unnecessary client-side dependencies, and defer nonessential media where appropriate.
-- Maintain useful document titles and route-specific metadata where feasible within the client-rendered application.
+- Provide a unique title, description, and canonical URL for every route, plus Open Graph metadata for social previews.
+- Include a sitemap and `robots.txt`; ensure sitemap entries use the canonical route URLs.
+- Add Person JSON-LD with only verified profile details and the LinkedIn URL in `sameAs`.
+- Keep headings semantic and provide appropriate alt text for meaningful images.
+- Check mobile usability and performance on representative routes before release.
 
 ## Routing and deployment
 
@@ -91,6 +99,11 @@ The project currently uses React Router and Cloudflare static assets configured 
 - Navigation makes the primary destinations discoverable and works by keyboard, touch, and pointer.
 - Layouts remain usable on mobile and laptop-sized screens, with no essential content dependent on hover or animation.
 - Reduced-motion preferences are respected; semantic structure, focus visibility, and image alternatives are addressed.
+- Every route has a unique title, description, and canonical URL; Open Graph metadata produces useful social previews.
+- A sitemap and `robots.txt` are present and consistent with the site's canonical URLs and crawl intent.
+- Person JSON-LD uses verified details and includes Joshua's LinkedIn profile in `sameAs`.
+- An accessible LinkedIn profile link is available in shared navigation, footer, and contact content; no OAuth, API feed, or login is introduced.
+- Semantic headings and meaningful image alternatives are in place, and mobile usability and performance are checked.
 - Content is maintained locally with typed structured data and no live CMS/API dependency.
 - Cloudflare serves the application shell on valid nested routes, while unknown routes show a useful not-found page.
 - No personal facts, project outcomes, statistics, imagery, or external links are added unless supplied or confirmed by Joshua.
