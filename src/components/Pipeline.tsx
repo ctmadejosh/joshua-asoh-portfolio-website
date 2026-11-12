@@ -58,15 +58,13 @@ const Pipeline = () => {
 
   return (
     <div>
-      <h2 className="font-sans text-base font-medium text-sky">
-        My work at The Hartford, stage by stage
-      </h2>
+      <p className="eyebrow">My work at The Hartford, stage by stage</p>
 
       <div className="relative mt-6">
         {/* Track runs between the centres of the first and last nodes. */}
-        <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-[15px] h-0.5 bg-white/25">
+        <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-[15px] h-0.5 bg-border">
           <div
-            className="h-full origin-left bg-signal transition-transform ease-linear"
+            className="h-full origin-left bg-primary transition-transform ease-linear"
             style={{ transform: `scaleX(${progress})`, transitionDuration: `${STEP_MS}ms` }}
           />
         </div>
@@ -89,15 +87,15 @@ const Pipeline = () => {
                 <span
                   className={`flex h-8 w-8 items-center justify-center rounded-full border-2 transition-colors duration-300 ${
                     done
-                      ? "border-signal bg-signal text-ink"
-                      : "border-white/40 bg-primary text-transparent"
-                  } ${isSelected ? "ring-4 ring-white/30" : "group-hover:ring-4 group-hover:ring-white/15"}`}
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border-strong bg-card text-transparent"
+                  } ${isSelected ? "ring-4 ring-primary/25" : "group-hover:ring-4 group-hover:ring-primary/10"}`}
                 >
                   <Check className="h-4 w-4" strokeWidth={3} />
                 </span>
                 <span
-                  className={`font-display text-lg font-semibold sm:text-xl ${
-                    isSelected ? "text-white" : "text-white/70 group-hover:text-white"
+                  className={`font-display text-base font-semibold sm:text-lg ${
+                    isSelected ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
                   }`}
                 >
                   {stage.name}
@@ -108,7 +106,7 @@ const Pipeline = () => {
         </div>
       </div>
 
-      <p className="mx-auto mt-5 min-h-[6.5rem] max-w-2xl text-center text-lg leading-relaxed text-white sm:min-h-[4.5rem]">
+      <p className="mx-auto mt-5 min-h-[6.5rem] max-w-2xl text-center leading-relaxed text-muted-foreground sm:min-h-[4.5rem]">
         {stages[selected].detail}
       </p>
     </div>

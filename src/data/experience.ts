@@ -7,7 +7,7 @@ export const experiences = [
       type: "Full-time",
       description: "Platform engineering across developer experience, CI/CD automation, cloud infrastructure, onboarding, and internal tooling in The Hartford's Technology & Operations Leadership Development Program.",
       achievements: [
-        "Delivered platform capabilities across 21 repositories supporting a developer platform serving 3,000+ engineers, with 214 authored pull requests (144 merged)",
+        "Delivered platform capabilities across 21 repositories of The Hartford's internal developer platform, with 214 authored pull requests (144 merged)",
         "Built Atlas Studio, an AI-enabled tool that converts guide content into narrated walkthrough videos to expand developer onboarding",
         "Engineered and hardened enterprise CI/CD automation in Harness, including project provisioning, onboarding workflows, build-farm smoke testing, and idempotent provisioning workflows",
         "Shipped features across the developer-experience ecosystem, including a VS Code extension, desktop and CLI tooling, DevOps Intelligence, and platform documentation",

@@ -23,10 +23,12 @@ export default {
 				display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif']
 			},
 			colors: {
-				ink: 'hsl(var(--ink))',
 				signal: 'hsl(var(--signal))',
-				sky: 'hsl(var(--sky))',
-				border: 'hsl(var(--border))',
+				subtle: 'hsl(var(--subtle))',
+				border: {
+					DEFAULT: 'hsl(var(--border))',
+					strong: 'hsl(var(--border-strong))'
+				},
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
@@ -34,7 +36,9 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					hover: 'hsl(var(--primary-hover))'
+					hover: 'hsl(var(--primary-hover))',
+					ink: 'hsl(var(--primary-ink))',
+					surface: 'hsl(var(--primary-surface))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -75,6 +79,9 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			maxWidth: {
+				site: '72rem'
 			},
 			keyframes: {
 				'accordion-down': {

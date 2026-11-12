@@ -6,7 +6,20 @@
     <title>Joshua Asoh | Platform Engineer</title>
     <meta name="description" content="Platform Engineer in The Hartford's Technology &amp; Operations Leadership Development Program and M.S. Computer Information Technology student, focused on CI/CD automation, developer experience, and cloud infrastructure." />
     <meta name="author" content="Joshua Asoh" />
-    <meta name="theme-color" content="#1B3BDB" />
+    <meta name="theme-color" content="#F6F7FA" />
+    <meta name="robots" content="index, follow" />
+    <script>
+      // Pick the theme before first paint: a saved choice wins, else the system setting.
+      (function () {
+        var dark;
+        try { dark = localStorage.getItem("theme"); } catch (e) {}
+        dark = dark ? dark === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) {
+          document.documentElement.classList.add("dark");
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#0B0E15");
+        }
+      })();
+    </script>
     <link rel="canonical" href="https://juasoh.com/" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -27,6 +40,19 @@
     <meta name="twitter:title" content="Joshua Asoh | Platform Engineer" />
     <meta name="twitter:description" content="Platform Engineer at The Hartford. CI/CD automation, developer tooling, and cloud infrastructure." />
     <meta name="twitter:image" content="https://juasoh.com/og-image.jpg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Joshua Asoh",
+        "url": "https://juasoh.com/",
+        "jobTitle": "Platform Engineer",
+        "worksFor": { "@type": "Organization", "name": "The Hartford" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Central Connecticut State University" },
+        "sameAs": ["https://www.linkedin.com/in/joshua-asoh", "https://github.com/ctmadejosh"]
+      }
+    </script>
   </head>
 
   <body>
