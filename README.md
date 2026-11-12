@@ -49,13 +49,13 @@ A contact form is available for professional inquiries and networking.
    ```
 2. **Install dependencies:**
    ```sh
-   npm install
+   bun install
    ```
 3. **Start the development server:**
    ```sh
-   npm run dev
+   bun run dev
    ```
-   The site will be available at `http://localhost:5173` by default.
+   The site will be available at `http://localhost:8080` by default.
 
 ## Development
 - Main entry: `src/main.tsx`
@@ -65,10 +65,10 @@ A contact form is available for professional inquiries and networking.
 - Public assets: `public/`
 
 ## Deployment
-You can deploy this site using [Lovable](https://lovable.dev/) or your preferred static hosting provider. For custom domains, see the Lovable documentation.
+The site is deployed to Cloudflare Workers (static assets) and served at [juasoh.com](https://juasoh.com). Pushing to `main` triggers a build (`bun install --frozen-lockfile && bun run build`) and deploy using `wrangler.jsonc`.
 
 ---
 
 **Author:** Joshua Asoh
 
-For more information, see the [live website](https://lovable.dev/projects/b08ca87c-d510-47ef-8cc4-a00c1434df29) or contact via the form on the site.
+Live site: [juasoh.com](https://juasoh.com)
