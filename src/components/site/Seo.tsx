@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { SITE_NAME, SITE_URL } from "@/data/site";
+import { ogImage } from "@/data/og";
 
 export type HeadData = {
   title: string;
@@ -8,6 +9,9 @@ export type HeadData = {
   canonical: string;
   noindex: boolean;
   ogType: "website" | "article" | "profile";
+  /** Absolute URL of the social preview image, and its alt text. */
+  image: string;
+  imageAlt: string;
   jsonLd: Record<string, unknown>[];
 };
 
@@ -24,6 +28,9 @@ type SeoProps = {
   description: string;
   noindex?: boolean;
   ogType?: HeadData["ogType"];
+  /** Preview image path under public/, from ogImage(); defaults to the home card. */
+  image?: string;
+  imageAlt?: string;
   /** Page-specific structured data; a BreadcrumbList is added automatically. */
   jsonLd?: Record<string, unknown>[];
   /** Breadcrumb trail after Home, e.g. [["Work", "/work"], ["ATLAS", "/work/atlas-developer-platform"]]. */
@@ -34,12 +41,19 @@ export const absoluteUrl = (path: string) => `${SITE_URL}${path === "/" ? "/" : 
 
 export function buildHead(pathname: string, props: SeoProps): HeadData {
   const { title, description, noindex = false, ogType = "website", jsonLd = [], breadcrumbs } = props;
+  const image = `${SITE_URL}${props.image ?? ogImage("home")}`;
+  // The alt describes the image actually shown: a page's own card, or the home card.
+  const imageAlt =
+    props.imageAlt ??
+    (props.image && title ? `${title}, a case study by ${SITE_NAME}` : `${SITE_NAME}, Platform Engineer at The Hartford`);
   const data: HeadData = {
     title: title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Platform Engineer`,
     description,
     canonical: absoluteUrl(pathname),
     noindex,
     ogType,
+    image,
+    imageAlt,
     jsonLd: [...jsonLd],
   };
   if (breadcrumbs?.length) {
@@ -84,6 +98,9 @@ const Seo = (props: SeoProps) => {
     setMeta("property", "og:url", head.canonical);
     setMeta("name", "twitter:title", head.title);
     setMeta("name", "twitter:description", head.description);
+    setMeta("property", "og:image", head.image);
+    setMeta("property", "og:image:alt", head.imageAlt);
+    setMeta("name", "twitter:image", head.image);
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
