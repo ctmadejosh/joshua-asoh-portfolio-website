@@ -4,6 +4,12 @@ import { Award, Calendar } from "lucide-react";
 
 const certifications = [
   {
+    name: "Terraform for the Absolute Beginners with Labs",
+    date: "August 2025",
+    icon: "🏗️",
+    description: "Udemy course covering Terraform fundamentals and hands-on infrastructure-as-code labs.",
+  },
+  {
     name: "BioLaunch Laboratory Operations",
     date: "February 2024",
     icon: "🧬",

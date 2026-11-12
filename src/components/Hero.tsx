@@ -32,7 +32,7 @@ const Hero = () => {
               </h1>
               
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                T&O LDP Associate – DevOps Engineer at The Hartford, pursuing a Master's in Computer Information Technology. Passionate about cloud infrastructure, automation, and building impactful software solutions.
+                Platform Engineer in The Hartford's Technology & Operations Leadership Development Program, pursuing a Master's in Computer Information Technology. I build internal developer platforms, CI/CD automation, and cloud-native tools.
               </p>
             </div>
             
