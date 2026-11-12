@@ -1,9 +1,9 @@
-# PROP-PR-5 v1.2 — Multi-page Portfolio Redesign
+# PROP-PR-5 v1.3 — Multi-page Portfolio Redesign
 
 **Status:** Proposal
 
 - **Proposal ID:** `PROP-PR-5`
-- **Version:** `1.2`
+- **Version:** `1.3`
 - **Source PR:** #5
 
 **Scope:** Product and implementation direction only; this document does not authorize or include website changes.
@@ -47,6 +47,14 @@ Use persistent, compact site navigation and contextual links between related pag
 Develop an original visual system that fits the existing portfolio and Joshua's preferences. The reference is directional inspiration for a polished, editorial portfolio—not a template. Do not copy its page composition, styling, wording, animations, or assets. Establish hierarchy through typography, spacing, restrained color, and a consistent card and page system.
 
 Interactions should support a real task: navigating between sections, opening a case study, scanning related work, or understanding a timeline. Use restrained transitions and progressive reveals only where they improve orientation. Essential content and navigation must remain available without animation, on touch devices, and with reduced motion enabled.
+
+## Reference notes
+
+These pages are linked as textual design references only. The observations below are original summaries of content organization; do not copy their wording or use their screenshots or assets.
+
+- [brignano.io homepage](https://brignano.io/): Introduces the person and professional focus, then leads into selected work, projects, experience, and contact links. This is a useful example of a home page that serves as a concise hub to deeper content.
+- [ATLAS Developer Platform case study](https://brignano.io/work/atlas-developer-platform): Starts with a project overview and scan-friendly indicators, then expands into the problem, platform capabilities, adoption, and future direction. This supports a case-study format that offers both a quick read and deeper context.
+- [Self-service developer onboarding case study](https://brignano.io/work/self-service-developer-onboarding): Organizes the story around the onboarding challenge and process, while distinguishing measured results from goals and unmeasured outcomes. This is a useful model for clear, evidence-led storytelling.
 
 ## LinkedIn connection
 
