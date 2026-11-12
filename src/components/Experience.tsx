@@ -5,16 +5,23 @@ import { Calendar, MapPin, Building } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
-      title: "T&O LDP Associate – DevOps Engineer",
+      title: "Tech & Ops LDP – Platform Engineer",
       company: "The Hartford Insurance",
       location: "Hartford, CT",
       period: "January 2026 – Present",
       type: "Full-time",
-      description: "DevOps engineering role as part of The Hartford's Technology & Operations Leadership Development Program.",
-      achievements: []
+      description: "Platform engineering across developer experience, CI/CD automation, cloud infrastructure, onboarding, and internal tooling in The Hartford's Technology & Operations Leadership Development Program.",
+      achievements: [
+        "Delivered platform capabilities across 21 repositories supporting a developer platform serving 3,000+ engineers, with 214 authored pull requests (144 merged)",
+        "Built Atlas Studio, an AI-enabled tool that converts guide content into narrated walkthrough videos to expand developer onboarding",
+        "Engineered and hardened enterprise CI/CD automation in Harness, including project provisioning, onboarding workflows, build-farm smoke testing, and idempotent provisioning workflows",
+        "Shipped features across the developer-experience ecosystem, including a VS Code extension, desktop and CLI tooling, DevOps Intelligence, and platform documentation",
+        "Improved reliability of shared developer tooling with cross-platform integration testing, an 80%+ code-coverage threshold, and release-readiness practices",
+        "Led technical enablement and onboarding for associates, interns, and engineers, and supported LDP mentorship and university engagement"
+      ]
     },
     {
-      title: "Digital Manufacturing Intern",
+      title: "Digital Manufacturing Engineering Intern",
       company: "Zygo AMETEK Precision Metrology",
       location: "Middlefield, CT",
       period: "September 2025 – January 2026",
@@ -28,7 +35,7 @@ const Experience = () => {
       ]
     },
     {
-      title: "Early Career LDP Intern – Cloud & Reliability Engineering",
+      title: "Tech & Ops LDP Intern – Cloud and Reliability Engineer",
       company: "The Hartford Insurance",
       location: "Hartford, CT",
       period: "May 2025 – August 2025",
@@ -38,7 +45,7 @@ const Experience = () => {
         "Provisioned cloud infrastructure with Terraform; ensured compliance with AWS IAM and security protocols",
         "Developed and deployed a responsive Angular UI integrated with AWS Bedrock for real-time chatbot interactions",
         "Led prompt engineering and modular pipeline design for processing unstructured internal documentation",
-        "Deployed agentic workflows for autonomous information retrieval, reducing queries by 80% across 800+ engineers",
+        "Built a chatbot that reduced documentation lookup time by 1–2 hours per query and scaled it to support 800+ engineers",
         "Engineered a GenAI-powered document chatbot using Claude 3.5 Sonnet and Bedrock, integrating AWS ECS, Lambda, and S3 within a RAG workflow"
       ]
     },
@@ -56,7 +63,7 @@ const Experience = () => {
       ]
     },
     {
-      title: "College Operations Intern and Assistant Trainer",
+      title: "College Operations and Training Intern",
       company: "Connecticut Center for Arts and Technology",
       location: "New Haven, CT",
       period: "May 2024 – January 2025",
@@ -70,7 +77,7 @@ const Experience = () => {
       ]
     },
     {
-      title: "Software Engineering Extern",
+      title: "Software Engineer Extern",
       company: "FactSet Research Systems Inc.",
       location: "Norwalk, CT",
       period: "May 2024",
@@ -126,7 +133,7 @@ const Experience = () => {
       title: "Vice President",
       company: "Institute of Electrical and Electronics Engineering (IEEE)",
       location: "New Britain, CT",
-      period: "July 2023 – April 2024",
+      period: "August 2023 – April 2024",
       type: "Leadership",
       description: "Led membership recruitment and partnerships with major technology and insurance companies.",
       achievements: [

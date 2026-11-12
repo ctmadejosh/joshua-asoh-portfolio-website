@@ -7,7 +7,7 @@ const About = () => {
     {
       icon: Target,
       title: "DevOps & Cloud",
-      description: "AWS infrastructure, Terraform, CI/CD pipelines, and infrastructure-as-code at The Hartford"
+      description: "Harness CI/CD automation, AWS and GCP infrastructure, Terraform, and developer tooling at The Hartford"
     },
     {
       icon: Users,
@@ -22,13 +22,15 @@ const About = () => {
     {
       icon: Award,
       title: "Academic Excellence",
-      description: "3.44 BS GPA, 3.66 MS GPA, 3x Dean's List, pursuing dual degrees at CCSU"
+      description: "BS in Computer Engineering Technology (3.44 GPA, 3x Dean's List), pursuing an MS at CCSU (3.71 GPA)"
     }
   ];
 
   const skills = [
     "AWS (ECS, Lambda, S3, Bedrock)",
     "Terraform & IaC",
+    "Harness CI/CD",
+    "Developer Experience",
     "Python",
     "Java",
     "Angular",
@@ -50,7 +52,7 @@ const About = () => {
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-bold mb-4">About Me</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Computer Engineering Technology student with hands-on experience in cloud infrastructure, software development, and leadership roles across diverse organizations.
+            Platform Engineer building internal developer platforms, CI/CD automation, and cloud-native tools that make engineering work more repeatable and productive.
           </p>
         </div>
         
@@ -61,7 +63,7 @@ const About = () => {
               <h3 className="text-2xl font-semibold mb-4 text-primary">My Journey</h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Currently a T&O LDP Associate – DevOps Engineer at The Hartford Insurance, while pursuing a Master's in Computer Information Technology and Bachelor's in Computer Engineering Technology at CCSU. A 3x Dean's List student with a 3.66 MS GPA and 3.44 BS GPA.
+                  Currently a Platform Engineer in The Hartford's Technology & Operations Leadership Development Program, working across Harness automation, developer experience, IDE tooling, DevOps Intelligence, cloud infrastructure, and guided onboarding for a platform serving 3,000+ engineers. I hold a BS in Computer Engineering Technology from CCSU (3x Dean's List, 3.44 GPA) and am pursuing a Master's in Computer Information Technology (3.71 GPA).
                 </p>
                 <p>
                   Previously interned at Zygo AMETEK in digital manufacturing, built a GenAI-powered document chatbot using Claude 3.5 Sonnet and AWS Bedrock at The Hartford, and developed inventory systems at Alexion-AstraZeneca. My experience spans DevOps, cloud infrastructure, AI/ML, and IIoT.
