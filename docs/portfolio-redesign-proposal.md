@@ -1,8 +1,14 @@
-# Portfolio redesign proposal
+# PROP-PR-5 v1.0 — Multi-page Portfolio Redesign
 
 **Status:** Proposal
 
+- **Proposal ID:** `PROP-PR-5`
+- **Version:** `1.0`
+- **Source PR:** #5
+
 **Scope:** Product and implementation direction only; this document does not authorize or include website changes.
+
+Versions use `major.minor`: increment the minor version for revisions within this proposal, and the major version for a substantial rewrite. Each future proposal uses its own PR number as its stable identifier.
 
 ## Summary
 
