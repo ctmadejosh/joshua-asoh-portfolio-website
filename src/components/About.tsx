@@ -1,117 +1,84 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Target, Users, Lightbulb, Award } from "lucide-react";
+const skillGroups = [
+  {
+    name: "Cloud and infrastructure",
+    items: "AWS (ECS, Lambda, S3, Bedrock), GCP, Terraform, Docker",
+  },
+  {
+    name: "CI/CD and developer experience",
+    items: "Harness, Jenkins, internal developer platforms, IDE and CLI tooling",
+  },
+  {
+    name: "AI",
+    items: "RAG and agentic workflows, prompt and retrieval engineering",
+  },
+  {
+    name: "Languages and frameworks",
+    items: "Python, Java, Angular, C/C++, SQL, VHDL",
+  },
+  {
+    name: "Also",
+    items: "SOLIDWORKS, Agile/Scrum, team leadership",
+  },
+];
+
+const education = [
+  {
+    degree: "M.S. Computer Information Technology",
+    detail: "Central Connecticut State University, in progress. 3.71 GPA.",
+  },
+  {
+    degree: "B.S. Computer Engineering Technology",
+    detail: "Central Connecticut State University. 3.44 GPA, Dean's List three times.",
+  },
+];
 
 const About = () => {
-  const highlights = [
-    {
-      icon: Target,
-      title: "DevOps & Cloud",
-      description: "Harness CI/CD automation, AWS and GCP infrastructure, Terraform, and developer tooling at The Hartford"
-    },
-    {
-      icon: Users,
-      title: "Leadership",
-      description: "Vice President of IEEE, managing teams and leading diversity initiatives"
-    },
-    {
-      icon: Lightbulb,
-      title: "Innovation",
-      description: "GenAI chatbots with RAG, agentic workflows, and IIoT solutions"
-    },
-    {
-      icon: Award,
-      title: "Academic Excellence",
-      description: "BS in Computer Engineering Technology (3.44 GPA, 3x Dean's List), pursuing an MS at CCSU (3.71 GPA)"
-    }
-  ];
-
-  const skills = [
-    "AWS (ECS, Lambda, S3, Bedrock)",
-    "Terraform & IaC",
-    "Harness CI/CD",
-    "Developer Experience",
-    "Python",
-    "Java",
-    "Angular",
-    "C/C++",
-    "Docker",
-    "Jenkins",
-    "SQL",
-    "VHDL",
-    "Prompt & Retrieval Engineering",
-    "RAG & Agentic Workflows",
-    "SOLIDWORKS",
-    "Agile/Scrum",
-    "Team Leadership",
-  ];
-
   return (
-    <section id="about" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Platform Engineer building internal developer platforms, CI/CD automation, and cloud-native tools that make engineering work more repeatable and productive.
-          </p>
-        </div>
-        
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Story */}
-          <div className="space-y-6 animate-fade-up">
-            <Card className="p-8 shadow-card hover:shadow-elegant transition-smooth">
-              <h3 className="text-2xl font-semibold mb-4 text-primary">My Journey</h3>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Currently a Platform Engineer in The Hartford's Technology & Operations Leadership Development Program, working across Harness automation, developer experience, IDE tooling, DevOps Intelligence, cloud infrastructure, and guided onboarding for a platform serving 3,000+ engineers. I hold a BS in Computer Engineering Technology from CCSU (3x Dean's List, 3.44 GPA) and am pursuing a Master's in Computer Information Technology (3.71 GPA).
-                </p>
-                <p>
-                  Previously interned at Zygo AMETEK in digital manufacturing, built a GenAI-powered document chatbot using Claude 3.5 Sonnet and AWS Bedrock at The Hartford, and developed inventory systems at Alexion-AstraZeneca. My experience spans DevOps, cloud infrastructure, AI/ML, and IIoT.
-                </p>
-                <p>
-                  Certified in BioLaunch Lab Operations, SolidWorks, OSHA-10, and Electronics Technician. Active in NSBE, ColorStack, Epsilon Pi Tau, and served as IEEE Vice President.
-                </p>
-              </div>
-            </Card>
-            
-            {/* Skills */}
-            <Card className="p-8 shadow-card">
-              <h3 className="text-xl font-semibold mb-6 text-primary">Core Skills</h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <Badge 
-                    key={skill} 
-                    variant="secondary" 
-                    className="hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
+    <section id="about" className="py-20 lg:py-28">
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
+        <div>
+          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">About</h2>
+          <div className="mt-8 max-w-[62ch] space-y-5 text-lg leading-relaxed">
+            <p>
+              I'm a platform engineer in The Hartford's Technology &amp; Operations Leadership
+              Development Program. My work covers Harness automation, developer experience,
+              IDE tooling, DevOps Intelligence, cloud infrastructure, and guided onboarding
+              for a platform that serves more than 3,000 engineers.
+            </p>
+            <p>
+              Before this rotation I interned in digital manufacturing at Zygo AMETEK, built
+              a GenAI document chatbot on Claude 3.5 Sonnet and AWS Bedrock at The Hartford,
+              and developed lab inventory systems at Alexion-AstraZeneca. That mix of DevOps,
+              cloud, AI, and industrial IoT shapes how I approach a problem.
+            </p>
+            <p>
+              Outside of work I'm finishing a master's at CCSU. I served as Vice President of
+              the university's IEEE chapter and I'm active in NSBE, ColorStack, and Epsilon
+              Pi Tau.
+            </p>
           </div>
-          
-          {/* Right Column - Highlights */}
-          <div className="space-y-6">
-            {highlights.map((highlight, index) => (
-              <Card 
-                key={highlight.title} 
-                className="p-6 shadow-card hover:shadow-elegant transition-smooth group animate-fade-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-smooth">
-                    <highlight.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-smooth" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-lg font-semibold mb-2">{highlight.title}</h4>
-                    <p className="text-muted-foreground leading-relaxed">{highlight.description}</p>
-                  </div>
-                </div>
-              </Card>
+
+          <h3 className="mt-12 text-2xl font-semibold tracking-tight">Education</h3>
+          <ul className="mt-4 divide-y divide-border border-y border-border">
+            {education.map((item) => (
+              <li key={item.degree} className="py-4">
+                <p className="font-semibold">{item.degree}</p>
+                <p className="text-muted-foreground">{item.detail}</p>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
+
+        <div className="lg:pt-2">
+          <h3 className="text-2xl font-semibold tracking-tight">What I work with</h3>
+          <dl className="mt-4 divide-y divide-border border-y border-border">
+            {skillGroups.map((group) => (
+              <div key={group.name} className="py-4">
+                <dt className="font-semibold text-primary">{group.name}</dt>
+                <dd className="mt-1">{group.items}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
