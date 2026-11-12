@@ -201,7 +201,7 @@
   }
 }
 
-/* Logo hover: the pipeline stroke redraws, then the deploy node pulses. */
+/* Logo hover: a signal runs along the circuit traces, then the solder pads light up. */
 @media (prefers-reduced-motion: no-preference) {
   .group:hover .logo-stroke,
   .group:focus-visible .logo-stroke {
@@ -218,6 +218,10 @@
     transform-box: fill-box;
     transform-origin: center;
     animation: logo-node 450ms 650ms ease-out both;
+  }
+  .group:hover .logo-node-2,
+  .group:focus-visible .logo-node-2 {
+    animation-delay: 760ms;
   }
 }
 
