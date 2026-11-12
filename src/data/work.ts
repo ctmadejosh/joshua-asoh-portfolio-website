@@ -1,11 +1,12 @@
 /**
- * Case studies. Every fact here comes from Joshua's resume and the earlier
- * version of this site. Per PROP-PR-6, team context and Joshua's own
- * contribution are labelled separately, and no platform-audience or
- * onboarding-time figure is published until its owner confirms it.
+ * Case studies. Per PROP-PR-6, team context, Joshua's own contribution, and
+ * team outcomes are labelled separately. Platform-wide figures (4,000+
+ * engineers, 95,000+ pipelines, 13,000+ repositories, 1,000+ in 90 days, the
+ * 40+ day baseline) were confirmed by Joshua in November 2026 against the
+ * team lead's published case studies, and are always labelled as team figures.
  */
 export type CaseStudySection = {
-  label: "Team context" | "The problem" | "My contribution" | "What shipped" | "Outcome" | "Approach";
+  label: "Team context" | "The problem" | "My contribution" | "What shipped" | "Outcome" | "Team outcome" | "Approach";
   title: string;
   body: string[];
   bullets?: string[];
@@ -31,110 +32,164 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "harness-platform-automation",
-    title: "CI/CD automation for an internal developer platform",
+    slug: "atlas-developer-platform",
+    title: "Building ATLAS, the developer platform for 4,000+ engineers",
     eyebrow: "The Hartford · 2026",
     lede:
-      "Provisioning, onboarding workflows, and build-farm testing in Harness, plus the IDE and CLI tools engineers use on the platform day to day.",
+      "ATLAS puts onboarding, builds, policy, telemetry, and AI tooling for The Hartford's engineers in one place: a CLI, a desktop agent, and IDE extensions. I build across all three, plus the telemetry behind them.",
     role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "January 2026 – present",
-    stack: ["Harness", "CI/CD", "VS Code extension", "CLI tooling", "Integration testing"],
+    stack: ["HIG CLI", "Desktop agent", "VS Code extension", "OpenTelemetry", "Amazon EventBridge", "DynamoDB", "Harness", "Integration testing"],
     facts: [
-      { value: "21", label: "Repositories contributed to" },
-      { value: "144", label: "Pull requests merged" },
-      { value: "80%+", label: "Coverage threshold on shared tooling" },
+      { value: "4,000+", label: "Engineers on the platform (team figure)" },
+      { value: "95,000+", label: "Pipelines the platform supports (team figure)" },
+      { value: "144", label: "Of my pull requests merged, across 21 repositories" },
+      { value: "80%+", label: "Coverage threshold on the tooling I test" },
     ],
     tldr: {
-      problem: "Shared provisioning and onboarding automation runs for many teams, often more than once, and has to be safe every time.",
-      did: "Built idempotent Harness workflows, build-farm smoke tests, and a tested release path for the platform's IDE and CLI tools.",
-      result: "144 merged pull requests across 21 repositories, with shared tooling held to an 80%+ coverage threshold.",
+      problem: "A new engineer's tools were found in a browser, installed from a wiki, and run in a terminal, and nothing connected the three.",
+      did: "Built CLI features, the desktop agent's bridge to the platform site, VS Code extension features, and telemetry, and put cross-platform tests and release checks around them.",
+      result: "The team's unified CLI, desktop app, and IDE extensions reached 1,000+ engineers in 90 days; the CLI now runs on 4,000+ machines.",
     },
     flow: [
-      { label: "Team request", detail: "New project or onboarding" },
-      { label: "Provision", detail: "Idempotent Harness workflow", mine: true },
-      { label: "Smoke test", detail: "Build farm checks", mine: true },
-      { label: "Integration tests", detail: "Cross-platform, 80%+ coverage", mine: true },
-      { label: "Ship", detail: "VS Code, desktop, CLI, docs", mine: true },
+      { label: "Platform site", detail: "Where engineers start" },
+      { label: "Desktop agent", detail: "Runs native commands from the site", mine: true },
+      { label: "HIG CLI", detail: "Setup, builds, policy", mine: true },
+      { label: "VS Code extension", detail: "The platform in the editor", mine: true },
+      { label: "Telemetry", detail: "OpenTelemetry → EventBridge → DynamoDB", mine: true },
     ],
-    flowNote: "Highlighted steps are the parts I built or hardened; the platform itself is a team effort.",
+    flowNote: "Highlighted parts are ones I wrote code for; ATLAS as a whole is the platform team's work.",
+    links: [{ label: "Anthony Brignano's ATLAS case study (team lead's view)", url: "https://brignano.io/work/atlas-developer-platform" }],
     sections: [
       {
         label: "Team context",
-        title: "A platform team serving engineers across the company",
+        title: "One platform team, one platform",
         body: [
-          "I work on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team owns the CI/CD automation, developer tooling, and documentation other engineering teams build on.",
+          "I'm on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team is led by Anthony Brignano, who sets the technical direction for ATLAS; I'm one of the engineers building it.",
+          "As of November 2026, the platform serves 4,000+ engineers, on its way to the full 8,000-engineer organization, supports 95,000+ pipelines, and tracks 13,000+ repositories. Those are the platform's numbers, not mine alone; the sections below are the parts I built.",
         ],
       },
       {
         label: "The problem",
-        title: "Shared automation has to be safe to re-run",
+        title: "Three tools that didn't know about each other",
         body: [
-          "Provisioning and onboarding workflows run for many teams, often more than once. A workflow that breaks on a second run, or a tool change that only gets tested on one operating system, turns into support tickets for everyone downstream.",
+          "Before ATLAS, an engineer's tooling was discovered in a browser, installed from a wiki, and run in a terminal, and nothing connected the three. Every team's pipelines had their own templates, so one change had to be repeated across thousands of them.",
         ],
       },
       {
         label: "My contribution",
-        title: "What I built and hardened",
-        body: ["Across 21 repositories I authored 214 pull requests, 144 of them merged."],
+        title: "The CLI and the desktop agent",
+        body: ["The CLI is the core of ATLAS, and the desktop agent is what lets the platform's website reach it."],
         bullets: [
-          "Harness project provisioning and onboarding workflows, written to be idempotent so a re-run leaves a team's setup intact.",
-          "Build-farm smoke testing in Harness, so platform changes are checked before engineers depend on them.",
-          "Cross-platform integration tests and an 80%+ code-coverage threshold for the developer tooling teams share, along with release-readiness practices.",
-          "Features across the developer-experience ecosystem: a VS Code extension, desktop and CLI tooling, DevOps Intelligence, and platform documentation.",
+          "Built features in the HIG CLI, now in use on 4,000+ machines.",
+          "Worked on the desktop agent's bridge to the platform site: a button on the site runs a native command on the engineer's own machine, which is what makes the in-browser onboarding possible.",
+          "Fixed bugs and hardened both after rollout.",
         ],
       },
       {
-        label: "Outcome",
-        title: "What changed",
+        label: "My contribution",
+        title: "The VS Code extension",
+        body: ["The extension brings the platform into the editor engineers already use."],
+        bullets: [
+          "Built features in the platform's VS Code extension.",
+          "Built the day-one walkthrough that opens VS Code, installs the extension, and tours the parts of the editor that matter on the first day.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Telemetry for DevOps Intelligence",
         body: [
-          "Shared tooling now ships behind integration tests and a coverage gate, and provisioning workflows can be re-run safely. I also lead technical enablement and onboarding for associates, interns, and engineers joining the platform.",
+          "The platform has been instrumented since day one, so the team can see how its tools are used. I worked on the telemetry pipeline behind that: events from the CLI, IDE extensions, and desktop agent flow through OpenTelemetry and Amazon EventBridge into DynamoDB, which feeds the usage dashboards.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Tests and releases",
+        body: ["Across 21 repositories I authored 214 pull requests, 144 of them merged."],
+        bullets: [
+          "Cross-platform integration tests and an 80%+ code-coverage threshold for the shared developer tooling.",
+          "Release-readiness checks, so the CLI, agent, and extension ship in step.",
+          "Build-farm smoke testing in Harness, so platform changes are checked before engineers depend on them.",
+        ],
+      },
+      {
+        label: "Team outcome",
+        title: "How it was adopted",
+        body: [
+          "The unified CLI, desktop app, and IDE extensions reached 1,000+ active engineers in their first 90 days. The desktop agent reached the same number in a day, because it shipped to everyone who already had the CLI.",
         ],
       },
     ],
   },
   {
-    slug: "atlas-studio",
-    title: "Atlas Studio: guides into narrated walkthroughs",
+    slug: "self-service-onboarding",
+    title: "The CEO-sponsored push to make onboarding self-service",
     eyebrow: "The Hartford · 2026",
     lede:
-      "An AI-enabled tool that turns written guide content into narrated walkthrough videos, built to widen developer onboarding.",
-    role: "Platform Engineer",
+      "A CEO-sponsored initiative to cut the time from an engineer's hire date to their first commit. I built parts of the day-one path, turned its guides into narrated videos, and onboarded people through it.",
+    role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "2026",
-    stack: ["Generative AI", "Developer onboarding", "Video narration"],
+    stack: ["HIG CLI", "Desktop agent", "VS Code", "Harness", "Generative AI", "Atlas Studio"],
     facts: [
-      { value: "Guide → video", label: "Written guides become narrated walkthroughs" },
-      { value: "Onboarding", label: "Built for new developers on the platform" },
+      { value: "40+ days", label: "Hire to first commit, before (team baseline)" },
+      { value: "Hours", label: "A machine, unboxed to building, on the platform path (team figure)" },
+      { value: "CEO", label: "Sponsor" },
     ],
     tldr: {
-      problem: "Onboarding guides are written text, and recording walkthrough videos by hand can't keep up when the guides change.",
-      did: "Built Atlas Studio, an AI-enabled tool that turns guide content into a narrated walkthrough video.",
-      result: "When a guide changes, its walkthrough can be regenerated instead of re-recorded.",
+      problem: "It took a new engineer 40+ days from hire to first commit, mostly waiting on setup and access that only experienced people knew to ask for.",
+      did: "Built in-browser onboarding walkthroughs, the VS Code walkthrough, Harness provisioning workflows, and Atlas Studio's narrated videos, then onboarded associates, interns, and engineers through it.",
+      result: "On the platform path, a new machine goes from unboxed to building in hours. The first-day goal is the initiative's target; the enterprise measure is still catching up.",
     },
     flow: [
-      { label: "Written guide", detail: "Existing onboarding content" },
-      { label: "Atlas Studio", detail: "AI-enabled generation", mine: true },
-      { label: "Narrated walkthrough", detail: "Video for new developers", mine: true },
+      { label: "Laptop arrives", detail: "CLI and agent preinstalled" },
+      { label: "Walkthroughs", detail: "Setup in the browser", mine: true },
+      { label: "Narrated videos", detail: "Atlas Studio", mine: true },
+      { label: "Provisioning", detail: "Harness workflows", mine: true },
+      { label: "First build", detail: "One command, any project" },
     ],
+    flowNote: "Highlighted steps are ones I built; the initiative is the platform team's, led by Anthony Brignano.",
+    links: [{ label: "Anthony Brignano's onboarding case study (team lead's view)", url: "https://brignano.io/work/self-service-developer-onboarding" }],
     sections: [
       {
         label: "Team context",
-        title: "Part of the team's onboarding work",
+        title: "Why it reached the CEO",
         body: [
-          "Atlas Studio is part of the platform team's wider Atlas and onboarding work. Onboarding is a team effort; this page covers only the part I built.",
-        ],
-      },
-      {
-        label: "The problem",
-        title: "Not everyone learns from a wall of text",
-        body: [
-          "Most onboarding material is written guides. Some people learn faster by watching someone walk through the steps, but recording and re-recording videos by hand doesn't keep up with docs that change.",
+          "The time from hire date to first commit was 40+ days, and almost none of it was learning the codebase: it was laptop imaging, software access, and permission requests that each had their own approver. The figure came up in an operating review, and the CEO made bringing it down a sponsored initiative. ATLAS is how the platform team delivers on it, under Anthony Brignano's lead.",
         ],
       },
       {
         label: "My contribution",
-        title: "Generating the walkthrough from the guide",
+        title: "The day-one walkthroughs",
         body: [
-          "I built Atlas Studio, which takes existing guide content and produces a narrated walkthrough video from it, so the video can be regenerated when the guide changes instead of re-recorded.",
+          "The design rule is that onboarding stays in the browser until it has to leave. I built walkthroughs that run real setup on the engineer's own machine through the desktop agent, and the one that opens VS Code, installs the platform extension, and tours the editor.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Atlas Studio: walkthroughs as narrated video",
+        body: [
+          "Some people learn faster by watching. I built Atlas Studio, an AI-enabled tool that turns written guide content into narrated walkthrough videos, so when a guide changes its video can be regenerated instead of re-recorded.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Provisioning that is safe to re-run",
+        body: [
+          "I built Harness project provisioning and onboarding workflows, written to be idempotent so that running one again leaves a team's setup intact.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Onboarding people through it",
+        body: [
+          "I led technical enablement and onboarding for associates, interns, and engineers going through the new path, and fed what tripped them up back into the walkthroughs.",
+        ],
+      },
+      {
+        label: "Team outcome",
+        title: "What the numbers mean",
+        body: [
+          "The \"hours\" figure is what the platform path delivers on a single machine, from unboxed to building. The initiative is judged on hire date to first commit, a cumulative enterprise average that moves slowly and hasn't caught up yet; the first-day goal is a target, not a result.",
         ],
       },
     ],

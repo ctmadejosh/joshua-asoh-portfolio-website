@@ -7,7 +7,7 @@ export const LINKEDIN_URL = "https://www.linkedin.com/in/joshua-asoh";
 export const GITHUB_URL = "https://github.com/ctmadejosh";
 
 export const SITE_DESCRIPTION =
-  "Joshua Asoh is a platform engineer at The Hartford building CI/CD automation, developer tooling, and cloud infrastructure.";
+  "Joshua Asoh is a platform engineer at The Hartford building ATLAS, the developer platform for 4,000+ engineers: its CLI, desktop agent, VS Code extension, telemetry, and self-service onboarding.";
 
 /**
  * Headline numbers. Each one is defined once, here, and every page reads it
@@ -15,10 +15,45 @@ export const SITE_DESCRIPTION =
  * `source` says where it comes from, for anyone checking.
  */
 export const proofPoints = [
-  { value: "144", label: "pull requests merged", context: "across 21 platform repositories at The Hartford", source: "harness-platform-automation" },
+  { value: "144", label: "pull requests merged", context: "of mine, across 21 ATLAS platform repositories", source: "atlas-developer-platform" },
   { value: "800+", label: "engineers supported", context: "by the GenAI documentation chatbot I built", source: "documentation-chatbot" },
   { value: "1–2 hrs", label: "saved per lookup", context: "on internal documentation questions", source: "documentation-chatbot" },
   { value: "20,000+", label: "inventory items tracked", context: "in a real-time BSL2 lab inventory system", source: "lab-inventory-system" },
+] as const;
+
+/** ATLAS platform-wide figures: the team's numbers, shown as context for Joshua's work. */
+export const PLATFORM_FIGURES_AS_OF = "November 2026";
+export const platformFigures = [
+  { value: "4,000+", label: "engineers on the platform" },
+  { value: "95,000+", label: "pipelines supported" },
+  { value: "13,000+", label: "repositories tracked" },
+  { value: "1,000+", label: "engineers adopted the tools in 90 days" },
+] as const;
+
+export const TEAM_LEAD = { name: "Anthony Brignano", url: "https://brignano.io/work/atlas-developer-platform" };
+
+/** What Joshua built on ATLAS, grouped for the home page. Each links to the case study with detail. */
+export const atlasWork = [
+  {
+    title: "CLI and desktop agent",
+    detail: "CLI features, and the agent's bridge that lets a button on the platform site run a command on an engineer's own machine.",
+    to: "/work/atlas-developer-platform#the-cli-and-the-desktop-agent",
+  },
+  {
+    title: "VS Code extension",
+    detail: "Extension features, and the day-one walkthrough that installs it and tours the editor.",
+    to: "/work/atlas-developer-platform#the-vs-code-extension",
+  },
+  {
+    title: "Self-service onboarding",
+    detail: "In-browser walkthroughs, Atlas Studio's narrated videos, Harness provisioning, and onboarding people through it, for the CEO-sponsored initiative.",
+    to: "/work/self-service-onboarding",
+  },
+  {
+    title: "Telemetry and quality",
+    detail: "The OpenTelemetry pipeline behind the usage dashboards, cross-platform tests with an 80%+ coverage gate, and release checks.",
+    to: "/work/atlas-developer-platform#telemetry-for-devops-intelligence",
+  },
 ] as const;
 
 export const NAV_PAGES = [

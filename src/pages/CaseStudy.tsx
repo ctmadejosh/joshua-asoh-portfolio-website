@@ -60,7 +60,7 @@ const CaseStudy = () => {
     timeRequired: `PT${minutes}M`,
   };
 
-  const toc = [{ id: "summary", label: "Summary" }, ...study.sections.map((s) => ({ id: sectionId(s.title), label: s.label }))];
+  const toc = [{ id: "summary", label: "Summary" }, ...study.sections.map((s) => ({ id: sectionId(s.title), label: s.label === "My contribution" ? s.title : s.label }))];
 
   return (
     <Container>
@@ -114,14 +114,14 @@ const CaseStudy = () => {
               </div>
             </dl>
 
-            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-6">
+            <ul className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
               {study.facts.map((fact) => (
-                <div key={fact.label} className="flex flex-col-reverse">
-                  <dt className="mt-1 max-w-[12rem] text-sm text-subtle">{fact.label}</dt>
-                  <dd className="font-display text-3xl font-bold tracking-tight">{fact.value}</dd>
-                </div>
+                <li key={fact.label}>
+                  <span className="block font-display text-3xl font-bold tracking-tight">{fact.value}</span>
+                  <span className="mt-1 block text-sm text-subtle">{fact.label}</span>
+                </li>
               ))}
-            </dl>
+            </ul>
           </header>
 
           {/* The 30-second version. */}
@@ -173,6 +173,24 @@ const CaseStudy = () => {
               </section>
             ))}
           </div>
+
+          {study.links && study.links.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-heading">
+              <h2 id="related-heading" className="eyebrow mb-3">
+                Related
+              </h2>
+              <ul className="space-y-2">
+                {study.links.map((link) => (
+                  <li key={link.url}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-link">
+                      {link.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <section className="mt-12" aria-labelledby="stack-heading">
             <h2 id="stack-heading" className="eyebrow mb-3">

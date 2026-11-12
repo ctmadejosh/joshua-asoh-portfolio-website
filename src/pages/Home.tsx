@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Copy, Download, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Box, Copy, Download, Gauge, Linkedin, Mail, Rocket, Terminal } from "lucide-react";
 import heroPortrait from "@/assets/hero-portrait.jpg";
 import Pipeline from "@/components/Pipeline";
 import Seo from "@/components/site/Seo";
@@ -7,7 +7,7 @@ import TerminalCard from "@/components/site/TerminalCard";
 import FlowDiagram from "@/components/site/FlowDiagram";
 import { copyEmail } from "@/components/site/CommandPalette";
 import { CaseStudyCard, Container, SectionHeading } from "@/components/site/Cards";
-import { caseStudies, readingMinutes } from "@/data/work";
+import { caseStudies } from "@/data/work";
 import { experiences } from "@/data/experience";
 import {
   GITHUB_URL,
@@ -16,6 +16,10 @@ import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
+  PLATFORM_FIGURES_AS_OF,
+  TEAM_LEAD,
+  atlasWork,
+  platformFigures,
   proofPoints,
   skillGroups,
 } from "@/data/site";
@@ -79,9 +83,10 @@ const Home = () => {
               .
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Harness CI/CD automation, IDE and CLI tooling, and the onboarding that gets engineers
-              productive on The Hartford's developer platform. Before that: a GenAI documentation
-              chatbot on AWS Bedrock, digital manufacturing, and lab software.
+              I'm a platform engineer at The Hartford, building ATLAS: the CLI, desktop agent, VS
+              Code extension, and self-service onboarding that 4,000+ engineers use to ship. Before
+              that: a GenAI documentation chatbot on AWS Bedrock, digital manufacturing, and lab
+              software.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link to="/work" className="btn-primary">
@@ -129,49 +134,90 @@ const Home = () => {
           ))}
         </section>
 
-        {/* Featured case study */}
+        {/* Current role: ATLAS. Team figures are labelled as such; "My part" is Joshua's own work. */}
+        <section aria-labelledby="atlas-heading" className="pt-20 md:pt-28">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
+            <div data-reveal>
+              <p className="eyebrow mb-3">Current role · The Hartford</p>
+              <h2 id="atlas-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Building ATLAS, the developer platform for 4,000+ engineers
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                ATLAS puts onboarding, builds, policy, telemetry, and AI tooling in one place: a CLI,
+                a desktop agent, and IDE extensions. I'm one of the engineers building it, on the
+                platform team led by{" "}
+                <a href={TEAM_LEAD.url} target="_blank" rel="noopener noreferrer" className="text-link">
+                  {TEAM_LEAD.name}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+                , and I help deliver the{" "}
+                <span className="font-medium text-foreground">CEO-sponsored push</span> to make
+                new-engineer onboarding self-service.
+              </p>
+
+              <figure className="mt-8 rounded-xl border border-dashed border-border-strong p-5">
+                <figcaption className="eyebrow mb-4">The platform · team figures, {PLATFORM_FIGURES_AS_OF}</figcaption>
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-5">
+                  {platformFigures.map((figure) => (
+                    <li key={figure.label}>
+                      <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">{figure.value}</span>
+                      <span className="mt-0.5 block text-sm text-subtle">{figure.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </figure>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link to="/work/atlas-developer-platform" className="btn-primary">
+                  The ATLAS case study
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
+                <Link to="/work/self-service-onboarding" className="btn-secondary">
+                  The onboarding initiative
+                </Link>
+              </div>
+            </div>
+
+            <div data-reveal data-reveal-delay={100}>
+              <h3 className="mb-4 flex items-center gap-2 font-sans text-sm font-semibold text-primary-ink">
+                <span aria-hidden="true" className="h-2.5 w-2.5 rounded-sm border border-primary/40 bg-primary-surface" />
+                My part
+              </h3>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {atlasWork.map((item, i) => {
+                  const Icon = [Terminal, Box, Rocket, Gauge][i];
+                  return (
+                    <li key={item.title}>
+                      <Link
+                        to={item.to}
+                        className="surface-card group flex h-full flex-col p-5 hover:border-primary/50"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-surface text-primary-ink">
+                          <Icon aria-hidden="true" className="h-[1.1rem] w-[1.1rem]" />
+                        </span>
+                        <span className="mt-4 font-display text-lg font-semibold group-hover:text-primary-ink">{item.title}</span>
+                        <span className="mt-1.5 text-[0.95rem] leading-relaxed text-muted-foreground">{item.detail}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+          <div className="mt-6 rounded-xl border border-border bg-card/60 p-4 sm:p-6" data-reveal>
+            <p className="eyebrow mb-4">How the pieces connect</p>
+            <FlowDiagram flow={featured.flow} note={featured.flowNote} />
+          </div>
+        </section>
+
+        {/* More case studies */}
         <section className="pt-20 md:pt-28">
           <SectionHeading
-            title="Selected work"
+            title="More work"
             description="Each case study opens with a three-line summary and a diagram of the system, so you can stop there or keep reading."
             action={{ label: "All case studies", to: "/work" }}
           />
-          <Link
-            to={`/work/${featured.slug}`}
-            data-reveal
-            className="surface-card group grid gap-8 p-6 hover:border-border-strong sm:p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
-          >
-            <div>
-              <p className="eyebrow mb-3">
-                Featured · {featured.eyebrow} · {readingMinutes(featured)} min read
-              </p>
-              <h3 className="text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary-ink sm:text-3xl">
-                {featured.title}
-              </h3>
-              <dl className="mt-5 space-y-3 text-[0.95rem]">
-                {(
-                  [
-                    ["Problem", featured.tldr.problem],
-                    ["What I did", featured.tldr.did],
-                    ["Result", featured.tldr.result],
-                  ] as const
-                ).map(([term, text]) => (
-                  <div key={term} className="grid gap-1 sm:grid-cols-[6.5rem_1fr]">
-                    <dt className="font-semibold">{term}</dt>
-                    <dd className="text-muted-foreground">{text}</dd>
-                  </div>
-                ))}
-              </dl>
-              <span className="mt-6 inline-flex items-center gap-1.5 font-medium text-primary-ink">
-                Read the case study
-                <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </div>
-            <div className="self-center rounded-lg border border-border bg-background/60 p-4 sm:p-5">
-              <FlowDiagram flow={featured.flow} note={featured.flowNote} vertical />
-            </div>
-          </Link>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             {rest.map((study, i) => (
               <CaseStudyCard key={study.slug} study={study} index={i} />
             ))}

@@ -26,7 +26,7 @@ type SeoProps = {
   ogType?: HeadData["ogType"];
   /** Page-specific structured data; a BreadcrumbList is added automatically. */
   jsonLd?: Record<string, unknown>[];
-  /** Breadcrumb trail after Home, e.g. [["Work", "/work"], ["Atlas Studio", "/work/atlas-studio"]]. */
+  /** Breadcrumb trail after Home, e.g. [["Work", "/work"], ["ATLAS", "/work/atlas-developer-platform"]]. */
   breadcrumbs?: [string, string][];
 };
 
