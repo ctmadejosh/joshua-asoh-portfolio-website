@@ -49,6 +49,9 @@ function page(url) {
   meta("property", "og:description", head.description);
   meta("name", "twitter:title", head.title);
   meta("name", "twitter:description", head.description);
+  meta("property", "og:image", head.image);
+  meta("property", "og:image:alt", head.imageAlt);
+  meta("name", "twitter:image", head.image);
   html = replaceOnce(
     html,
     /<link rel="canonical" href="[^"]*"\s*\/?>/,

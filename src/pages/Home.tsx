@@ -24,6 +24,7 @@ import {
   skillGroups,
 } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
+import { ogImage } from "@/data/og";
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -33,7 +34,7 @@ const personJsonLd = {
     "@type": "Person",
     name: SITE_NAME,
     url: `${SITE_URL}/`,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}${ogImage("home")}`,
     jobTitle: "Platform Engineer",
     worksFor: { "@type": "Organization", name: "The Hartford" },
     alumniOf: { "@type": "CollegeOrUniversity", name: "Central Connecticut State University" },

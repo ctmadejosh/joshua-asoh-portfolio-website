@@ -72,6 +72,11 @@ BreadcrumbList on inner pages). It also writes `dist/sitemap.xml` from the route
 `dist/404.html` that Cloudflare serves with a real 404 status. Add a case study to
 `src/data/work.ts` and it gets a page, sitemap entry, and metadata automatically.
 
+Social preview cards (the image iMessage, LinkedIn, and X show for a link) are in `public/og/`,
+one for the home page and one per case study. Regenerate them with `npm run og` (needs Playwright)
+after changing a case study's title, and bump `OG_VERSION` in `src/data/og.ts` when the look
+changes, so apps that cached the old image fetch the new one.
+
 After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
 
 ## Analytics

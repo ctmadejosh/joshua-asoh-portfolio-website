@@ -6,6 +6,7 @@ import { Container } from "@/components/site/Cards";
 import FlowDiagram from "@/components/site/FlowDiagram";
 import { caseStudies, getCaseStudy, readingMinutes } from "@/data/work";
 import { SITE_NAME, SITE_URL } from "@/data/site";
+import { ogImage } from "@/data/og";
 import NotFound from "./NotFound";
 
 const sectionId = (title: string) =>
@@ -54,7 +55,7 @@ const CaseStudy = () => {
     description: study.lede,
     url: absoluteUrl(path),
     mainEntityOfPage: absoluteUrl(path),
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}${ogImage(study.slug)}`,
     author: { "@type": "Person", name: SITE_NAME, url: `${SITE_URL}/` },
     keywords: study.stack.join(", "),
     timeRequired: `PT${minutes}M`,
@@ -68,6 +69,7 @@ const CaseStudy = () => {
         title={study.title}
         description={study.lede}
         ogType="article"
+        image={ogImage(study.slug)}
         jsonLd={[articleJsonLd]}
         breadcrumbs={[
           ["Work", "/work"],
