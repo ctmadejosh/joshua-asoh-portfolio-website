@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Download, GraduationCap, MapPin } from "lucide-react";
-import portraitStudio from "@/assets/portrait-studio.jpg";
+import portraitMain from "@/assets/portrait-linkedin.jpg";
 import portraitClose from "@/assets/portrait-close.jpg";
 import Seo from "@/components/site/Seo";
 import { Container, SectionHeading } from "@/components/site/Cards";
 import JourneyTimeline from "@/components/site/JourneyTimeline";
 import SocialLinks from "@/components/site/SocialLinks";
-import { journey, quickFacts, story } from "@/data/about";
+import PhotoGallery from "@/components/site/PhotoGallery";
+import { gallery, journey, quickFacts, story } from "@/data/about";
 import { RESUME_PATH, SITE_NAME, certifications, education } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -62,10 +63,10 @@ const AboutPage = () => (
       <figure className="relative isolate mx-auto w-full max-w-md">
         <div aria-hidden="true" className="absolute -inset-3 -z-10 rotate-2 rounded-[2rem] bg-primary-surface" />
         <img
-          src={portraitStudio}
-          alt="Portrait of Joshua Asoh in a navy polo"
-          width={960}
-          height={1200}
+          src={portraitMain}
+          alt="Portrait of Joshua Asoh smiling, in a white T-shirt"
+          width={640}
+          height={800}
           className="aspect-[4/5] w-full rounded-3xl border border-border object-cover shadow-[0_30px_60px_-30px_hsl(var(--foreground)/0.45)]"
         />
         <figcaption className="absolute -bottom-4 left-4 flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium shadow-sm">
@@ -89,6 +90,21 @@ const AboutPage = () => (
         <JourneyTimeline milestones={journey} />
       </div>
     </section>
+
+    {/* Photo gallery: Joshua's own photos from LinkedIn. */}
+    {gallery.length > 0 && (
+      <section className="pt-20 md:pt-28" aria-labelledby="gallery-heading">
+        <div className="mb-8" data-reveal>
+          <h2 id="gallery-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Along the way
+          </h2>
+          <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
+            A few moments from the road so far. Select a photo to see it larger.
+          </p>
+        </div>
+        <PhotoGallery photos={gallery} />
+      </section>
+    )}
 
     {/* Why platform engineering: Joshua's own words, shown only once written. */}
     {story.why.length > 0 && (

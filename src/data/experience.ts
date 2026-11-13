@@ -52,6 +52,7 @@ export const experiences = [
         "Developed and deployed a responsive Angular UI integrated with AWS Bedrock for real-time chatbot interactions",
         "Led prompt engineering and modular pipeline design for processing unstructured internal documentation",
         "Built a chatbot that reduced documentation lookup time by 1–2 hours per query and scaled it to support 800+ engineers",
+        "Deployed agentic workflows for autonomous information retrieval, reducing documentation queries by 80% across 800+ engineers",
         "Engineered a GenAI-powered document chatbot using Claude 3.5 Sonnet and Bedrock, integrating AWS ECS, Lambda, and S3 within a RAG workflow"
       ]
     },
