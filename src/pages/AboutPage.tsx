@@ -6,7 +6,8 @@ import Seo from "@/components/site/Seo";
 import { Container, SectionHeading } from "@/components/site/Cards";
 import JourneyTimeline from "@/components/site/JourneyTimeline";
 import SocialLinks from "@/components/site/SocialLinks";
-import { journey, quickFacts, story } from "@/data/about";
+import PhotoGallery from "@/components/site/PhotoGallery";
+import { gallery, journey, quickFacts, story } from "@/data/about";
 import { RESUME_PATH, SITE_NAME, certifications, education } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -89,6 +90,21 @@ const AboutPage = () => (
         <JourneyTimeline milestones={journey} />
       </div>
     </section>
+
+    {/* Photo gallery: Joshua's own photos from LinkedIn. */}
+    {gallery.length > 0 && (
+      <section className="pt-20 md:pt-28" aria-labelledby="gallery-heading">
+        <div className="mb-8" data-reveal>
+          <h2 id="gallery-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Along the way
+          </h2>
+          <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
+            A few moments from the road so far. Select a photo to see it larger.
+          </p>
+        </div>
+        <PhotoGallery photos={gallery} />
+      </section>
+    )}
 
     {/* Why platform engineering: Joshua's own words, shown only once written. */}
     {story.why.length > 0 && (

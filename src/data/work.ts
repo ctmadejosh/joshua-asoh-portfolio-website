@@ -217,11 +217,12 @@ export const caseStudies: CaseStudy[] = [
     facts: [
       { value: "1–2 hrs", label: "Saved per documentation lookup" },
       { value: "800+", label: "Engineers supported" },
+      { value: "80%", label: "Fewer documentation queries" },
     ],
     tldr: {
       problem: "Engineers spent one to two hours per question digging through unstructured internal documentation.",
       did: "Led prompt engineering and designed a modular RAG pipeline on AWS Bedrock with Claude 3.5 Sonnet, plus an Angular chat UI.",
-      result: "Lookups got one to two hours faster per query, and the chatbot scaled to 800+ engineers.",
+      result: "Lookups got one to two hours faster per query, documentation queries dropped by 80%, and the chatbot scaled to 800+ engineers.",
     },
     flow: [
       { label: "Unstructured docs", detail: "Internal documentation" },
@@ -255,7 +256,7 @@ export const caseStudies: CaseStudy[] = [
         label: "Outcome",
         title: "Faster answers, at scale",
         body: [
-          "The chatbot cut documentation lookup time by one to two hours per query and scaled to support more than 800 engineers.",
+          "The chatbot cut documentation lookup time by one to two hours per query and scaled to support more than 800 engineers. Agentic workflows for autonomous information retrieval reduced documentation queries by 80% across them.",
         ],
       },
     ],
