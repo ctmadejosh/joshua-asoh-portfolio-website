@@ -8,6 +8,7 @@
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:client": "vite build",
     "og": "node --experimental-strip-types scripts/og-images.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

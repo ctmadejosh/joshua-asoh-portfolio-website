@@ -33,6 +33,10 @@ const personJsonLd = {
   mainEntity: {
     "@type": "Person",
     name: SITE_NAME,
+    alternateName: "Josh Asoh",
+    givenName: "Joshua",
+    familyName: "Asoh",
+    description: SITE_DESCRIPTION,
     url: `${SITE_URL}/`,
     image: `${SITE_URL}${ogImage("home")}`,
     jobTitle: "Platform Engineer",
@@ -71,18 +75,21 @@ const Home = () => {
                 height={48}
                 className="h-12 w-12 rounded-full border border-border object-cover object-[56%_40%]"
               />
-              <p className="text-sm leading-tight">
+              {/* The page's h1 is Joshua's name and role, the strongest signal to
+                  search engines for a name search; the big tagline below is styled
+                  text, not the heading. */}
+              <h1 className="font-sans text-sm leading-tight">
                 <span className="block font-semibold">{SITE_NAME}</span>
-                <span className="text-subtle">Platform Engineer · The Hartford</span>
-              </p>
+                <span className="font-normal text-subtle">Platform Engineer · The Hartford</span>
+              </h1>
             </div>
-            <h1 className="text-[2.6rem] font-bold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.25rem]">
+            <p className="font-display text-[2.6rem] font-bold leading-[1.02] tracking-[-0.03em] [text-wrap:balance] sm:text-6xl lg:text-[4.25rem]">
               I build the pipelines and tools{" "}
               <span className="text-primary-ink underline decoration-signal decoration-[0.09em] underline-offset-[0.14em] [text-decoration-skip-ink:none]">
                 engineers ship with
               </span>
               .
-            </h1>
+            </p>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I'm a platform engineer at The Hartford, building ATLAS: the CLI, desktop agent, VS
               Code extension, and self-service onboarding that 4,000+ engineers use to ship. Before
