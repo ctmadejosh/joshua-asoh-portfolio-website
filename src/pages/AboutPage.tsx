@@ -82,7 +82,7 @@ const AboutPage = () => (
           The road here
         </h2>
         <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
-          Seven stops since 2022. Pick one to see what I did there.
+          {journey.length} stops since 2022. Pick one to see what I did there.
         </p>
       </div>
       <div data-reveal>

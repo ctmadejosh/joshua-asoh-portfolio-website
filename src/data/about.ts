@@ -8,7 +8,7 @@ export type Milestone = {
   year: string;
   title: string;
   org: string;
-  icon: "wrench" | "flask" | "users" | "trophy" | "bot" | "factory" | "rocket";
+  icon: "wrench" | "flask" | "users" | "trophy" | "bot" | "factory" | "rocket" | "map";
   summary: string;
   highlight?: { value: string; label: string };
   to?: string;
@@ -81,13 +81,22 @@ export const journey: Milestone[] = [
     highlight: { value: "144", label: "pull requests merged" },
     to: "/work/atlas-developer-platform",
   },
+  {
+    year: "Aug 2026",
+    title: "Project Lead, Guides",
+    org: "The Hartford",
+    icon: "map",
+    summary:
+      "Leading the implementation of browser-based Guides, an interactive way to transfer the tribal knowledge engineers usually pass on by word of mouth.",
+    to: "/work/self-service-onboarding",
+  },
 ];
 
 export const quickFacts = [
   { label: "Based in", value: "Connecticut" },
   { label: "Studying", value: "M.S. Computer Information Technology" },
   { label: "Program", value: "Tech & Ops Leadership Development" },
-  { label: "Communities", value: "NSBE · ColorStack · Epsilon Pi Tau" },
+  { label: "Communities", value: "NSBE · ColorStack · Epsilon Pi Tau · FactSet Student Ambassador" },
 ];
 
 /**

@@ -1,6 +1,17 @@
 export const experiences = [
     {
-      title: "Tech & Ops LDP – Platform Engineer",
+      title: "Project Lead – Guides",
+      company: "The Hartford Insurance",
+      location: "Hartford, CT",
+      period: "August 2026 – Present",
+      type: "Leadership",
+      description: "Leading the implementation of browser-based Guides, an interactive way to transfer tribal knowledge.",
+      achievements: [
+        "Leading the implementation of browser-based Guides, an interactive way to capture and transfer the tribal knowledge engineers usually pass on by word of mouth"
+      ]
+    },
+    {
+      title: "T&O LDP Associate – Platform/DevOps Engineer",
       company: "The Hartford Insurance",
       location: "Hartford, CT",
       period: "January 2026 – Present",
@@ -8,11 +19,11 @@ export const experiences = [
       description: "Platform engineering across developer experience, CI/CD automation, cloud infrastructure, onboarding, and internal tooling in The Hartford's Technology & Operations Leadership Development Program.",
       achievements: [
         "Build ATLAS, The Hartford's developer platform for 4,000+ engineers: CLI features, the desktop agent's bridge to the platform site, VS Code extension features, and telemetry, across 21 repositories with 214 authored pull requests (144 merged)",
-        "Help deliver the CEO-sponsored initiative to make engineer onboarding self-service, building in-browser walkthroughs, the VS Code walkthrough, and Atlas Studio, an AI-enabled tool that turns guide content into narrated walkthrough videos",
-        "Engineered and hardened enterprise CI/CD automation in Harness, including project provisioning, onboarding workflows, build-farm smoke testing, and idempotent provisioning workflows",
-        "Shipped features across the developer-experience ecosystem, including a VS Code extension, desktop and CLI tooling, DevOps Intelligence, and platform documentation",
-        "Improved reliability of shared developer tooling with cross-platform integration testing, an 80%+ code-coverage threshold, and release-readiness practices",
-        "Led technical enablement and onboarding for associates, interns, and engineers, and supported LDP mentorship and university engagement"
+        "Built Atlas Studio, a developer-tooling pipeline that turns guide content into narrated 4K/8K walkthrough videos, with automated production and adaptive audio, for the CEO-sponsored initiative to make onboarding self-service",
+        "Engineered and hardened Harness project provisioning and onboarding, including rerunnable project creation, smoke testing, access configuration, and service-account reconciliation",
+        "Led a zero-downtime, dual-write DynamoDB key migration from IW# to WORKSPACE# across the DevOps Intelligence API and ingestion, and shipped pipeline-query and guide deep-link capabilities",
+        "Improved reliability across developer tooling with cross-platform integration tests, VS Code updater and release-workflow improvements, and an 80%+ code-coverage threshold for extension development",
+        "Led technical onboarding and knowledge transfer, supported LDP mentorship and orientation, mentored associates and interns, and contributed to university engagement and NAAIA Greater Hartford programming"
       ]
     },
     {
@@ -95,6 +106,8 @@ export const experiences = [
         "Managed PC imaging and Service Board tickets, ensuring efficient IT operations",
         "Implemented cybersecurity measures based on Bitdefender recommendations",
         "Utilized Cisco Meraki Portal for network management and optimization",
+        "Monitored and troubleshot alerts from devices, ensuring minimal downtime",
+        "Upgraded software on devices to strengthen security and system integrity",
         "Leveraged ConnectWise Automate and ConnectWise Manage for streamlined IT operations"
       ]
     },
@@ -115,11 +128,12 @@ export const experiences = [
       title: "Vice President",
       company: "Institute of Electrical and Electronics Engineering (IEEE)",
       location: "New Britain, CT",
-      period: "August 2023 – April 2024",
+      period: "July 2023 – April 2024",
       type: "Leadership",
       description: "Led membership recruitment and partnerships with major technology and insurance companies.",
       achievements: [
         "Recruited approximately 40 new members during the CCSU involvement fair",
+        "Overhauled the chapter's Discord server with bots and channels to organize information",
         "Spearheaded partnerships with FactSet, COCC, The Hartford, and Travelers for diversity-focused hiring events",
         "Hosted professional development workshop with Travelers on marketable skills"
       ]
@@ -134,7 +148,8 @@ export const experiences = [
       achievements: [
         "Collaborated to repair a script malfunction affecting 36,000+ students and faculty across 12 colleges",
         "Troubleshot technical issues in virtual environments for improved user data access",
-        "Installed and configured hardware, software, and networks across campus"
+        "Installed and configured hardware, software, and networks across campus, keeping Bomgar, Windows, macOS, Microsoft Azure, and Active Directory up to date",
+        "Handled regular printer maintenance and management"
       ]
     }
   ];

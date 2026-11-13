@@ -1,10 +1,10 @@
 import { useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Bot, Factory, FlaskConical, Rocket, Trophy, Users, Wrench } from "lucide-react";
+import { ArrowRight, Bot, Factory, FlaskConical, Map, Rocket, Trophy, Users, Wrench } from "lucide-react";
 import CountUp from "./CountUp";
 import type { Milestone } from "@/data/about";
 
-const ICONS = { wrench: Wrench, flask: FlaskConical, users: Users, trophy: Trophy, bot: Bot, factory: Factory, rocket: Rocket };
+const ICONS = { wrench: Wrench, flask: FlaskConical, users: Users, trophy: Trophy, bot: Bot, factory: Factory, rocket: Rocket, map: Map };
 
 /**
  * The career path as a row of stops on a rail (a tab list). Pick a stop by
@@ -28,9 +28,9 @@ const JourneyTimeline = ({ milestones }: { milestones: Milestone[] }) => {
   return (
     <div>
       <div className="-mx-6 overflow-x-auto px-6 pb-2 md:mx-0 md:overflow-visible md:px-0">
-        <div className="relative min-w-[44rem]">
+        <div className="relative min-w-[50rem]">
           {/* Rail, filled up to the selected stop. */}
-          <div aria-hidden="true" className="absolute left-[calc(100%/14)] right-[calc(100%/14)] top-[1.375rem] h-0.5 bg-border">
+          <div aria-hidden="true" className="absolute left-[calc(100%/16)] right-[calc(100%/16)] top-[1.375rem] h-0.5 bg-border">
             <div
               className="h-full origin-left bg-primary transition-transform duration-500 ease-out"
               style={{ transform: `scaleX(${active / last})` }}

@@ -1,7 +1,7 @@
 export const SITE_URL = "https://juasoh.com";
 export const SITE_NAME = "Joshua Asoh";
 export const SITE_ROLE = "Platform Engineer at The Hartford";
-export const RESUME_PATH = "/Josh_Asoh_Resume_020926.pdf";
+export const RESUME_PATH = "/Joshua_Asoh_Resume.pdf";
 export const EMAIL = "Joshua.asoh@my.ccsu.edu";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/joshua-asoh";
 export const GITHUB_URL = "https://github.com/ctmadejosh";
@@ -71,11 +71,11 @@ export const skillGroups = [
   },
   {
     name: "CI/CD and developer experience",
-    items: ["Harness", "Jenkins", "Internal developer platforms", "IDE and CLI tooling"],
+    items: ["Harness", "GitHub Actions", "Jenkins", "Internal developer platforms", "IDE and CLI tooling"],
   },
   {
     name: "AI",
-    items: ["RAG and agentic workflows", "Prompt and retrieval engineering"],
+    items: ["RAG and agentic workflows", "Prompt and retrieval engineering", "Cursor AI"],
   },
   {
     name: "Languages and frameworks",
@@ -83,18 +83,18 @@ export const skillGroups = [
   },
   {
     name: "Also",
-    items: ["SOLIDWORKS", "Agile/Scrum", "Team leadership"],
+    items: ["SOLIDWORKS", "Raspberry Pi", "Circuit prototyping", "Agile/Scrum", "Team leadership"],
   },
 ];
 
 export const education = [
   {
     degree: "M.S. Computer Information Technology",
-    detail: "Central Connecticut State University, in progress. 3.71 GPA.",
+    detail: "Central Connecticut State University (4+1 program), May 2026. 3.71 GPA.",
   },
   {
     degree: "B.S. Computer Engineering Technology",
-    detail: "Central Connecticut State University. 3.44 GPA, Dean's List three times.",
+    detail: "Central Connecticut State University, August 2023 – December 2025. 3.43 GPA, Dean's List three times. Vice President of IEEE, A.S.O Club, and FactSet Student Ambassador.",
   },
 ];
 

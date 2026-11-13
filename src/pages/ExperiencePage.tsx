@@ -27,7 +27,7 @@ const ExperiencePage = () => {
       breadcrumbs={[["Experience", "/experience"]]}
     />
     <PageIntro eyebrow="Experience" title="Where I've worked">
-      <p>Ten roles since 2022, newest first. Open any of them for the details.</p>
+      <p>{experiences.length} roles since 2022, newest first. Open any of them for the details.</p>
       <a
         href={RESUME_PATH}
         download

@@ -98,6 +98,10 @@ export const caseStudies: CaseStudy[] = [
       {
         label: "My contribution",
         title: "Telemetry for DevOps Intelligence",
+        bullets: [
+          "Led a zero-downtime, dual-write DynamoDB key migration from IW# to WORKSPACE# across the DevOps Intelligence API and ingestion.",
+          "Shipped pipeline-query and guide deep-link capabilities.",
+        ],
         body: [
           "The platform has been instrumented since day one, so the team can see how its tools are used. I worked on the telemetry pipeline behind that: events from the CLI, IDE extensions, and desktop agent flow through OpenTelemetry and Amazon EventBridge into DynamoDB, which feeds the usage dashboards.",
         ],
@@ -168,14 +172,14 @@ export const caseStudies: CaseStudy[] = [
         label: "My contribution",
         title: "Atlas Studio: walkthroughs as narrated video",
         body: [
-          "Some people learn faster by watching. I built Atlas Studio, an AI-enabled tool that turns written guide content into narrated walkthrough videos, so when a guide changes its video can be regenerated instead of re-recorded.",
+          "Some people learn faster by watching. I built Atlas Studio, a developer-tooling pipeline that turns written guide content into narrated 4K/8K walkthrough videos, with automated production and adaptive audio, so when a guide changes its video can be regenerated instead of re-recorded.",
         ],
       },
       {
         label: "My contribution",
         title: "Provisioning that is safe to re-run",
         body: [
-          "I built Harness project provisioning and onboarding workflows, written to be idempotent so that running one again leaves a team's setup intact.",
+          "I engineered and hardened Harness project provisioning and onboarding: rerunnable project creation, smoke testing, access configuration, and service-account reconciliation, so that running a workflow again leaves a team's setup intact.",
         ],
       },
       {
@@ -183,6 +187,13 @@ export const caseStudies: CaseStudy[] = [
         title: "Onboarding people through it",
         body: [
           "I led technical enablement and onboarding for associates, interns, and engineers going through the new path, and fed what tripped them up back into the walkthroughs.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "Now leading Guides",
+        body: [
+          "Since August 2026 I've been the project lead for browser-based Guides, an interactive way to capture and transfer the tribal knowledge that new engineers usually only get by asking someone who already knows.",
         ],
       },
       {

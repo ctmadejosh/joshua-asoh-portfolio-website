@@ -281,7 +281,7 @@ const Home = () => {
         <section className="pt-20 md:pt-28">
           <SectionHeading
             title="Recent roles"
-            description="Ten roles since 2022. The three most recent:"
+            description={`${experiences.length} roles since 2022. The three most recent:`}
             action={{ label: "Full experience", to: "/experience" }}
           />
           <ol className="relative border-l border-border pl-6" data-reveal>
