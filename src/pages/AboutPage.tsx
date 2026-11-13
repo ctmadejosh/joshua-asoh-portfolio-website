@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Download, GraduationCap, MapPin } from "lucide-react";
-import portraitStudio from "@/assets/portrait-studio.jpg";
+import portraitMain from "@/assets/portrait-linkedin.jpg";
 import portraitClose from "@/assets/portrait-close.jpg";
 import Seo from "@/components/site/Seo";
 import { Container, SectionHeading } from "@/components/site/Cards";
@@ -63,10 +63,10 @@ const AboutPage = () => (
       <figure className="relative isolate mx-auto w-full max-w-md">
         <div aria-hidden="true" className="absolute -inset-3 -z-10 rotate-2 rounded-[2rem] bg-primary-surface" />
         <img
-          src={portraitStudio}
-          alt="Portrait of Joshua Asoh in a navy polo"
-          width={960}
-          height={1200}
+          src={portraitMain}
+          alt="Portrait of Joshua Asoh smiling, in a white T-shirt"
+          width={640}
+          height={800}
           className="aspect-[4/5] w-full rounded-3xl border border-border object-cover shadow-[0_30px_60px_-30px_hsl(var(--foreground)/0.45)]"
         />
         <figcaption className="absolute -bottom-4 left-4 flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium shadow-sm">
