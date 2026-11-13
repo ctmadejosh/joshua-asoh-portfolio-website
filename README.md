@@ -77,6 +77,10 @@ one for the home page and one per case study. Regenerate them with `npm run og` 
 after changing a case study's title, and bump `OG_VERSION` in `src/data/og.ts` when the look
 changes, so apps that cached the old image fetch the new one.
 
+After a deploy with new or changed pages, run `npm run indexnow` to tell Bing (and DuckDuckGo
+and Yahoo, which use Bing's index) to recrawl them; the key file is
+`public/a98d7e4ee1b1de4c75822f84eb4c55e6.txt`. Google doesn't use IndexNow.
+
 After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
 
 ## Analytics
