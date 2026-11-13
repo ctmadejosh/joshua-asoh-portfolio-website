@@ -45,14 +45,19 @@ const PhotoGallery = ({ photos }: { photos: GalleryPhoto[] }) => {
                 decoding="async"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
+              {/* Overlay caption from sm up; on phones it would cover the photo, so it sits below instead. */}
               <span
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/45 to-transparent px-3 pb-3 pt-12 text-white sm:px-4 sm:pb-4"
+                className="absolute inset-x-0 bottom-0 hidden bg-gradient-to-t from-black/80 via-black/45 to-transparent px-4 pb-4 pt-12 text-white sm:block"
               >
-                <span className="line-clamp-3 block text-sm font-medium leading-snug sm:text-[0.95rem]">{p.caption}</span>
+                <span className="line-clamp-3 block text-[0.95rem] font-medium leading-snug">{p.caption}</span>
                 {p.date && <span className="mt-1 block text-xs text-white/75">{p.date}</span>}
               </span>
             </button>
+            <p aria-hidden="true" className="mt-2 px-0.5 sm:hidden">
+              <span className="line-clamp-2 block text-sm font-medium leading-snug">{p.caption}</span>
+              {p.date && <span className="mt-0.5 block text-xs text-subtle">{p.date}</span>}
+            </p>
           </li>
         ))}
       </ul>
