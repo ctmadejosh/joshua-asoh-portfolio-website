@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Layout from "./components/site/Layout";
 import Home from "./pages/Home";
 import Work from "./pages/Work";
+import AboutPage from "./pages/AboutPage";
 import CaseStudy from "./pages/CaseStudy";
 import ProjectsPage from "./pages/ProjectsPage";
 import ExperiencePage from "./pages/ExperiencePage";
@@ -16,6 +17,7 @@ const App = () => (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/work" element={<Work />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
         <Route path="/projects" element={<ProjectsPage />} />

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Box, Copy, Download, Gauge, Linkedin, Mail, Rocket, Terminal } from "lucide-react";
-import heroPortrait from "@/assets/hero-portrait.jpg";
+import portraitStudio from "@/assets/portrait-studio.jpg";
+import portraitClose from "@/assets/portrait-close.jpg";
+import CountUp from "@/components/site/CountUp";
 import Pipeline from "@/components/Pipeline";
 import Seo from "@/components/site/Seo";
 import TerminalCard from "@/components/site/TerminalCard";
@@ -69,11 +71,11 @@ const Home = () => {
           <div>
             <div className="mb-6 flex items-center gap-3">
               <img
-                src={heroPortrait}
-                alt="Portrait of Joshua Asoh"
+                src={portraitClose}
+                alt=""
                 width={48}
                 height={48}
-                className="h-12 w-12 rounded-full border border-border object-cover object-[56%_40%]"
+                className="h-12 w-12 rounded-full border border-border object-cover"
               />
               {/* The page's h1 is Joshua's name and role, the strongest signal to
                   search engines for a name search; the big tagline below is styled
@@ -117,7 +119,21 @@ const Home = () => {
             </div>
           </div>
 
-          <TerminalCard />
+          {/* Big studio portrait with the terminal overlapping its lower-left corner. */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div aria-hidden="true" className="absolute right-0 top-6 -z-0 aspect-[4/5] w-[74%] translate-x-3 rotate-3 rounded-[2rem] bg-primary-surface" />
+            <img
+              src={portraitStudio}
+              alt="Portrait of Joshua Asoh in a navy polo"
+              width={960}
+              height={1200}
+              {...{ fetchpriority: "high" }}
+              className="relative ml-auto aspect-[4/5] w-[74%] rounded-3xl border border-border object-cover shadow-[0_30px_60px_-30px_hsl(var(--foreground)/0.45)]"
+            />
+            <div className="relative -mt-36 w-[86%] sm:-mt-44">
+              <TerminalCard />
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -132,7 +148,9 @@ const Home = () => {
               data-reveal-delay={i * 60}
               className={`group py-8 pr-4 ${i % 2 === 1 ? "pl-4 sm:pl-6" : ""} ${i > 0 ? "lg:border-l lg:pl-6" : ""} ${i % 2 === 1 ? "border-l" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} border-border`}
             >
-              <p className="font-display text-3xl font-bold tracking-tight sm:text-4xl">{point.value}</p>
+              <p className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                <CountUp value={point.value} />
+              </p>
               <p className="mt-1 font-medium">{point.label}</p>
               <p className="mt-1 text-sm text-subtle">{point.context}</p>
               <p className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary-ink opacity-70 transition-opacity group-hover:opacity-100">
@@ -168,7 +186,9 @@ const Home = () => {
                 <ul className="grid grid-cols-2 gap-x-6 gap-y-5">
                   {platformFigures.map((figure) => (
                     <li key={figure.label}>
-                      <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">{figure.value}</span>
+                      <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">
+                        <CountUp value={figure.value} />
+                      </span>
                       <span className="mt-0.5 block text-sm text-subtle">{figure.label}</span>
                     </li>
                   ))}
@@ -261,7 +281,7 @@ const Home = () => {
         <section className="pt-20 md:pt-28">
           <SectionHeading
             title="Recent roles"
-            description="Ten roles since 2022. The three most recent:"
+            description={`${experiences.length} roles since 2022. The three most recent:`}
             action={{ label: "Full experience", to: "/experience" }}
           />
           <ol className="relative border-l border-border pl-6" data-reveal>
