@@ -8,6 +8,7 @@ import { caseStudies } from "./data/work";
 /** Every route that gets its own static HTML file and sitemap entry. */
 export const routes = [
   "/",
+  "/about",
   "/work",
   ...caseStudies.map((study) => `/work/${study.slug}`),
   "/projects",

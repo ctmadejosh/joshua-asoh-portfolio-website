@@ -57,6 +57,7 @@ export const atlasWork = [
 ] as const;
 
 export const NAV_PAGES = [
+  { label: "About", to: "/about" },
   { label: "Work", to: "/work" },
   { label: "Projects", to: "/projects" },
   { label: "Experience", to: "/experience" },
