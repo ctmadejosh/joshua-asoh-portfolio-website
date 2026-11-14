@@ -9,6 +9,7 @@
     "build:client": "vite build",
     "og": "node --experimental-strip-types scripts/og-images.mjs",
     "indexnow": "node scripts/indexnow.mjs",
+    "resume": "node scripts/build-resume.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

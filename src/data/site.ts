@@ -15,7 +15,7 @@ export const CONTACT_API_URL: string =
   (import.meta.env.VITE_CONTACT_API_URL as string | undefined) || "https://aws.juasoh.com/contact";
 
 export const SITE_DESCRIPTION =
-  "Joshua Asoh is a platform engineer at The Hartford building ATLAS, the developer platform for 4,000+ engineers: its CLI, desktop agent, VS Code extension, telemetry, and self-service onboarding.";
+  "Joshua Asoh is a platform engineer at The Hartford building ATLAS, a developer platform used by 4,000+ engineers: its CLI, desktop agent, VS Code extension, telemetry, and self-service onboarding.";
 
 /**
  * Headline numbers. Each one is defined once, here, and every page reads it
@@ -38,7 +38,6 @@ export const platformFigures = [
   { value: "1,000+", label: "engineers adopted the tools in 90 days" },
 ] as const;
 
-export const TEAM_LEAD = { name: "Anthony Brignano", url: "https://brignano.io/work/atlas-developer-platform" };
 
 /** What Joshua built on ATLAS, grouped for the home page. Each links to the case study with detail. */
 export const atlasWork = [

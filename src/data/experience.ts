@@ -1,16 +1,5 @@
 export const experiences = [
     {
-      title: "Project Lead – Guides",
-      company: "The Hartford Insurance",
-      location: "Hartford, CT",
-      period: "August 2026 – Present",
-      type: "Leadership",
-      description: "Leading the implementation of browser-based Guides, an interactive way to transfer tribal knowledge.",
-      achievements: [
-        "Leading the implementation of browser-based Guides, an interactive way to capture and transfer the tribal knowledge engineers usually pass on by word of mouth"
-      ]
-    },
-    {
       title: "T&O LDP Associate – Platform/DevOps Engineer",
       company: "The Hartford Insurance",
       location: "Hartford, CT",
@@ -18,12 +7,13 @@ export const experiences = [
       type: "Full-time",
       description: "Platform engineering across developer experience, CI/CD automation, cloud infrastructure, onboarding, and internal tooling in The Hartford's Technology & Operations Leadership Development Program.",
       achievements: [
-        "Build ATLAS, The Hartford's developer platform for 4,000+ engineers: CLI features, the desktop agent's bridge to the platform site, VS Code extension features, and telemetry, across 21 repositories with 214 authored pull requests (144 merged)",
+        "Build ATLAS, The Hartford's developer platform (4,000+ engineers on the platform as of November 2026, a platform figure): CLI features, the desktop agent's bridge to the platform site, VS Code extension features, and telemetry. 214 pull requests authored and 144 merged across 21 platform repositories, as of November 2026",
+        "Leading the implementation of browser-based Guides (side project): interactive, step-by-step guides that help engineers learn workflows and complete setup as part of self-service onboarding",
         "Built Atlas Studio, a developer-tooling pipeline that turns guide content into narrated 4K/8K walkthrough videos, with automated production and adaptive audio, for the CEO-sponsored initiative to make onboarding self-service",
         "Engineered and hardened Harness project provisioning and onboarding, including rerunnable project creation, smoke testing, access configuration, and service-account reconciliation",
-        "Led a zero-downtime, dual-write DynamoDB key migration from IW# to WORKSPACE# across the DevOps Intelligence API and ingestion, and shipped pipeline-query and guide deep-link capabilities",
+        "Led a zero-downtime, dual-write DynamoDB key migration across the platform's DevOps analytics API and data ingestion, and shipped pipeline-query and guide deep-link capabilities",
         "Improved reliability across developer tooling with cross-platform integration tests, VS Code updater and release-workflow improvements, and an 80%+ code-coverage threshold for extension development",
-        "Led technical onboarding and knowledge transfer, supported LDP mentorship and orientation, mentored associates and interns, and contributed to university engagement and NAAIA Greater Hartford programming"
+        "Led technical onboarding and knowledge transfer, supported LDP mentorship and orientation, mentored associates and interns, and contributed to university engagement; NAAIA Greater Hartford Chapter committee member"
       ]
     },
     {

@@ -39,7 +39,7 @@ export const caseStudies: CaseStudy[] = [
       "ATLAS puts onboarding, builds, policy, telemetry, and AI tooling for The Hartford's engineers in one place: a CLI, a desktop agent, and IDE extensions. I build across all three, plus the telemetry behind them.",
     role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "January 2026 – present",
-    stack: ["HIG CLI", "Desktop agent", "VS Code extension", "OpenTelemetry", "Amazon EventBridge", "DynamoDB", "Harness", "Integration testing"],
+    stack: ["Platform CLI", "Desktop agent", "VS Code extension", "OpenTelemetry", "Amazon EventBridge", "DynamoDB", "Harness", "Integration testing"],
     facts: [
       { value: "4,000+", label: "Engineers on the platform (team figure)" },
       { value: "95,000+", label: "Pipelines the platform supports (team figure)" },
@@ -54,18 +54,18 @@ export const caseStudies: CaseStudy[] = [
     flow: [
       { label: "Platform site", detail: "Where engineers start" },
       { label: "Desktop agent", detail: "Runs native commands from the site", mine: true },
-      { label: "HIG CLI", detail: "Setup, builds, policy", mine: true },
+      { label: "Platform CLI", detail: "Setup, builds, policy", mine: true },
       { label: "VS Code extension", detail: "The platform in the editor", mine: true },
       { label: "Telemetry", detail: "OpenTelemetry → EventBridge → DynamoDB", mine: true },
     ],
     flowNote: "Highlighted parts are ones I wrote code for; ATLAS as a whole is the platform team's work.",
-    links: [{ label: "Anthony Brignano's ATLAS case study (team lead's view)", url: "https://brignano.io/work/atlas-developer-platform" }],
+    links: [{ label: "The platform team lead's public ATLAS case study", url: "https://brignano.io/work/atlas-developer-platform" }],
     sections: [
       {
         label: "Team context",
         title: "One platform team, one platform",
         body: [
-          "I'm on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team is led by Anthony Brignano, who sets the technical direction for ATLAS; I'm one of the engineers building it.",
+          "I'm on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team's technical lead sets the direction for ATLAS; I'm one of the engineers building it.",
           "As of November 2026, the platform serves 4,000+ engineers, on its way to the full 8,000-engineer organization, supports 95,000+ pipelines, and tracks 13,000+ repositories. Those are the platform's numbers, not mine alone; the sections below are the parts I built.",
         ],
       },
@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
         title: "The CLI and the desktop agent",
         body: ["The CLI is the core of ATLAS, and the desktop agent is what lets the platform's website reach it."],
         bullets: [
-          "Built features in the HIG CLI, now in use on 4,000+ machines.",
+          "Built features in the platform's command-line tool (the HIG CLI), now in use on 4,000+ machines (platform figure, November 2026).",
           "Worked on the desktop agent's bridge to the platform site: a button on the site runs a native command on the engineer's own machine, which is what makes the in-browser onboarding possible.",
           "Fixed bugs and hardened both after rollout.",
         ],
@@ -97,9 +97,9 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: "My contribution",
-        title: "Telemetry for DevOps Intelligence",
+        title: "Telemetry for the platform's DevOps analytics",
         bullets: [
-          "Led a zero-downtime, dual-write DynamoDB key migration from IW# to WORKSPACE# across the DevOps Intelligence API and ingestion.",
+          "Led a zero-downtime, dual-write DynamoDB key migration across the DevOps analytics API (DevOps Intelligence) and its data ingestion.",
           "Shipped pipeline-query and guide deep-link capabilities.",
         ],
         body: [
@@ -133,7 +133,7 @@ export const caseStudies: CaseStudy[] = [
       "A CEO-sponsored initiative to cut the time from an engineer's hire date to their first commit. I built parts of the day-one path, turned its guides into narrated videos, and onboarded people through it.",
     role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "2026",
-    stack: ["HIG CLI", "Desktop agent", "VS Code", "Harness", "Generative AI", "Atlas Studio"],
+    stack: ["Platform CLI", "Desktop agent", "VS Code", "Harness", "Generative AI", "Atlas Studio"],
     facts: [
       { value: "40+ days", label: "Hire to first commit, before (team baseline)" },
       { value: "Hours", label: "A machine, unboxed to building, on the platform path (team figure)" },
@@ -151,14 +151,14 @@ export const caseStudies: CaseStudy[] = [
       { label: "Provisioning", detail: "Harness workflows", mine: true },
       { label: "First build", detail: "One command, any project" },
     ],
-    flowNote: "Highlighted steps are ones I built; the initiative is the platform team's, led by Anthony Brignano.",
-    links: [{ label: "Anthony Brignano's onboarding case study (team lead's view)", url: "https://brignano.io/work/self-service-developer-onboarding" }],
+    flowNote: "Highlighted steps are ones I built; the initiative is the platform team's.",
+    links: [{ label: "The platform team lead's public onboarding case study", url: "https://brignano.io/work/self-service-developer-onboarding" }],
     sections: [
       {
         label: "Team context",
         title: "Why it reached the CEO",
         body: [
-          "The time from hire date to first commit was 40+ days, and almost none of it was learning the codebase: it was laptop imaging, software access, and permission requests that each had their own approver. The figure came up in an operating review, and the CEO made bringing it down a sponsored initiative. ATLAS is how the platform team delivers on it, under Anthony Brignano's lead.",
+          "The time from hire date to first commit was 40+ days, and almost none of it was learning the codebase: it was laptop imaging, software access, and permission requests that each had their own approver. The figure came up in an operating review, and the CEO made bringing it down a sponsored initiative. ATLAS is how the platform team delivers on it.",
         ],
       },
       {
@@ -191,9 +191,9 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: "My contribution",
-        title: "Now leading Guides",
+        title: "Leading the Guides implementation (side project)",
         body: [
-          "Since August 2026 I've been the project lead for browser-based Guides, an interactive way to capture and transfer the tribal knowledge that new engineers usually only get by asking someone who already knows.",
+          "Alongside my role, since August 2026, I've been leading the implementation of browser-based Guides as a side project: interactive, step-by-step guides that help engineers learn workflows and complete setup as part of self-service onboarding. The onboarding platform itself is the team's.",
         ],
       },
       {

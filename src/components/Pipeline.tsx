@@ -20,7 +20,7 @@ const stages = [
   {
     name: "Ship",
     detail:
-      "A VS Code extension, desktop and CLI tooling, DevOps Intelligence, and the docs that go with them: 144 pull requests merged across 21 repositories.",
+      "A VS Code extension, desktop and CLI tooling, DevOps analytics, and the docs that go with them: 144 pull requests merged (of 214 authored) across 21 repositories.",
   },
 ];
 
