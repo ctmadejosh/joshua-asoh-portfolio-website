@@ -87,6 +87,19 @@ class ContactHandlerTest(unittest.TestCase):
         self.assertIn("[juasoh.com] Hello", sent["Content"]["Simple"]["Subject"]["Data"])
         self.assertIn("platform engineering", sent["Content"]["Simple"]["Body"]["Text"]["Data"])
 
+    def test_source_is_saved_and_shown_in_email(self):
+        self.call(event({**VALID, "source": "LinkedIn"}))
+        self.assertEqual(self.table.items[0]["source"], "linkedin")
+        self.assertIn("Came from: linkedin", self.ses.sent[0]["Content"]["Simple"]["Body"]["Text"]["Data"])
+
+    def test_source_is_sanitized_and_optional(self):
+        self.call(event({**VALID, "source": "<script>alert(1)</script>" + "x" * 100}))
+        self.call(event(VALID))
+        stored = [i["source"] for i in self.table.items]
+        self.assertTrue(all(len(s) <= 40 for s in stored))
+        self.assertNotIn("<", stored[0])
+        self.assertEqual(stored[1], "unknown")
+
     def test_base64_body_is_decoded(self):
         status, _ = self.call(event(VALID, b64=True))
         self.assertEqual(status, 200)

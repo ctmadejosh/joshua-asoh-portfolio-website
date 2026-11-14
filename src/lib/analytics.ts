@@ -5,6 +5,8 @@
  * change, because GA's automatic page view only fires on the first load of a
  * single-page app.
  */
+import { captureAttribution, refOnlyCampaign } from "./attribution";
+
 type Gtag = (...args: unknown[]) => void;
 declare global {
   interface Window {
@@ -35,7 +37,12 @@ export function initAnalytics() {
     window.dataLayer!.push(arguments);
   };
   window.gtag("js", new Date());
-  window.gtag("config", MEASUREMENT_ID, { send_page_view: false });
+  // utm_* tags on the landing URL are read by GA automatically. The short
+  // ?ref=linkedin form is mapped onto GA's campaign fields here, and the
+  // visit's first source is saved as the user property `first_source`.
+  const attribution = captureAttribution();
+  window.gtag("config", MEASUREMENT_ID, { send_page_view: false, ...(refOnlyCampaign() ?? {}) });
+  window.gtag("set", "user_properties", { first_source: attribution.source });
 }
 
 export function trackPageView(path: string, title: string) {

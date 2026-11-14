@@ -83,6 +83,16 @@ and Yahoo, which use Bing's index) to recrawl them; the key file is
 
 After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
 
+## Sharing links
+Every link to juasoh.com you post should carry a source tag (`?utm_source=linkedin&utm_medium=profile`,
+or the short `?ref=linkedin`), so Google Analytics and the contact form can tell where visitors came
+from. Ready-to-paste links for LinkedIn, GitHub, the resume, and more are in
+[docs/share-links.md](docs/share-links.md).
+
+## Resume
+`resume/resume.html` is the source of `public/Joshua_Asoh_Resume.pdf`. Edit the HTML, then run
+`npm run resume` (needs Playwright) and commit both.
+
 ## Contact form backend (AWS)
 The contact form posts to a serverless API on AWS at `https://aws.juasoh.com/contact`:
 API Gateway → Lambda (Python) → DynamoDB + SES, with CloudWatch alarms, all in Terraform

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Mail, Send } from "lucide-react";
 import { CONTACT_API_URL, EMAIL } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 /**
  * Sends the form to Joshua's own AWS backend: API Gateway at aws.juasoh.com,
@@ -61,14 +62,15 @@ const ContactForm: React.FC = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // `company` is the honeypot; the API quietly drops messages that fill it.
-        body: JSON.stringify({ ...fields, company }),
+        // `source` is where the visit began (e.g. "linkedin"), so the email says so.
+        body: JSON.stringify({ ...fields, company, source: captureAttribution().source }),
         signal: controller.signal,
       });
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; errors?: string[] };
 
       if (res.ok && body.ok) {
         setStatus("sent");
-        trackEvent("contact_submit", { result: "sent" });
+        trackEvent("contact_submit", { result: "sent", source: captureAttribution().source });
       } else if (res.status === 400 && body.errors?.length) {
         setErrors(body.errors);
         setStatus("invalid");

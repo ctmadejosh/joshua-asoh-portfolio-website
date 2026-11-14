@@ -33,6 +33,9 @@ LIMITS = {"user_name": 100, "user_email": 254, "subject": 150, "message": 5000}
 # Deliberately simple: one @, no spaces, a dot in the domain. SES rejects
 # anything truly undeliverable; this only catches obvious typos.
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+# Optional "where did they come from" label set by the website (utm_source,
+# ?ref=, or the referring site). Untrusted, so it's reduced to a short slug.
+SOURCE_RE = re.compile(r"[^a-z0-9._-]")
 MAX_BODY_BYTES = 16_000
 
 # boto3 clients are created on first use, not at import time, so tests can
@@ -98,11 +101,20 @@ def validate(data: dict[str, Any]) -> tuple[dict[str, str], list[str]]:
     return clean, errors
 
 
+def clean_source(value: Any) -> str:
+    """Return a safe source label like "linkedin", or "unknown"."""
+    if not isinstance(value, str):
+        return "unknown"
+    slug = SOURCE_RE.sub("", value.strip().lower())[:40]
+    return slug or "unknown"
+
+
 def _send_email(record: dict[str, str]) -> None:
     body = (
         f"New message from juasoh.com\n\n"
         f"From:    {record['user_name']} <{record['user_email']}>\n"
         f"Subject: {record['subject']}\n"
+        f"Came from: {record['source']}\n"
         f"Sent:    {record['created_at']}\n"
         f"ID:      {record['id']}\n\n"
         f"{record['message']}\n"
@@ -141,6 +153,7 @@ def handle_contact(event: dict[str, Any]) -> dict[str, Any]:
         "id": str(uuid.uuid4()),
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         **clean,
+        "source": clean_source(data.get("source")),
         "source_ip": http.get("sourceIp", ""),
         "user_agent": (http.get("userAgent") or "")[:300],
     }
