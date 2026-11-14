@@ -89,6 +89,10 @@ Google Analytics 4 loads only when `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`
 Cloudflare. It sends one `page_view` per route change, plus these events:
 `resume_download`, `contact_submit`, `email_copied`, and `command_palette_open`.
 
+Changing that variable does nothing until the next build, so retry the latest build (or push to
+`main`) afterwards. To check it took, search the live `/assets/index-*.js` bundle for the
+measurement ID, or open the site and watch GA's *Reports → Realtime*.
+
 ## Deployment
 The site is deployed to Cloudflare Workers (static assets) and served at [juasoh.com](https://juasoh.com). Pushing to `main` triggers a build (`bun install --frozen-lockfile && bun run build`) and deploy using `wrangler.jsonc`.
 
