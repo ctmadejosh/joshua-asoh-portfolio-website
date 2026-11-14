@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Box, Copy, Download, Gauge, Linkedin, Mail, Rocket, Terminal } from "lucide-react";
-import portraitStudio from "@/assets/portrait-studio.jpg";
+import portraitMain from "@/assets/portrait-linkedin.jpg";
 import portraitClose from "@/assets/portrait-close.jpg";
 import CountUp from "@/components/site/CountUp";
 import Pipeline from "@/components/Pipeline";
@@ -123,10 +123,10 @@ const Home = () => {
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <div aria-hidden="true" className="absolute right-0 top-6 -z-0 aspect-[4/5] w-[74%] translate-x-3 rotate-3 rounded-[2rem] bg-primary-surface" />
             <img
-              src={portraitStudio}
-              alt="Portrait of Joshua Asoh in a navy polo"
-              width={960}
-              height={1200}
+              src={portraitMain}
+              alt="Portrait of Joshua Asoh smiling, in a white T-shirt"
+              width={640}
+              height={800}
               {...{ fetchpriority: "high" }}
               className="relative ml-auto aspect-[4/5] w-[74%] rounded-3xl border border-border object-cover shadow-[0_30px_60px_-30px_hsl(var(--foreground)/0.45)]"
             />

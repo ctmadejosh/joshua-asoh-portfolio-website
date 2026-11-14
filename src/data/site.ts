@@ -98,11 +98,11 @@ export const skillGroups = [
 export const education = [
   {
     degree: "M.S. Computer Information Technology",
-    detail: "Central Connecticut State University (4+1 program), May 2026. 3.71 GPA.",
+    detail: "Central Connecticut State University (4+1 program), expected May 2027. 3.71 GPA.",
   },
   {
     degree: "B.S. Computer Engineering Technology",
-    detail: "Central Connecticut State University, August 2023 – December 2025. 3.43 GPA, Dean's List three times. Vice President of IEEE, A.S.O Club, and FactSet Student Ambassador.",
+    detail: "Central Connecticut State University, August 2023 – December 2025. 3.44 GPA, Dean's List three times. Vice President of IEEE, A.S.O Club, and FactSet Student Ambassador.",
   },
 ];
 
