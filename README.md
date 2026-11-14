@@ -83,6 +83,12 @@ and Yahoo, which use Bing's index) to recrawl them; the key file is
 
 After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
 
+## Contact form backend (AWS)
+The contact form posts to a serverless API on AWS at `https://aws.juasoh.com/contact`:
+API Gateway → Lambda (Python) → DynamoDB + SES, with CloudWatch alarms, all in Terraform
+(`infra/`) and deployed by GitHub Actions over OIDC. See
+[docs/aws/contact-backend.md](docs/aws/contact-backend.md) for how it works and how to set it up.
+
 ## Analytics
 Google Analytics 4 loads only when `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`) is set at
 **build** time; set it under the Worker's *Settings → Build → Variables and secrets* in

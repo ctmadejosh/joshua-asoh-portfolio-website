@@ -54,14 +54,8 @@ In `src/data/about.ts`, `story.why`, `story.next` and `story.funFacts` are empty
 
 Use his words, lightly edited for clarity only.
 
-## Task 4: Contact form (needs one value from Joshua)
-- **Problem:** the form in `src/components/ContactForm.tsx` uses EmailJS. `.env` has `VITE_EMAILJS_TEMPLATE_ID` set to the service ID by mistake, so EmailJS answers `400 The template ID not found`.
-- **Current behaviour:** it falls back to opening the visitor's email app with the message pre-filled.
-- **Fix:**
-  1. Get the real ID (`template_…`) from https://dashboard.emailjs.com → Email Templates.
-  2. Put it in `.env`. If Cloudflare's build has its own `VITE_EMAILJS_*` variables, set it there too.
-  3. Check that the template uses `{{user_name}}`, `{{user_email}}`, `{{subject}}` and `{{message}}`, with Reply-To set to `{{user_email}}`.
-- **Test:** sending a real test message emails Joshua, so ask first.
+## Task 4: Contact form backend (AWS)
+The form now posts to Joshua's own AWS backend at `https://aws.juasoh.com/contact` (API Gateway → Lambda → DynamoDB + SES), defined in `infra/contact` and `services/contact`. Until it's deployed, the form falls back to opening the visitor's email app. Setup steps and a full explanation are in `docs/aws/contact-backend.md`. Joshua deploys it from his own AWS account; never ask for AWS keys.
 
 ## Project facts a new session needs
 - **Stack:** React 18 + Vite + TypeScript + Tailwind, React Router.

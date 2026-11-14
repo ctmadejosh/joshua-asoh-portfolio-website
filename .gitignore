@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+infra/**/.build/
+infra/**/terraform.tfvars
+
+# Python
+__pycache__/
+*.pyc
