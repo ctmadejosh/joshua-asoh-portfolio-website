@@ -1,6 +1,6 @@
 import orderOfTheEngineer from "@/assets/gallery/order-of-the-engineer.jpg";
 import ccsuGraduation from "@/assets/gallery/ccsu-graduation.jpg";
-import hartfordCeo from "@/assets/gallery/hartford-ceo-chris-swift.jpg";
+import hartfordCeo from "@/assets/gallery/hartford-ceo-meeting.jpg";
 import hartfordPodium from "@/assets/gallery/hartford-intern-podium.jpg";
 import hartfordInternship from "@/assets/gallery/hartford-internship.jpg";
 import docChatbotTeam from "@/assets/gallery/doc-chatbot-team.jpg";
@@ -87,17 +87,17 @@ export const journey: Milestone[] = [
     org: "The Hartford",
     icon: "rocket",
     summary:
-      "Building ATLAS, the developer platform for 4,000+ engineers: its CLI, desktop agent, VS Code extension, telemetry, and the CEO-sponsored push to make onboarding self-service.",
-    highlight: { value: "144", label: "pull requests merged" },
+      "Building ATLAS, a developer platform used by 4,000+ engineers (as of November 2026): its CLI, desktop agent, VS Code extension, telemetry, and the CEO-sponsored push to make onboarding self-service.",
+    highlight: { value: "144", label: "pull requests merged (of 214 authored), as of Nov 2026" },
     to: "/work/atlas-developer-platform",
   },
   {
     year: "Aug 2026",
-    title: "Project Lead, Guides",
+    title: "Side project: browser-based Guides",
     org: "The Hartford",
     icon: "map",
     summary:
-      "Leading the implementation of browser-based Guides, an interactive way to transfer the tribal knowledge engineers usually pass on by word of mouth.",
+      "Alongside my role, I'm leading the implementation of browser-based Guides: interactive, step-by-step guides that help engineers learn workflows and complete setup as part of self-service onboarding.",
     to: "/work/self-service-onboarding",
   },
 ];
@@ -145,8 +145,8 @@ export const gallery: GalleryPhoto[] = [
     src: hartfordCeo,
     width: 800,
     height: 1067,
-    alt: "Joshua standing with fellow interns and The Hartford's CEO, Chris Swift",
-    caption: "Meeting The Hartford's CEO, Chris Swift, as an intern",
+    alt: "Joshua standing with fellow interns and The Hartford's CEO",
+    caption: "Meeting The Hartford's CEO as an intern",
     date: "Summer 2025",
   },
   {
@@ -212,3 +212,40 @@ export const story: {
   next: [],
   funFacts: [],
 };
+
+/**
+ * Leadership, mentoring & community. Wording confirmed by Joshua (November
+ * 2026). NAAIA: "Committee Member" only, never a leader or officer title.
+ * FIRST Robotics: event setup and field resetting only (no judging).
+ */
+export const community: { role: string; org: string; period?: string; detail: string; icon: "users" | "graduation" | "handshake" | "bot" }[] = [
+  {
+    role: "Technical onboarding & mentoring",
+    org: "The Hartford, Tech & Ops Leadership Development Program",
+    period: "2026 – Present",
+    detail:
+      "Leads technical onboarding and knowledge transfer, supports LDP mentorship and orientation, and mentors associates and interns.",
+    icon: "users",
+  },
+  {
+    role: "Committee Member",
+    org: "NAAIA Greater Hartford Chapter",
+    period: "May 2026 – Present",
+    detail:
+      "Serves on the Programs, Career Expo, College & University Outreach, and SHINE committees. Plans professional-development events and an early-career expo, and reaches out to local universities to support student career readiness.",
+    icon: "handshake",
+  },
+  {
+    role: "Student Team Mentor",
+    org: "Central Connecticut State University",
+    detail:
+      "Joins weekly sprint reviews with student software teams and guides them on cloud, DevOps, and agile practices.",
+    icon: "graduation",
+  },
+  {
+    role: "Event Volunteer",
+    org: "FIRST Robotics (Hartford)",
+    detail: "Handled event setup and field resetting for a youth robotics competition.",
+    icon: "bot",
+  },
+];

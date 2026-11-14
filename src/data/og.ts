@@ -4,6 +4,6 @@
  * change: the new file names make iMessage, LinkedIn, and others fetch fresh
  * previews instead of reusing ones they cached for the old URLs.
  */
-export const OG_VERSION = "v2";
+export const OG_VERSION = "v3";
 
 export const ogImage = (name: string) => `/og/${name}-${OG_VERSION}.jpg`;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Download, GraduationCap, MapPin } from "lucide-react";
+import { ArrowRight, Bot, Download, GraduationCap, Handshake, MapPin, Users } from "lucide-react";
 import portraitMain from "@/assets/portrait-linkedin.jpg";
 import portraitClose from "@/assets/portrait-close.jpg";
 import Seo from "@/components/site/Seo";
@@ -7,7 +7,7 @@ import { Container, SectionHeading } from "@/components/site/Cards";
 import JourneyTimeline from "@/components/site/JourneyTimeline";
 import SocialLinks from "@/components/site/SocialLinks";
 import PhotoGallery from "@/components/site/PhotoGallery";
-import { gallery, journey, quickFacts, story } from "@/data/about";
+import { community, gallery, journey, quickFacts, story } from "@/data/about";
 import { RESUME_PATH, SITE_NAME, certifications, education } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -29,7 +29,7 @@ const AboutPage = () => (
         <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-muted-foreground">
           <p>
             I'm a platform engineer in The Hartford's Technology &amp; Operations Leadership
-            Development Program, building ATLAS, the developer platform 4,000+ engineers use to
+            Development Program, building ATLAS, a developer platform used by 4,000+ engineers (as of November 2026) to
             ship.
           </p>
           <p>
@@ -105,6 +105,38 @@ const AboutPage = () => (
         <PhotoGallery photos={gallery} />
       </section>
     )}
+
+    {/* Leadership, mentoring & community. Wording confirmed by Joshua. */}
+    <section className="pt-20 md:pt-28" aria-labelledby="community-heading">
+      <div className="mb-8" data-reveal>
+        <h2 id="community-heading" className="text-3xl font-bold tracking-tight sm:text-4xl">
+          Leadership, mentoring &amp; community
+        </h2>
+        <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
+          Outside the day-to-day engineering work.
+        </p>
+      </div>
+      <ul className="grid gap-4 md:grid-cols-2">
+        {community.map((item, i) => {
+          const Icon = { users: Users, handshake: Handshake, graduation: GraduationCap, bot: Bot }[item.icon];
+          return (
+            <li key={item.org} className="surface-card flex gap-4 p-6" data-reveal data-reveal-delay={i * 70}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-surface text-primary-ink">
+                <Icon aria-hidden="true" className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="font-sans text-lg font-semibold leading-snug">{item.role}</h3>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {item.org}
+                  {item.period && <span className="text-subtle"> · {item.period}</span>}
+                </p>
+                <p className="mt-2 leading-relaxed text-muted-foreground">{item.detail}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
 
     {/* Why platform engineering: Joshua's own words, shown only once written. */}
     {story.why.length > 0 && (

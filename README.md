@@ -83,11 +83,28 @@ and Yahoo, which use Bing's index) to recrawl them; the key file is
 
 After the first deploy, submit `https://juasoh.com/sitemap.xml` in Google Search Console.
 
+## Sharing links
+Every link to juasoh.com you post should carry a source tag (`?utm_source=linkedin&utm_medium=profile`,
+or the short `?ref=linkedin`), so Google Analytics and the contact form can tell where visitors came
+from. Ready-to-paste links for LinkedIn, GitHub, the resume, and more are in
+[docs/share-links.md](docs/share-links.md).
+
+## Resume
+`resume/resume.html` is the source of `public/Joshua_Asoh_Resume.pdf`. Edit the HTML, then run
+`npm run resume` (needs Playwright) and commit both.
+
+## Contact form backend (AWS)
+The contact form posts to a serverless API on AWS at `https://aws.juasoh.com/contact`:
+API Gateway → Lambda (Python) → DynamoDB + SES, with CloudWatch alarms, all in Terraform
+(`infra/`) and deployed by GitHub Actions over OIDC. See
+[docs/aws/contact-backend.md](docs/aws/contact-backend.md) for how it works and how to set it up.
+
 ## Analytics
-Google Analytics 4 loads only when `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`) is set at
-**build** time; set it under the Worker's *Settings → Build → Variables and secrets* in
-Cloudflare. It sends one `page_view` per route change, plus these events:
-`resume_download`, `contact_submit`, `email_copied`, and `command_palette_open`.
+Google Analytics 4 (property `G-G1XFK5MDXR`) runs only on juasoh.com and www.juasoh.com, never on
+Cloudflare previews or localhost, so test traffic doesn't count. It sends one `page_view` per route
+change plus `resume_download`, `contact_submit`, `email_copied` and `command_palette_open`, and records
+where each visit came from (see [docs/share-links.md](docs/share-links.md)). To test against another
+property, build with `VITE_GA_MEASUREMENT_ID`.
 
 Changing that variable does nothing until the next build, so retry the latest build (or push to
 `main`) afterwards. To check it took, search the live `/assets/index-*.js` bundle for the

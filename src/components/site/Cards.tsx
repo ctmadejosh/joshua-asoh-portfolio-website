@@ -93,12 +93,21 @@ export const ProjectCard = ({ project, index = 0 }: { project: Project; index?: 
         </li>
       ))}
     </ul>
+    {project.caseStudy && (
+      <Link
+        to={`/work/${project.caseStudy}`}
+        className="group mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-primary-ink"
+      >
+        Read how it's built
+        <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </Link>
+    )}
     {project.link && (
       <a
         href={project.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-primary-ink"
+        className={`group inline-flex items-center gap-1 text-sm font-medium text-primary-ink ${project.caseStudy ? "pt-2" : "mt-auto pt-6"}`}
       >
         View the code on GitHub
         <span className="sr-only"> (opens in a new tab)</span>

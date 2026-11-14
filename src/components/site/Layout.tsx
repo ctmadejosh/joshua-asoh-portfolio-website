@@ -5,12 +5,15 @@ import SiteFooter from "./SiteFooter";
 import { useScrollReveal } from "./useScrollReveal";
 import CommandPalette from "./CommandPalette";
 import { initAnalytics, trackPageView } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 const Layout = () => {
   const { pathname, hash } = useLocation();
   useScrollReveal();
 
   useEffect(() => {
+    // Record where this visit came from before anything else reads it.
+    captureAttribution();
     initAnalytics();
   }, []);
 

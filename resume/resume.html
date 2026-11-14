@@ -1,0 +1,177 @@
+<!doctype html>
+<!--
+  Joshua Asoh's resume. This file is the source; scripts/build-resume.mjs
+  renders it to public/Joshua_Asoh_Resume.pdf (npm run resume).
+  Styled to match the original Word layout: Times New Roman 11pt (Liberation
+  Serif has identical metrics and is the fallback), US Letter, narrow margins,
+  rules under section headings.
+  Public-safe: no internal IDs, system details, or colleague names.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Joshua Asoh – Resume</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.5in 0.45in 0.5in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Times New Roman", "Liberation Serif", Tinos, serif; font-size: 11pt; line-height: 1.12; color: #000; }
+  a { color: #0563c1; text-decoration: underline; }
+  header { text-align: center; }
+  h1 { font-size: 20pt; font-weight: bold; line-height: 1.1; }
+  .contact { margin-top: 1pt; }
+  h2 { font-size: 10pt; font-weight: bold; text-transform: uppercase; border-bottom: 0.5pt solid #000; margin-top: 13pt; padding-bottom: 1pt; margin-bottom: 6pt; letter-spacing: 0; }
+  .row { display: flex; justify-content: space-between; gap: 12pt; }
+  .row > :last-child { text-align: right; white-space: nowrap; }
+  .entry { margin-top: 9pt; }
+  .entry:first-of-type { margin-top: 0; }
+  .b { font-weight: bold; }
+  .i { font-style: italic; }
+  .bi { font-weight: bold; font-style: italic; }
+  ul { margin: 2pt 0 0 0; padding-left: 0; list-style: none; }
+  li { position: relative; padding-left: 16pt; margin-top: 2pt; }
+  li::before { content: "•"; position: absolute; left: 4pt; }
+  ul.dash li::before { content: "-"; left: 8pt; }
+  ul.dash li { padding-left: 22pt; margin-top: 0; }
+  p.para { margin-top: 6pt; }
+  .skills p { margin-top: 4.5pt; }
+  .skills p:first-child { margin-top: 0; }
+  .avoid { break-inside: avoid; }
+  li { break-inside: avoid; }
+  .entry > .i, .entry > .row { break-after: avoid; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Joshua Asoh</h1>
+  <p class="contact">New Haven, CT | 203-613-0475 | <a href="mailto:Joshua.asoh@my.ccsu.edu">Joshua.asoh@my.ccsu.edu</a> | <a href="https://www.linkedin.com/in/joshua-asoh">www.linkedin.com/in/joshua-asoh</a> | <a href="https://juasoh.com/?utm_source=resume&amp;utm_medium=pdf">juasoh.com</a></p>
+</header>
+
+<h2>Education</h2>
+<div class="entry">
+  <div class="row"><span><span class="b">Central Connecticut State University -</span> New Britain, CT</span><span class="i">Expected May 2027</span></div>
+  <div class="row"><span>Master of Science, Computer Information Technology (4+1 Program)</span><span class="bi">Overall GPA: 3.71</span></div>
+</div>
+<div class="entry">
+  <div class="row"><span><span class="b">Central Connecticut State University -</span> New Britain, CT</span><span class="bi">August 2023 – December 2025</span></div>
+  <div class="row"><span class="i">Bachelor of Science, Computer Engineering Technology</span><span class="bi">Overall GPA: 3.44</span></div>
+  <ul>
+    <li>Club Involvement: Vice President of I.E.E.E, A.S.O Club</li>
+    <li>Societies: National Society of Black Engineers, ColorStack</li>
+    <li>FactSet Student Ambassador</li>
+  </ul>
+</div>
+
+<h2>Skills &amp; Certifications</h2>
+<div class="skills">
+  <p><span class="b">Cloud &amp; DevOps:</span> AWS (Lambda, API Gateway, DynamoDB, SES, S3, CloudWatch, Bedrock, ECS), Terraform, GitHub Actions (OIDC), Harness, Jenkins, Cloudflare Workers, Docker (basic), Checkov</p>
+  <p><span class="b">Web &amp; Software:</span> Python, TypeScript, React, Vite, Tailwind CSS, Angular, Playwright, C, C++, Cursor AI, Microsoft Office, Google products, Multisim, SOLIDWORKS, Raspberry Pi</p>
+  <p><span class="b">Engineering:</span> Electronic Circuit Prototyping, Soldering, Blueprint Reading, Circuit Analysis, 3D Modeling, 2D Drafting &amp; Drawings, Assembly Design, Prompt Engineering</p>
+  <p><span class="b">Hardware:</span> Windows OS, Linux OS, Printer Management, ConnectWise Automate, ConnectWise Manage</p>
+  <p><span class="b">Lab:</span> Research and Design/Development, Integrative Workflow, Data Analysis, Good Laboratory Practice (GLP)</p>
+  <p><span class="b">Leadership:</span> Team Leadership, Project Oversight, Social Networking, Quality Control</p>
+  <p><span class="bi">Certifications:</span> <span class="i">BioLaunch Laboratory Operations</span> 02/2024 | <span class="i">SolidWorks Associate</span> 03/2021 | <span class="i">OSHA-10</span> 03/2019</p>
+</div>
+
+<h2>Work Experience</h2>
+<div class="entry">
+  <div class="i">T&amp;O LDP Associate – Platform/DevOps Engineer</div>
+  <div class="row"><span class="b">The Hartford Insurance – Hartford, CT</span><span class="b">January 2026 – Present</span></div>
+  <ul>
+    <li>Delivered engineering work across 21 repositories (214 pull requests authored, 144 merged, as of November 2026) for ATLAS, a shared developer platform used by 4,000+ Hartford engineers (platform figure, November 2026), spanning developer experience, CI/CD automation, cloud workflows, and internal tools.</li>
+    <li>Built Atlas Studio, a developer-tooling pipeline that turns guide content into narrated 4K/8K walkthrough videos, with automated production and adaptive audio for developer education and onboarding.</li>
+    <li>Leading the implementation of browser-based Guides (side project): interactive, step-by-step guides that help engineers learn workflows and complete setup as part of self-service onboarding.</li>
+    <li>Engineered and hardened Harness project provisioning and onboarding, including rerunnable project creation, smoke testing, access configuration, and service-account reconciliation.</li>
+    <li>Led a zero-downtime, dual-write DynamoDB key migration across the DevOps Intelligence API and data ingestion; also shipped pipeline-query and guide deep-link capabilities.</li>
+    <li>Improved reliability across developer tooling through cross-platform integration tests, VS Code updater and release-workflow improvements, and an at-least 80% code-coverage threshold for extension development.</li>
+    <li>Led technical onboarding and knowledge transfer, supported LDP mentorship and orientation, mentored associates and interns, and contributed to university engagement.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="i">Cloud and Reliability Engineering Intern</div>
+  <div class="row"><span><span class="b">The Hartford Insurance –</span> Hartford, CT</span><span class="bi">May 2025 – August 2025</span></div>
+  <ul>
+    <li>Provisioned cloud infrastructure with Terraform; ensured compliance with AWS IAM and security protocols</li>
+    <li>Developed and deployed a responsive Angular UI integrated with AWS Bedrock for real-time chatbot interactions</li>
+    <li>Led prompt engineering and modular pipeline design for processing unstructured internal documentation</li>
+    <li>Deployed agentic workflows for autonomous information retrieval, reducing queries by 80% across 800+ engineers</li>
+    <li>Engineered a GenAI-powered document chatbot using Claude 3.5 Sonnet and Bedrock, integrating AWS ECS, Lambda, and S3 to support a Retrieval-Augmented Generation (RAG) workflow</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="i">Client Experience Associate</div>
+  <div class="row"><span><span class="b">The Computer Company –</span> Cromwell, CT</span><span class="bi">February 2024 – March 2024</span></div>
+  <ul>
+    <li>Managed PC imaging and Service Board tickets, ensuring efficient IT operations.</li>
+    <li>Implemented cybersecurity measures based on <span class="bi">Bitdefender</span> recommendations.</li>
+    <li>Utilized <span class="bi">Cisco Meraki Portal</span> for network management and optimization.</li>
+    <li>Monitored and troubleshooted alerts from various devices, ensuring minimal downtime.</li>
+    <li>Upgraded software on devices to enhance security and system integrity.</li>
+    <li>Leveraged ConnectWise Automate and ConnectWise Manage for streamlined IT operations.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="i">Information Technology Student Technician</div>
+  <div class="row"><span><span class="b">Gateway IT Department -</span> New Haven, CT</span><span class="bi">October 2022 - May 2023</span></div>
+  <ul>
+    <li>Collaborated with IT professionals to repair a script malfunction that affected <span class="b">36,000+</span> students and faculty across 12 Community Colleges</li>
+    <li>Troubleshooted technical issues in a virtual environment that allowed users more efficient access to their data</li>
+    <li>Installed and configured hardware, software, and networks around campus as well as updating necessary software such as: <span class="bi">Bomgar</span>, <span class="bi">Windows O.S.</span>, <span class="bi">Mac O.S.</span>, <span class="bi">Microsoft Azure</span>, and <span class="bi">Active Directory</span></li>
+    <li>Contributed to team effort by regularly doing printer maintenance and management</li>
+  </ul>
+</div>
+
+<h2>Projects</h2>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">juasoh.com – Personal Portfolio Platform</span> | <span class="i">React, TypeScript, AWS, Terraform</span></span><span class="bi">2026 – Present</span></div>
+  <ul>
+    <li>Built a pre-rendered React/TypeScript site on Cloudflare Workers with per-page SEO metadata, JSON-LD structured data, a generated sitemap, and GA4 traffic-source attribution.</li>
+    <li>Designed a serverless contact API (API Gateway, Lambda, DynamoDB, SES) in Terraform with least-privilege IAM, throttling, CloudWatch alarms, and a budget alert; AWS deployment in progress.</li>
+    <li>Automated CI/CD in GitHub Actions with OIDC (no stored keys), unit tests, Terraform validation, Checkov security scanning, and approval-gated deploys.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">AI-Powered Lead Generation</span> | <span class="i">Python, OpenAI, PRAW, Airtable</span></span><span></span></div>
+  <ul>
+    <li>Automated lead generation and outreach for a home care agency: finds caregiving-related Reddit posts, scores them with AI, and logs leads and outreach in Airtable.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">Kate AI – FactSet Externship Hackathon</span> | <span class="i">Python, Streamlit</span></span><span class="bi">May 2024</span></div>
+  <ul>
+    <li>Built a smart portfolio manager that answers questions about stocks and portfolios using FactSet and news data.</li>
+  </ul>
+</div>
+
+<h2>Leadership, Mentoring &amp; Community</h2>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">Institute of Electrical and Electronics Engineering (I.E.E.E) –</span> <span class="i">Vice President</span></span><span class="bi">July 2023 – April 2024</span></div>
+  <ul>
+    <li>Recruited approximately 40 new members during the CCSU involvement fair.</li>
+    <li>Overhauled the Discord Server by introducing bots and channels for improved information organization.</li>
+    <li>Spearheaded initiatives to establish partnerships with leading Financial Technology, and insurance companies (<span class="b">FactSet, COCC, The Hartford, Travelers</span>) for diversity-focused hiring events.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">NAAIA Greater Hartford Chapter –</span> <span class="i">Committee Member</span></span><span class="bi">May 2026 – Present</span></div>
+  <ul>
+    <li>Serves on the Programs, Career Expo, College &amp; University Outreach, and SHINE committees.</li>
+    <li>Plans professional-development events and an early-career expo, and reaches out to local universities to support student career readiness.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">Central Connecticut State University –</span> <span class="i">Student Team Mentor</span></span><span></span></div>
+  <ul>
+    <li>Joins weekly sprint reviews with student software teams and guides them on cloud, DevOps, and agile practices.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">FIRST Robotics (Hartford) –</span> <span class="i">Event Volunteer</span></span><span></span></div>
+  <ul>
+    <li>Handled event setup and field resetting for a youth robotics competition.</li>
+  </ul>
+</div>
+</body>
+</html>

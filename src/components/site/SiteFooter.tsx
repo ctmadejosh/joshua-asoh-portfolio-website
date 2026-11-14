@@ -14,7 +14,13 @@ const SiteFooter = () => (
         <p className="mt-1 text-sm text-muted-foreground">
           Platform engineering, CI/CD, and developer experience. Connecticut.
         </p>
-        <p className="mt-6 text-sm text-subtle">© {new Date().getFullYear()} {SITE_NAME}</p>
+        <p className="mt-6 text-sm text-subtle">
+          Built with React, TypeScript and Tailwind on Cloudflare, with a serverless contact API built for AWS.{" "}
+          <Link to="/work/this-website" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">
+            How it's built
+          </Link>
+        </p>
+        <p className="mt-2 text-sm text-subtle">© {new Date().getFullYear()} {SITE_NAME}</p>
       </div>
       <div className="flex flex-col gap-5 md:items-end">
         <nav aria-label="Footer">

@@ -1,0 +1,13 @@
+# Copy to terraform.tfvars for a local apply (it's git-ignored).
+# In GitHub Actions these come from repo variables named TF_VAR_<name> instead.
+
+recipient_email = "you@example.com" # where contact messages arrive
+alert_email     = "you@example.com" # where alarms and budget alerts go
+
+# First apply: false. After adding the DNS records it prints, set true and apply again.
+custom_domain_ready = false
+
+# Optional overrides (defaults shown):
+# api_domain         = "aws.juasoh.com"
+# sender_address     = "contact@juasoh.com"
+# monthly_budget_usd = 5

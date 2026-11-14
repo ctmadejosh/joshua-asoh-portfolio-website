@@ -39,7 +39,7 @@ export const caseStudies: CaseStudy[] = [
       "ATLAS puts onboarding, builds, policy, telemetry, and AI tooling for The Hartford's engineers in one place: a CLI, a desktop agent, and IDE extensions. I build across all three, plus the telemetry behind them.",
     role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "January 2026 – present",
-    stack: ["HIG CLI", "Desktop agent", "VS Code extension", "OpenTelemetry", "Amazon EventBridge", "DynamoDB", "Harness", "Integration testing"],
+    stack: ["Platform CLI", "Desktop agent", "VS Code extension", "OpenTelemetry", "Amazon EventBridge", "DynamoDB", "Harness", "Integration testing"],
     facts: [
       { value: "4,000+", label: "Engineers on the platform (team figure)" },
       { value: "95,000+", label: "Pipelines the platform supports (team figure)" },
@@ -54,18 +54,18 @@ export const caseStudies: CaseStudy[] = [
     flow: [
       { label: "Platform site", detail: "Where engineers start" },
       { label: "Desktop agent", detail: "Runs native commands from the site", mine: true },
-      { label: "HIG CLI", detail: "Setup, builds, policy", mine: true },
+      { label: "Platform CLI", detail: "Setup, builds, policy", mine: true },
       { label: "VS Code extension", detail: "The platform in the editor", mine: true },
       { label: "Telemetry", detail: "OpenTelemetry → EventBridge → DynamoDB", mine: true },
     ],
     flowNote: "Highlighted parts are ones I wrote code for; ATLAS as a whole is the platform team's work.",
-    links: [{ label: "Anthony Brignano's ATLAS case study (team lead's view)", url: "https://brignano.io/work/atlas-developer-platform" }],
+    links: [{ label: "The platform team lead's public ATLAS case study", url: "https://brignano.io/work/atlas-developer-platform" }],
     sections: [
       {
         label: "Team context",
         title: "One platform team, one platform",
         body: [
-          "I'm on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team is led by Anthony Brignano, who sets the technical direction for ATLAS; I'm one of the engineers building it.",
+          "I'm on The Hartford's developer platform team as part of the Technology & Operations Leadership Development Program. The team's technical lead sets the direction for ATLAS; I'm one of the engineers building it.",
           "As of November 2026, the platform serves 4,000+ engineers, on its way to the full 8,000-engineer organization, supports 95,000+ pipelines, and tracks 13,000+ repositories. Those are the platform's numbers, not mine alone; the sections below are the parts I built.",
         ],
       },
@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
         title: "The CLI and the desktop agent",
         body: ["The CLI is the core of ATLAS, and the desktop agent is what lets the platform's website reach it."],
         bullets: [
-          "Built features in the HIG CLI, now in use on 4,000+ machines.",
+          "Built features in the platform's command-line tool (the HIG CLI), now in use on 4,000+ machines (platform figure, November 2026).",
           "Worked on the desktop agent's bridge to the platform site: a button on the site runs a native command on the engineer's own machine, which is what makes the in-browser onboarding possible.",
           "Fixed bugs and hardened both after rollout.",
         ],
@@ -97,9 +97,9 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: "My contribution",
-        title: "Telemetry for DevOps Intelligence",
+        title: "Telemetry for the platform's DevOps analytics",
         bullets: [
-          "Led a zero-downtime, dual-write DynamoDB key migration from IW# to WORKSPACE# across the DevOps Intelligence API and ingestion.",
+          "Led a zero-downtime, dual-write DynamoDB key migration across the DevOps analytics API (DevOps Intelligence) and its data ingestion.",
           "Shipped pipeline-query and guide deep-link capabilities.",
         ],
         body: [
@@ -133,7 +133,7 @@ export const caseStudies: CaseStudy[] = [
       "A CEO-sponsored initiative to cut the time from an engineer's hire date to their first commit. I built parts of the day-one path, turned its guides into narrated videos, and onboarded people through it.",
     role: "Platform Engineer, Tech & Ops Leadership Development Program",
     period: "2026",
-    stack: ["HIG CLI", "Desktop agent", "VS Code", "Harness", "Generative AI", "Atlas Studio"],
+    stack: ["Platform CLI", "Desktop agent", "VS Code", "Harness", "Generative AI", "Atlas Studio"],
     facts: [
       { value: "40+ days", label: "Hire to first commit, before (team baseline)" },
       { value: "Hours", label: "A machine, unboxed to building, on the platform path (team figure)" },
@@ -151,14 +151,14 @@ export const caseStudies: CaseStudy[] = [
       { label: "Provisioning", detail: "Harness workflows", mine: true },
       { label: "First build", detail: "One command, any project" },
     ],
-    flowNote: "Highlighted steps are ones I built; the initiative is the platform team's, led by Anthony Brignano.",
-    links: [{ label: "Anthony Brignano's onboarding case study (team lead's view)", url: "https://brignano.io/work/self-service-developer-onboarding" }],
+    flowNote: "Highlighted steps are ones I built; the initiative is the platform team's.",
+    links: [{ label: "The platform team lead's public onboarding case study", url: "https://brignano.io/work/self-service-developer-onboarding" }],
     sections: [
       {
         label: "Team context",
         title: "Why it reached the CEO",
         body: [
-          "The time from hire date to first commit was 40+ days, and almost none of it was learning the codebase: it was laptop imaging, software access, and permission requests that each had their own approver. The figure came up in an operating review, and the CEO made bringing it down a sponsored initiative. ATLAS is how the platform team delivers on it, under Anthony Brignano's lead.",
+          "The time from hire date to first commit was 40+ days, and almost none of it was learning the codebase: it was laptop imaging, software access, and permission requests that each had their own approver. The figure came up in an operating review, and the CEO made bringing it down a sponsored initiative. ATLAS is how the platform team delivers on it.",
         ],
       },
       {
@@ -191,9 +191,9 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         label: "My contribution",
-        title: "Now leading Guides",
+        title: "Leading the Guides implementation (side project)",
         body: [
-          "Since August 2026 I've been the project lead for browser-based Guides, an interactive way to capture and transfer the tribal knowledge that new engineers usually only get by asking someone who already knows.",
+          "Alongside my role, since August 2026, I've been leading the implementation of browser-based Guides as a side project: interactive, step-by-step guides that help engineers learn workflows and complete setup as part of self-service onboarding. The onboarding platform itself is the team's.",
         ],
       },
       {
@@ -201,6 +201,106 @@ export const caseStudies: CaseStudy[] = [
         title: "What the numbers mean",
         body: [
           "The \"hours\" figure is what the platform path delivers on a single machine, from unboxed to building. The initiative is judged on hire date to first commit, a cumulative enterprise average that moves slowly and hasn't caught up yet; the first-day goal is a target, not a result.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "this-website",
+    title: "This website: built and run like a production service",
+    eyebrow: "Personal project · 2026",
+    lede:
+      "juasoh.com is a pre-rendered React site on Cloudflare, with a serverless contact backend on AWS defined in Terraform, CI/CD in GitHub Actions, and analytics that show where visitors come from.",
+    role: "Designer and engineer (solo)",
+    period: "2026 – present",
+    stack: [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Cloudflare Workers",
+      "AWS Lambda",
+      "API Gateway",
+      "DynamoDB",
+      "SES",
+      "Terraform",
+      "GitHub Actions",
+      "Checkov",
+      "Playwright",
+      "Google Analytics 4",
+    ],
+    facts: [
+      { value: "11", label: "Pages pre-rendered to static HTML on every build" },
+      { value: "17", label: "Unit tests on the contact backend" },
+      { value: "0", label: "Failed Checkov security checks (121 passed)" },
+      { value: "~$1", label: "Estimated AWS cost per month" },
+    ],
+    tldr: {
+      problem: "A portfolio should show how I build, not just say it: fast and findable pages, a contact form that works, and infrastructure I can explain line by line.",
+      did: "Built the site in React and TypeScript, pre-rendered for SEO and deployed to Cloudflare from GitHub, and wrote a serverless AWS contact backend in Terraform with a tested CI/CD pipeline.",
+      result: "Every page ships as real HTML with structured data. The contact backend's code, tests, and security scans run on every change; its AWS deployment is in progress.",
+    },
+    flow: [
+      { label: "GitHub", detail: "Pull request" },
+      { label: "GitHub Actions", detail: "Tests, Terraform, Checkov", mine: true },
+      { label: "Cloudflare Workers", detail: "Pre-rendered site", mine: true },
+      { label: "API Gateway + Lambda", detail: "Contact API (AWS)", mine: true },
+      { label: "DynamoDB + SES", detail: "Save, then email", mine: true },
+    ],
+    flowNote: "The site deploys from main to Cloudflare; the AWS contact stack deploys through GitHub Actions after a manual approval.",
+    links: [
+      { label: "Source code on GitHub", url: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website" },
+      { label: "How the AWS contact backend works", url: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website/blob/main/docs/aws/contact-backend.md" },
+    ],
+    sections: [
+      {
+        label: "The problem",
+        title: "A portfolio that proves the work",
+        body: [
+          "My earlier site was a single page with a contact form that never actually sent: its email service was misconfigured. I wanted the site itself to show the platform and DevOps practices I use at work.",
+        ],
+      },
+      {
+        label: "Approach",
+        title: "The front end",
+        body: ["React 18 and TypeScript, built with Vite and styled with Tailwind CSS, with light and dark themes."],
+        bullets: [
+          "Every route is pre-rendered to static HTML at build time and hydrated in the browser, so search engines and link previews see real content.",
+          "Per-page titles, canonical URLs, Open Graph cards, JSON-LD structured data, a generated sitemap, and IndexNow submissions to Bing.",
+          "Accessible by keyboard and screen reader, with content that stays visible without JavaScript or with reduced motion.",
+        ],
+      },
+      {
+        label: "Approach",
+        title: "Hosting and delivery",
+        body: [
+          "Cloudflare Workers serves the static build. Every pull request gets its own preview URL, and merging to main deploys to juasoh.com in about a minute.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "A serverless contact backend on AWS",
+        body: [
+          "The contact form posts to an API at aws.juasoh.com: API Gateway, then a Python Lambda that validates the message, saves it to DynamoDB, and emails it through SES. CloudWatch alarms and a budget alert watch it. All of it is defined in Terraform.",
+        ],
+        bullets: [
+          "Least-privilege IAM: the function can write to one table and send from verified addresses, nothing else.",
+          "Throttling, a honeypot, and input validation instead of a login, because it's a public form.",
+          "Remote Terraform state in S3 with locking, and pinned provider versions.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "CI/CD and security",
+        body: [
+          "GitHub Actions runs the unit tests, Terraform format and validation, and a Checkov security scan on every change, and posts the Terraform plan on pull requests. Deploys use OIDC, so no AWS keys are stored anywhere, and need a manual approval.",
+        ],
+      },
+      {
+        label: "Outcome",
+        title: "Where it stands",
+        body: [
+          "The site is live. The contact backend is built and passes its tests and scans in CI; it is being deployed to AWS, and until then the form falls back to opening the visitor's email app, so no message is lost.",
         ],
       },
     ],

@@ -11,8 +11,8 @@ const LINES: { key: string; value: string; to?: string }[] = [
   { key: "role", value: "Platform Engineer, The Hartford" },
   { key: "program", value: "Tech & Ops Leadership Development Program" },
   { key: "focus", value: "CLI · desktop agent · VS Code · onboarding" },
-  { key: "building", value: "ATLAS, the developer platform for 4,000+ engineers", to: "/work/atlas-developer-platform" },
-  { key: "shipped", value: "144 PRs merged across 21 repos" },
+  { key: "building", value: "ATLAS developer platform (4,000+ engineers, Nov 2026)", to: "/work/atlas-developer-platform" },
+  { key: "shipped", value: "144 PRs merged (214 authored), 21 repos" },
   { key: "studying", value: "M.S. Computer Information Technology, CCSU" },
   { key: "based", value: "Connecticut" },
 ];

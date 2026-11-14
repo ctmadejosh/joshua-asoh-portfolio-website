@@ -1,0 +1,174 @@
+# CI/CD for the AWS contact backend (services/contact + infra/contact).
+#
+#   Pull request -> test     unit tests, terraform fmt/validate, Checkov scan
+#                -> plan     terraform plan against real AWS (read-only role),
+#                            posted as a PR comment
+#   Merge to main -> deploy  terraform apply, after a manual approval on the
+#                            GitHub "production" environment
+#
+# AWS access uses OIDC: GitHub hands each run a short-lived signed token and
+# AWS exchanges it for temporary credentials. No AWS keys are stored in GitHub.
+# The plan and deploy jobs skip themselves until the repo variables from
+# infra/bootstrap exist, so this workflow is safe to merge before AWS is set up.
+
+name: contact-backend
+
+on:
+  pull_request:
+    paths:
+      - "services/contact/**"
+      - "infra/contact/**"
+      - ".github/workflows/contact-backend.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/contact/**"
+      - "infra/contact/**"
+      - ".github/workflows/contact-backend.yml"
+  workflow_dispatch:
+
+# Never run two deploys (or a plan and a deploy) at the same time.
+concurrency:
+  group: contact-backend-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  TF_VERSION: "1.17.2"
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  # Inputs to infra/contact/variables.tf, from repo variables (Settings ->
+  # Secrets and variables -> Actions -> Variables).
+  TF_VAR_recipient_email: ${{ vars.CONTACT_RECIPIENT_EMAIL }}
+  TF_VAR_alert_email: ${{ vars.CONTACT_ALERT_EMAIL }}
+  TF_VAR_custom_domain_ready: ${{ vars.CONTACT_CUSTOM_DOMAIN_READY || 'false' }}
+
+jobs:
+  test:
+    name: Test and scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13" # same as the Lambda runtime
+
+      - name: Lambda unit tests
+        run: python -m unittest discover -s services/contact -v
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: terraform fmt
+        run: terraform fmt -check -recursive infra
+
+      - name: terraform validate
+        run: |
+          for dir in infra/bootstrap infra/contact; do
+            terraform -chdir="$dir" init -backend=false
+            terraform -chdir="$dir" validate
+          done
+
+      - name: Checkov security scan
+        run: |
+          pip install --quiet checkov
+          checkov -d infra --framework terraform --compact --quiet
+
+  plan:
+    name: Plan
+    if: github.event_name == 'pull_request' && vars.AWS_PLAN_ROLE_ARN != ''
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets the job request the OIDC token for AWS
+      pull-requests: write # to post the plan as a comment
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: terraform init
+        run: terraform -chdir=infra/contact init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+
+      - name: terraform plan
+        id: plan
+        run: |
+          set +e
+          terraform -chdir=infra/contact plan -no-color -lock-timeout=5m -out=tfplan > plan.txt 2>&1
+          code=$?
+          cat plan.txt
+          exit $code
+
+      - name: Comment the plan on the PR
+        if: always() && steps.plan.outcome != 'skipped'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let plan = fs.existsSync('plan.txt') ? fs.readFileSync('plan.txt', 'utf8') : 'No plan output.';
+            const summary = (plan.match(/^(Plan:.*|No changes\..*)$/m) || ['(see log)'])[0];
+            if (plan.length > 60000) plan = plan.slice(0, 60000) + '\n... truncated; see the workflow log.';
+            const body = [
+              `### Terraform plan: \`infra/contact\` (${{ steps.plan.outcome }})`,
+              `**${summary}**`,
+              '<details><summary>Full plan</summary>',
+              '',
+              '```',
+              plan,
+              '```',
+              '</details>',
+            ].join('\n');
+            await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
+
+  deploy:
+    name: Deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.AWS_DEPLOY_ROLE_ARN != ''
+    needs: test
+    runs-on: ubuntu-latest
+    # The production environment requires a reviewer to click "Approve"
+    # before this job starts, and the AWS deploy role only trusts this
+    # environment.
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: terraform init
+        run: terraform -chdir=infra/contact init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+
+      - name: terraform apply
+        run: terraform -chdir=infra/contact apply -auto-approve -lock-timeout=5m
+
+      - name: Show outputs (DNS records, URLs, next step)
+        run: terraform -chdir=infra/contact output
+
+      - name: Smoke test
+        run: |
+          url=$(terraform -chdir=infra/contact output -raw api_base_url)
+          echo "GET $url/health"
+          curl --fail --silent --show-error --retry 5 --retry-delay 5 --retry-all-errors "$url/health"

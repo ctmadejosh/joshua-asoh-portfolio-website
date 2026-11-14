@@ -19,7 +19,6 @@ import {
   SITE_NAME,
   SITE_URL,
   PLATFORM_FIGURES_AS_OF,
-  TEAM_LEAD,
   atlasWork,
   platformFigures,
   proofPoints,
@@ -93,8 +92,9 @@ const Home = () => {
               .
             </p>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I'm a platform engineer at The Hartford, building ATLAS: the CLI, desktop agent, VS
-              Code extension, and self-service onboarding that 4,000+ engineers use to ship. Before
+              I'm a platform engineer at The Hartford, building ATLAS, a developer platform used by
+              4,000+ engineers (as of November 2026): its CLI, desktop agent, VS Code extension, and
+              self-service onboarding. Before
               that: a GenAI documentation chatbot on AWS Bedrock, digital manufacturing, and lab
               software.
             </p>
@@ -170,13 +170,8 @@ const Home = () => {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 ATLAS puts onboarding, builds, policy, telemetry, and AI tooling in one place: a CLI,
-                a desktop agent, and IDE extensions. I'm one of the engineers building it, on the
-                platform team led by{" "}
-                <a href={TEAM_LEAD.url} target="_blank" rel="noopener noreferrer" className="text-link">
-                  {TEAM_LEAD.name}
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-                , and I help deliver the{" "}
+                a desktop agent, and IDE extensions. I'm one of the engineers on the platform team
+                building it, and I help deliver the{" "}
                 <span className="font-medium text-foreground">CEO-sponsored push</span> to make
                 new-engineer onboarding self-service.
               </p>
@@ -245,7 +240,7 @@ const Home = () => {
             description="Each case study opens with a three-line summary and a diagram of the system, so you can stop there or keep reading."
             action={{ label: "All case studies", to: "/work" }}
           />
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2">
             {rest.map((study, i) => (
               <CaseStudyCard key={study.slug} study={study} index={i} />
             ))}

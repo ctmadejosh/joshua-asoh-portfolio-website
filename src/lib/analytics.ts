@@ -5,6 +5,8 @@
  * change, because GA's automatic page view only fires on the first load of a
  * single-page app.
  */
+import { captureAttribution, refOnlyCampaign } from "./attribution";
+
 type Gtag = (...args: unknown[]) => void;
 declare global {
   interface Window {
@@ -13,11 +15,21 @@ declare global {
   }
 }
 
-const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+/**
+ * The juasoh.com GA4 property. A measurement ID isn't a secret (it's in every
+ * tracked page's HTML); VITE_GA_MEASUREMENT_ID can override it for testing.
+ */
+const MEASUREMENT_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-G1XFK5MDXR";
+
+/** Only the real site is counted: not Cloudflare previews, localhost, or tests. */
+const PRODUCTION_HOSTS = new Set(["juasoh.com", "www.juasoh.com"]);
 let initialised = false;
 
 export const analyticsEnabled = () =>
-  typeof window !== "undefined" && Boolean(MEASUREMENT_ID) && import.meta.env.PROD;
+  typeof window !== "undefined" &&
+  Boolean(MEASUREMENT_ID) &&
+  import.meta.env.PROD &&
+  (PRODUCTION_HOSTS.has(window.location.hostname) || Boolean(import.meta.env.VITE_GA_MEASUREMENT_ID));
 
 export function initAnalytics() {
   if (initialised || !analyticsEnabled()) return;
@@ -35,7 +47,12 @@ export function initAnalytics() {
     window.dataLayer!.push(arguments);
   };
   window.gtag("js", new Date());
-  window.gtag("config", MEASUREMENT_ID, { send_page_view: false });
+  // utm_* tags on the landing URL are read by GA automatically. The short
+  // ?ref=linkedin form is mapped onto GA's campaign fields here, and the
+  // visit's first source is saved as the user property `first_source`.
+  const attribution = captureAttribution();
+  window.gtag("config", MEASUREMENT_ID, { send_page_view: false, ...(refOnlyCampaign() ?? {}) });
+  window.gtag("set", "user_properties", { first_source: attribution.source });
 }
 
 export function trackPageView(path: string, title: string) {

@@ -36,8 +36,9 @@ export const projects: Project[] = [
     title: "This website",
     context: "Personal, ongoing",
     description:
-      "My portfolio, built with React, Vite, TypeScript, and Tailwind CSS and deployed to Cloudflare Workers from GitHub.",
-    stack: ["React", "TypeScript", "Cloudflare Workers"],
+      "A pre-rendered React and TypeScript site on Cloudflare Workers, with a serverless AWS contact backend in Terraform (Lambda, API Gateway, DynamoDB, SES) and CI/CD in GitHub Actions.",
+    stack: ["React", "TypeScript", "Cloudflare Workers", "AWS", "Terraform", "GitHub Actions"],
     link: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website",
+    caseStudy: "this-website",
   },
 ];
