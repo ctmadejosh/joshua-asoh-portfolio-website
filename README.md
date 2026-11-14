@@ -100,10 +100,11 @@ API Gateway → Lambda (Python) → DynamoDB + SES, with CloudWatch alarms, all 
 [docs/aws/contact-backend.md](docs/aws/contact-backend.md) for how it works and how to set it up.
 
 ## Analytics
-Google Analytics 4 loads only when `VITE_GA_MEASUREMENT_ID` (e.g. `G-XXXXXXXXXX`) is set at
-**build** time; set it under the Worker's *Settings → Build → Variables and secrets* in
-Cloudflare. It sends one `page_view` per route change, plus these events:
-`resume_download`, `contact_submit`, `email_copied`, and `command_palette_open`.
+Google Analytics 4 (property `G-G1XFK5MDXR`) runs only on juasoh.com and www.juasoh.com, never on
+Cloudflare previews or localhost, so test traffic doesn't count. It sends one `page_view` per route
+change plus `resume_download`, `contact_submit`, `email_copied` and `command_palette_open`, and records
+where each visit came from (see [docs/share-links.md](docs/share-links.md)). To test against another
+property, build with `VITE_GA_MEASUREMENT_ID`.
 
 ## Deployment
 The site is deployed to Cloudflare Workers (static assets) and served at [juasoh.com](https://juasoh.com). Pushing to `main` triggers a build (`bun install --frozen-lockfile && bun run build`) and deploy using `wrangler.jsonc`.

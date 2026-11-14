@@ -15,11 +15,21 @@ declare global {
   }
 }
 
-const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+/**
+ * The juasoh.com GA4 property. A measurement ID isn't a secret (it's in every
+ * tracked page's HTML); VITE_GA_MEASUREMENT_ID can override it for testing.
+ */
+const MEASUREMENT_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-G1XFK5MDXR";
+
+/** Only the real site is counted: not Cloudflare previews, localhost, or tests. */
+const PRODUCTION_HOSTS = new Set(["juasoh.com", "www.juasoh.com"]);
 let initialised = false;
 
 export const analyticsEnabled = () =>
-  typeof window !== "undefined" && Boolean(MEASUREMENT_ID) && import.meta.env.PROD;
+  typeof window !== "undefined" &&
+  Boolean(MEASUREMENT_ID) &&
+  import.meta.env.PROD &&
+  (PRODUCTION_HOSTS.has(window.location.hostname) || Boolean(import.meta.env.VITE_GA_MEASUREMENT_ID));
 
 export function initAnalytics() {
   if (initialised || !analyticsEnabled()) return;
