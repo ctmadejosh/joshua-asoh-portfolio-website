@@ -206,6 +206,106 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    slug: "this-website",
+    title: "This website: built and run like a production service",
+    eyebrow: "Personal project · 2026",
+    lede:
+      "juasoh.com is a pre-rendered React site on Cloudflare, with a serverless contact backend on AWS defined in Terraform, CI/CD in GitHub Actions, and analytics that show where visitors come from.",
+    role: "Designer and engineer (solo)",
+    period: "2026 – present",
+    stack: [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Cloudflare Workers",
+      "AWS Lambda",
+      "API Gateway",
+      "DynamoDB",
+      "SES",
+      "Terraform",
+      "GitHub Actions",
+      "Checkov",
+      "Playwright",
+      "Google Analytics 4",
+    ],
+    facts: [
+      { value: "11", label: "Pages pre-rendered to static HTML on every build" },
+      { value: "17", label: "Unit tests on the contact backend" },
+      { value: "0", label: "Failed Checkov security checks (121 passed)" },
+      { value: "~$1", label: "Estimated AWS cost per month" },
+    ],
+    tldr: {
+      problem: "A portfolio should show how I build, not just say it: fast and findable pages, a contact form that works, and infrastructure I can explain line by line.",
+      did: "Built the site in React and TypeScript, pre-rendered for SEO and deployed to Cloudflare from GitHub, and wrote a serverless AWS contact backend in Terraform with a tested CI/CD pipeline.",
+      result: "Every page ships as real HTML with structured data. The contact backend's code, tests, and security scans run on every change; its AWS deployment is in progress.",
+    },
+    flow: [
+      { label: "GitHub", detail: "Pull request" },
+      { label: "GitHub Actions", detail: "Tests, Terraform, Checkov", mine: true },
+      { label: "Cloudflare Workers", detail: "Pre-rendered site", mine: true },
+      { label: "API Gateway + Lambda", detail: "Contact API (AWS)", mine: true },
+      { label: "DynamoDB + SES", detail: "Save, then email", mine: true },
+    ],
+    flowNote: "The site deploys from main to Cloudflare; the AWS contact stack deploys through GitHub Actions after a manual approval.",
+    links: [
+      { label: "Source code on GitHub", url: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website" },
+      { label: "How the AWS contact backend works", url: "https://github.com/ctmadejosh/joshua-asoh-portfolio-website/blob/main/docs/aws/contact-backend.md" },
+    ],
+    sections: [
+      {
+        label: "The problem",
+        title: "A portfolio that proves the work",
+        body: [
+          "My earlier site was a single page with a contact form that never actually sent: its email service was misconfigured. I wanted the site itself to show the platform and DevOps practices I use at work.",
+        ],
+      },
+      {
+        label: "Approach",
+        title: "The front end",
+        body: ["React 18 and TypeScript, built with Vite and styled with Tailwind CSS, with light and dark themes."],
+        bullets: [
+          "Every route is pre-rendered to static HTML at build time and hydrated in the browser, so search engines and link previews see real content.",
+          "Per-page titles, canonical URLs, Open Graph cards, JSON-LD structured data, a generated sitemap, and IndexNow submissions to Bing.",
+          "Accessible by keyboard and screen reader, with content that stays visible without JavaScript or with reduced motion.",
+        ],
+      },
+      {
+        label: "Approach",
+        title: "Hosting and delivery",
+        body: [
+          "Cloudflare Workers serves the static build. Every pull request gets its own preview URL, and merging to main deploys to juasoh.com in about a minute.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "A serverless contact backend on AWS",
+        body: [
+          "The contact form posts to an API at aws.juasoh.com: API Gateway, then a Python Lambda that validates the message, saves it to DynamoDB, and emails it through SES. CloudWatch alarms and a budget alert watch it. All of it is defined in Terraform.",
+        ],
+        bullets: [
+          "Least-privilege IAM: the function can write to one table and send from verified addresses, nothing else.",
+          "Throttling, a honeypot, and input validation instead of a login, because it's a public form.",
+          "Remote Terraform state in S3 with locking, and pinned provider versions.",
+        ],
+      },
+      {
+        label: "My contribution",
+        title: "CI/CD and security",
+        body: [
+          "GitHub Actions runs the unit tests, Terraform format and validation, and a Checkov security scan on every change, and posts the Terraform plan on pull requests. Deploys use OIDC, so no AWS keys are stored anywhere, and need a manual approval.",
+        ],
+      },
+      {
+        label: "Outcome",
+        title: "Where it stands",
+        body: [
+          "The site is live. The contact backend is built and passes its tests and scans in CI; it is being deployed to AWS, and until then the form falls back to opening the visitor's email app, so no message is lost.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "documentation-chatbot",
     title: "A GenAI chatbot for internal documentation",
     eyebrow: "The Hartford · 2025 internship",

@@ -240,7 +240,7 @@ const Home = () => {
             description="Each case study opens with a three-line summary and a diagram of the system, so you can stop there or keep reading."
             action={{ label: "All case studies", to: "/work" }}
           />
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2">
             {rest.map((study, i) => (
               <CaseStudyCard key={study.slug} study={study} index={i} />
             ))}

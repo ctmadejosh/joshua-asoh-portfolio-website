@@ -36,6 +36,8 @@
   .skills p { margin-top: 4.5pt; }
   .skills p:first-child { margin-top: 0; }
   .avoid { break-inside: avoid; }
+  li { break-inside: avoid; }
+  .entry > .i, .entry > .row { break-after: avoid; }
 </style>
 </head>
 <body>
@@ -61,7 +63,8 @@
 
 <h2>Skills &amp; Certifications</h2>
 <div class="skills">
-  <p><span class="b">Software:</span> Microsoft Office, Google products, Multisim, SOLIDWORKS, C, C++, Python, Cursor AI, Docker (basic), Raspberry Pi, AWS, Terraform, Jenkins, Harness, GitHub Actions</p>
+  <p><span class="b">Cloud &amp; DevOps:</span> AWS (Lambda, API Gateway, DynamoDB, SES, S3, CloudWatch, Bedrock, ECS), Terraform, GitHub Actions (OIDC), Harness, Jenkins, Cloudflare Workers, Docker (basic), Checkov</p>
+  <p><span class="b">Web &amp; Software:</span> Python, TypeScript, React, Vite, Tailwind CSS, Angular, Playwright, C, C++, Cursor AI, Microsoft Office, Google products, Multisim, SOLIDWORKS, Raspberry Pi</p>
   <p><span class="b">Engineering:</span> Electronic Circuit Prototyping, Soldering, Blueprint Reading, Circuit Analysis, 3D Modeling, 2D Drafting &amp; Drawings, Assembly Design, Prompt Engineering</p>
   <p><span class="b">Hardware:</span> Windows OS, Linux OS, Printer Management, ConnectWise Automate, ConnectWise Manage</p>
   <p><span class="b">Lab:</span> Research and Design/Development, Integrative Workflow, Data Analysis, Good Laboratory Practice (GLP)</p>
@@ -84,7 +87,7 @@
   </ul>
 </div>
 
-<div class="entry avoid">
+<div class="entry">
   <div class="i">Cloud and Reliability Engineering Intern</div>
   <div class="row"><span><span class="b">The Hartford Insurance –</span> Hartford, CT</span><span class="bi">May 2025 – August 2025</span></div>
   <ul>
@@ -96,7 +99,7 @@
   </ul>
 </div>
 
-<div class="entry avoid">
+<div class="entry">
   <div class="i">Client Experience Associate</div>
   <div class="row"><span><span class="b">The Computer Company –</span> Cromwell, CT</span><span class="bi">February 2024 – March 2024</span></div>
   <ul>
@@ -109,7 +112,7 @@
   </ul>
 </div>
 
-<div class="entry avoid">
+<div class="entry">
   <div class="i">Information Technology Student Technician</div>
   <div class="row"><span><span class="b">Gateway IT Department -</span> New Haven, CT</span><span class="bi">October 2022 - May 2023</span></div>
   <ul>
@@ -117,6 +120,28 @@
     <li>Troubleshooted technical issues in a virtual environment that allowed users more efficient access to their data</li>
     <li>Installed and configured hardware, software, and networks around campus as well as updating necessary software such as: <span class="bi">Bomgar</span>, <span class="bi">Windows O.S.</span>, <span class="bi">Mac O.S.</span>, <span class="bi">Microsoft Azure</span>, and <span class="bi">Active Directory</span></li>
     <li>Contributed to team effort by regularly doing printer maintenance and management</li>
+  </ul>
+</div>
+
+<h2>Projects</h2>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">juasoh.com – Personal Portfolio Platform</span> | <span class="i">React, TypeScript, AWS, Terraform</span></span><span class="bi">2026 – Present</span></div>
+  <ul>
+    <li>Built a pre-rendered React/TypeScript site on Cloudflare Workers with per-page SEO metadata, JSON-LD structured data, a generated sitemap, and GA4 traffic-source attribution.</li>
+    <li>Designed a serverless contact API (API Gateway, Lambda, DynamoDB, SES) in Terraform with least-privilege IAM, throttling, CloudWatch alarms, and a budget alert; AWS deployment in progress.</li>
+    <li>Automated CI/CD in GitHub Actions with OIDC (no stored keys), unit tests, Terraform validation, Checkov security scanning, and approval-gated deploys.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">AI-Powered Lead Generation</span> | <span class="i">Python, OpenAI, PRAW, Airtable</span></span><span></span></div>
+  <ul>
+    <li>Automated lead generation and outreach for a home care agency: finds caregiving-related Reddit posts, scores them with AI, and logs leads and outreach in Airtable.</li>
+  </ul>
+</div>
+<div class="entry avoid">
+  <div class="row"><span><span class="b">Kate AI – FactSet Externship Hackathon</span> | <span class="i">Python, Streamlit</span></span><span class="bi">May 2024</span></div>
+  <ul>
+    <li>Built a smart portfolio manager that answers questions about stocks and portfolios using FactSet and news data.</li>
   </ul>
 </div>
 
