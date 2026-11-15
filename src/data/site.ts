@@ -26,7 +26,7 @@ export const INBOX_AUTH = {
   domain:
     (import.meta.env.VITE_INBOX_AUTH_DOMAIN as string | undefined) ||
     "juasoh-inbox.auth.us-east-1.amazoncognito.com",
-  clientId: (import.meta.env.VITE_INBOX_CLIENT_ID as string | undefined) || "",
+  clientId: (import.meta.env.VITE_INBOX_CLIENT_ID as string | undefined) || "4ih3u9vkomr3kk9eou0q6546d4",
 };
 
 export const SITE_DESCRIPTION =
