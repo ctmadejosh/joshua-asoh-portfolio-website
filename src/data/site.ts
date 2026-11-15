@@ -98,8 +98,12 @@ export const NAV_PAGES = [
   { label: "Work", to: "/work" },
   { label: "Projects", to: "/projects" },
   { label: "Experience", to: "/experience" },
+  { label: "Status", to: "/status" },
   { label: "Contact", to: "/contact" },
 ] as const;
+
+/** The private admin page (messages, costs, analytics), behind Cognito login. */
+export const ADMIN_PATH = "/inbox";
 
 export const skillGroups = [
   {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Copy, Download, FileText, Github, Home, Linkedin, Mail, Moon, Search, Sun } from "lucide-react";
+import { Copy, Download, FileText, Github, Home, Linkedin, Lock, Mail, Moon, Search, Sun } from "lucide-react";
 import { toast } from "sonner";
 import {
   CommandDialog,
@@ -12,7 +12,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { caseStudies } from "@/data/work";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL, NAV_PAGES, RESUME_PATH } from "@/data/site";
+import { ADMIN_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL, NAV_PAGES, RESUME_PATH } from "@/data/site";
 import { setTheme, useIsDark } from "@/lib/theme";
 import { trackEvent } from "@/lib/analytics";
 
@@ -116,6 +116,9 @@ const CommandPalette = () => {
           </CommandItem>
           <CommandItem onSelect={() => run(() => window.open(GITHUB_URL, "_blank", "noopener"))}>
             <Github /> GitHub profile
+          </CommandItem>
+          <CommandItem value="admin sign in login inbox" onSelect={() => run(() => navigate(ADMIN_PATH))}>
+            <Lock /> Admin sign-in
           </CommandItem>
         </CommandGroup>
       </CommandList>
