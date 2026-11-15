@@ -14,6 +14,7 @@ export const routes = [
   "/projects",
   "/experience",
   "/contact",
+  "/status",
 ];
 
 /** Pre-rendered so they load with a 200, but kept out of the sitemap (and noindex). */

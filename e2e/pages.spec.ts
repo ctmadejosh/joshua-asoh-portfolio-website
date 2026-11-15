@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
+import { fakeLiveServices } from "./fakes";
 
 /**
  * Every page in the sitemap: loads, has real pre-rendered content, is
@@ -13,7 +14,7 @@ const sitemap = fs.readFileSync(path.join(process.cwd(), "dist", "sitemap.xml"),
 const pages = [...sitemap.matchAll(/<loc>https:\/\/juasoh\.com([^<]*)<\/loc>/g)].map((m) => m[1] || "/");
 
 test("the sitemap lists the main pages", () => {
-  for (const page of ["/", "/about", "/work", "/projects", "/experience", "/contact"]) {
+  for (const page of ["/", "/about", "/work", "/projects", "/experience", "/contact", "/status"]) {
     expect(pages).toContain(page);
   }
   expect(pages).not.toContain("/inbox");
@@ -35,6 +36,7 @@ for (const page of pages) {
       if (msg.type() === "error") errors.push(msg.text());
     });
 
+    await fakeLiveServices(browser);
     await browser.goto(page);
     await expect(browser.locator("h1").first()).toBeVisible();
     await expect(browser).toHaveTitle(/Joshua Asoh/);

@@ -249,6 +249,17 @@ data "aws_iam_policy_document" "deploy" {
     resources = ["*"]
   }
   statement {
+    # The status page's 5-minute schedule (an EventBridge rule). Limited to
+    # rules named juasoh-contact-*.
+    sid = "StatusSchedule"
+    actions = [
+      "events:PutRule", "events:DeleteRule", "events:DescribeRule", "events:EnableRule", "events:DisableRule",
+      "events:PutTargets", "events:RemoveTargets", "events:ListTargetsByRule",
+      "events:TagResource", "events:UntagResource", "events:ListTagsForResource",
+    ]
+    resources = ["arn:aws:events:${var.region}:${data.aws_caller_identity.current.account_id}:rule/juasoh-contact-*"]
+  }
+  statement {
     sid = "OwnIamRolesOnly"
     actions = [
       "iam:CreateRole", "iam:DeleteRole", "iam:GetRole", "iam:UpdateRole",
