@@ -18,7 +18,9 @@ const Layout = () => {
   }, []);
 
   // One GA page_view per route. Deferred a tick so <Seo> has set the title.
+  // The private inbox is left out, so the owner's own visits don't count.
   useEffect(() => {
+    if (pathname === "/inbox") return;
     const t = window.setTimeout(() => trackPageView(pathname, document.title), 0);
     return () => window.clearTimeout(t);
   }, [pathname]);

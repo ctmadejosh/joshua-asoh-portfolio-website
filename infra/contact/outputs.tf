@@ -45,3 +45,13 @@ output "messages_table" {
   description = "DynamoDB table holding every message (AWS console -> DynamoDB -> Explore items)."
   value       = aws_dynamodb_table.messages.name
 }
+
+output "inbox_client_id" {
+  description = "Cognito app client ID for juasoh.com/inbox (public, not a secret). Goes in src/data/site.ts."
+  value       = aws_cognito_user_pool_client.inbox.id
+}
+
+output "inbox_sign_in_domain" {
+  description = "Cognito's hosted sign-in page for the inbox."
+  value       = "${aws_cognito_user_pool_domain.admin.domain}.auth.${var.region}.amazoncognito.com"
+}

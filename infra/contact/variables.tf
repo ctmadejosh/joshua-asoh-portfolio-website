@@ -64,3 +64,18 @@ variable "log_retention_days" {
   type        = number
   default     = 30
 }
+
+variable "inbox_auth_domain_prefix" {
+  description = "Prefix for Cognito's hosted sign-in page: https://<prefix>.auth.<region>.amazoncognito.com. Must be unique in the region."
+  type        = string
+  default     = "juasoh-inbox"
+}
+
+variable "inbox_urls" {
+  description = "Pages Cognito may send you back to after signing in or out (the private inbox)."
+  type        = list(string)
+  default = [
+    "https://juasoh.com/inbox",
+    "http://localhost:8080/inbox", # vite dev server
+  ]
+}

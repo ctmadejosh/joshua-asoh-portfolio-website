@@ -16,6 +16,9 @@ export const routes = [
   "/contact",
 ];
 
+/** Pre-rendered so they load with a 200, but kept out of the sitemap (and noindex). */
+export const privateRoutes = ["/inbox"];
+
 export function render(url: string) {
   let head: HeadData | null = null;
   const html = renderToString(
