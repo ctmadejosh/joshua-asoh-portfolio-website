@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Moon, Search, Sun, X } from "lucide-react";
+import { Lock, Menu, Moon, Search, ShieldCheck, Sun, X } from "lucide-react";
 import { OPEN_PALETTE_EVENT } from "./CommandPalette";
 import Logo from "./Logo";
-import { NAV_PAGES, SITE_NAME } from "@/data/site";
+import { ADMIN_PATH, NAV_PAGES, SITE_NAME } from "@/data/site";
+import { getToken } from "@/lib/inboxAuth";
 import { setTheme, useIsDark } from "@/lib/theme";
 
 const HIDE_AFTER_PX = 80;
@@ -20,6 +21,15 @@ const SiteHeader = () => {
   const [menuOpenOn, setMenuOpenOn] = useState<string | null>(null);
   const menuOpen = menuOpenOn === pathname;
   const lastY = useRef(0);
+  // Whether the owner is signed in to the admin page. Read after mount (the
+  // token lives in sessionStorage), so the pre-rendered HTML is the same for
+  // everyone and hydration never disagrees.
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    setSignedIn(Boolean(getToken()));
+  }, [pathname]);
+  const adminLabel = signedIn ? "Admin" : "Admin sign-in";
+  const AdminIcon = signedIn ? ShieldCheck : Lock;
 
   // Tuck the header away while reading down the page; bring it back on scroll up.
   useEffect(() => {
@@ -89,7 +99,7 @@ const SiteHeader = () => {
             <Logo className="h-8 w-8" />
             <span className="font-display font-semibold tracking-tight">{SITE_NAME}</span>
           </Link>
-          <nav aria-label="Main" className="hidden md:block">
+          <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-x-7">{links("inline")}</ul>
           </nav>
         </div>
@@ -112,6 +122,17 @@ const SiteHeader = () => {
           >
             <Search className="h-[1.1rem] w-[1.1rem]" />
           </button>
+          <Link
+            to={ADMIN_PATH}
+            rel="nofollow"
+            aria-label={adminLabel}
+            title={adminLabel}
+            className={`${iconButton} hidden lg:inline-flex ${
+              signedIn ? "border-primary/50 text-primary-ink" : ""
+            }`}
+          >
+            <AdminIcon className="h-[1.1rem] w-[1.1rem]" />
+          </Link>
           <button
             type="button"
             aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
@@ -126,15 +147,24 @@ const SiteHeader = () => {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             onClick={() => setMenuOpenOn(menuOpen ? null : pathname)}
-            className={`${iconButton} md:hidden`}
+            className={`${iconButton} lg:hidden`}
           >
             {menuOpen ? <X className="h-[1.1rem] w-[1.1rem]" /> : <Menu className="h-[1.1rem] w-[1.1rem]" />}
           </button>
         </div>
       </div>
       {menuOpen && (
-        <nav id="mobile-nav" aria-label="Main" className="mx-auto max-w-site px-6 pb-4 md:hidden">
+        <nav id="mobile-nav" aria-label="Main" className="mx-auto max-w-site px-6 pb-4 lg:hidden">
           <ul className="flex flex-col">{links("menu")}</ul>
+          <Link
+            to={ADMIN_PATH}
+            rel="nofollow"
+            onClick={() => setMenuOpenOn(null)}
+            className="mt-2 flex items-center gap-2 border-t border-border pt-4 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <AdminIcon aria-hidden="true" className="h-4 w-4" />
+            {adminLabel}
+          </Link>
         </nav>
       )}
     </header>

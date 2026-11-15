@@ -19,10 +19,6 @@ const SiteFooter = () => (
           <Link to="/work/this-website" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">
             How it's built
           </Link>
-          {" · "}
-          <Link to="/status" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">
-            Live status
-          </Link>
         </p>
         <p className="mt-2 text-sm text-subtle">© {new Date().getFullYear()} {SITE_NAME}</p>
       </div>
