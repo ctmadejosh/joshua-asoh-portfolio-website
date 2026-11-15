@@ -170,5 +170,12 @@ jobs:
       - name: Smoke test
         run: |
           url=$(terraform -chdir=infra/contact output -raw api_base_url)
+          host=${url#https://}; host=${host%%/*}
+          # Right after the custom domain is attached, its CNAME isn't in Cloudflare yet.
+          # Don't fail the deploy for that: warn, and point at the record to add.
+          if ! getent hosts "$host" > /dev/null; then
+            echo "::warning::$host doesn't resolve yet. Add the CNAME from 'Show outputs' in Cloudflare (DNS only), then re-run this job."
+            exit 0
+          fi
           echo "GET $url/health"
           curl --fail --silent --show-error --retry 5 --retry-delay 5 --retry-all-errors "$url/health"

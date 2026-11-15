@@ -1,6 +1,6 @@
 # LinkedIn post draft: projects
 
-**When to post:** after the PR with these changes is live on juasoh.com. For the line about the AWS contact form, either wait until it's deployed on AWS, or keep the "deploying now" wording below, which is accurate today.
+**When to post:** any time. The site and the AWS contact backend are both live.
 
 **Attach:** the juasoh.com link preview appears automatically. For more reach, add 2–3 images: the home page, the About timeline, and the architecture diagram from the "This website" case study.
 
@@ -16,7 +16,7 @@ juasoh.com is now:
 🔹 A CI/CD pipeline in GitHub Actions that runs unit tests, Terraform validation and a Checkov security scan on every change, and deploys with OIDC (no stored AWS keys) behind a manual approval
 🔹 Analytics that show where visitors come from, so I can tell what's working
 
-I built it end to end (design, infrastructure, pipeline, monitoring), using the same platform and DevOps practices I use every day. The AWS contact backend is deploying now; the code and the full write-up of how it works are on the site.
+I built it end to end (design, infrastructure, pipeline, monitoring), using the same platform and DevOps practices I use every day. The AWS contact backend is live, and the code and a full write-up of how it works are on the site.
 
 A few other projects I've built:
 🔹 AI-Powered Lead Generation: Python + OpenAI automation that finds and scores relevant Reddit posts for a home care agency and logs leads in Airtable
