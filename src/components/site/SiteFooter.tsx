@@ -15,7 +15,7 @@ const SiteFooter = () => (
           Platform engineering, CI/CD, and developer experience. Connecticut.
         </p>
         <p className="mt-6 text-sm text-subtle">
-          Built with React, TypeScript and Tailwind on Cloudflare, with a serverless contact API built for AWS.{" "}
+          Built with React, TypeScript and Tailwind on Cloudflare, with a serverless contact API on AWS.{" "}
           <Link to="/work/this-website" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">
             How it's built
           </Link>

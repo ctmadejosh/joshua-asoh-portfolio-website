@@ -238,7 +238,7 @@ export const caseStudies: CaseStudy[] = [
     tldr: {
       problem: "A portfolio should show how I build, not just say it: fast and findable pages, a contact form that works, and infrastructure I can explain line by line.",
       did: "Built the site in React and TypeScript, pre-rendered for SEO and deployed to Cloudflare from GitHub, and wrote a serverless AWS contact backend in Terraform with a tested CI/CD pipeline.",
-      result: "Every page ships as real HTML with structured data. The contact backend's code, tests, and security scans run on every change; its AWS deployment is in progress.",
+      result: "Every page ships as real HTML with structured data. The contact backend's code, tests, and security scans run on every change; the backend runs on AWS at aws.juasoh.com.",
     },
     flow: [
       { label: "GitHub", detail: "Pull request" },
@@ -300,7 +300,7 @@ export const caseStudies: CaseStudy[] = [
         label: "Outcome",
         title: "Where it stands",
         body: [
-          "The site is live. The contact backend is built and passes its tests and scans in CI; it is being deployed to AWS, and until then the form falls back to opening the visitor's email app, so no message is lost.",
+          "The site is live. The contact backend passes its tests and scans in CI, and it now runs on AWS at aws.juasoh.com, deployed through the approval-gated pipeline. If the API is ever unreachable, the form falls back to opening the visitor's email app, so no message is lost.",
         ],
       },
     ],
