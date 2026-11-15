@@ -1,6 +1,6 @@
 # ---------------------------------------------------------------------------
-# Private inbox: lets Joshua (and only Joshua) read and delete messages at
-# juasoh.com/inbox.
+# Private inbox: lets Joshua (and only Joshua) read and delete messages, and
+# see what this AWS account costs, at juasoh.com/inbox.
 # ---------------------------------------------------------------------------
 #
 #   Browser ──sign in──> Cognito (password + authenticator app code)
@@ -133,7 +133,7 @@ resource "aws_apigatewayv2_integration" "admin" {
   integration_type       = "AWS_PROXY"
   integration_uri        = aws_lambda_function.admin.invoke_arn
   payload_format_version = "2.0"
-  timeout_milliseconds   = 10000
+  timeout_milliseconds   = 25000 # the costs route reads several billing series
 }
 
 resource "aws_apigatewayv2_route" "list_messages" {
@@ -150,6 +150,22 @@ resource "aws_apigatewayv2_route" "delete_message" {
   target             = "integrations/${aws_apigatewayv2_integration.admin.id}"
   authorization_type = "JWT"
   authorizer_id      = aws_apigatewayv2_authorizer.inbox.id
+}
+
+resource "aws_apigatewayv2_route" "costs" {
+  api_id             = aws_apigatewayv2_api.contact.id
+  route_key          = "GET /costs"
+  target             = "integrations/${aws_apigatewayv2_integration.admin.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.inbox.id
+}
+
+resource "aws_lambda_permission" "admin_costs" {
+  statement_id  = "AllowCostsFromApiGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.admin.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.contact.execution_arn}/*/GET/costs"
 }
 
 resource "aws_lambda_permission" "admin_api" {
@@ -182,7 +198,7 @@ resource "aws_lambda_function" "admin" {
   #checkov:skip=CKV_AWS_272:Code signing guards against tampered deploy artifacts in multi-team pipelines; here Terraform zips the reviewed source directly.
   #checkov:skip=CKV_AWS_173:The environment variables are a table name and a user ID, not secrets; Lambda encrypts them at rest with an AWS-managed key anyway.
   function_name = "${local.name}-admin"
-  description   = "juasoh.com private inbox: list and delete messages (behind Cognito login)"
+  description   = "juasoh.com private inbox: messages and costs (behind Cognito login)"
   role          = aws_iam_role.admin.arn
 
   filename         = data.archive_file.admin.output_path
@@ -191,7 +207,7 @@ resource "aws_lambda_function" "admin" {
   runtime          = "python3.13"
   architectures    = ["arm64"]
   memory_size      = 128
-  timeout          = 10
+  timeout          = 20
 
   environment {
     variables = {
@@ -199,6 +215,9 @@ resource "aws_lambda_function" "admin" {
       # The Cognito user ID ("sub") allowed in. A valid token for any other
       # user in the pool still gets 403.
       OWNER_SUB = aws_cognito_user.owner.sub
+      # For the costs view: which budget to read.
+      ACCOUNT_ID  = data.aws_caller_identity.current.account_id
+      BUDGET_NAME = aws_budgets_budget.monthly.name
     }
   }
 
@@ -220,6 +239,19 @@ resource "aws_iam_role" "admin" {
 }
 
 data "aws_iam_policy_document" "admin" {
+  #checkov:skip=CKV_AWS_356:CloudWatch ListMetrics and GetMetricStatistics don't support resource-level permissions, so "*" is the only option; both are read-only.
+  statement {
+    # Billing metrics: estimated month-to-date charges per service. Read-only,
+    # and free (GetMetricStatistics is in CloudWatch's free API allowance).
+    sid       = "ReadBillingMetrics"
+    actions   = ["cloudwatch:ListMetrics", "cloudwatch:GetMetricStatistics"]
+    resources = ["*"]
+  }
+  statement {
+    sid       = "ReadMonthlyBudget"
+    actions   = ["budgets:ViewBudget"]
+    resources = ["arn:aws:budgets::${data.aws_caller_identity.current.account_id}:budget/${aws_budgets_budget.monthly.name}"]
+  }
   statement {
     sid       = "ReadAndDeleteMessages"
     actions   = ["dynamodb:Scan", "dynamodb:DeleteItem"]
