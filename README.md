@@ -64,6 +64,18 @@ A contact form is available for professional inquiries and networking.
 - Content: `src/data/` (`work.ts` case studies, `projects.ts`, `experience.ts`, `site.ts`). Headline numbers live once in `proofPoints` in `site.ts`.
 - Styles and design tokens (light and dark): `src/index.css`, `tailwind.config.ts`
 
+## Tests and checks
+Every pull request runs these in GitHub Actions; the site ones are in `.github/workflows/site.yml`.
+
+| Check | What it covers | Run it locally |
+|---|---|---|
+| Lint | ESLint over the app | `bun run lint` |
+| Browser tests (Playwright, `e2e/`) | Every sitemap page loads with real pre-rendered HTML, no errors and no sideways scroll, on desktop and phone; the contact form (API faked); the 404 page; analytics off outside juasoh.com; `/inbox` hidden from search | `bun run build && bun run test:e2e` |
+| Lighthouse (`lighthouserc.json`) | Accessibility, best practices and SEO must stay high; performance warns only | `npx @lhci/cli@0.15.1 autorun` after a build |
+| Lambda tests, Terraform, Checkov | The AWS backend (`contact-backend.yml`) | see `docs/aws/contact-backend.md` |
+| CodeQL (`codeql.yml`) | Security scan of TypeScript, Python and the workflows | runs on GitHub |
+| Dependabot (`.github/dependabot.yml`) | Weekly update PRs for packages, Actions and Terraform providers | runs on GitHub |
+
 ## SEO
 `bun run build` builds the client, then pre-renders every route to its own HTML file
 (`dist/work.html`, `dist/work/<slug>.html`, …) with that page's title, description, canonical

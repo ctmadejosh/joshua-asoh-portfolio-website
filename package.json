@@ -12,6 +12,7 @@
     "resume": "node scripts/build-resume.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "test:e2e": "playwright test",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -69,6 +70,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",

@@ -25,6 +25,7 @@ flowchart LR
 | `services/contact/handler.py` | The Lambda function: about 150 lines of Python. |
 | `services/contact/test_handler.py` | 17 unit tests, run with fake DynamoDB and SES, so no AWS account is needed. |
 | `services/contact/admin.py` + `test_admin.py` | The private admin Lambda (messages and costs) and its 22 tests. |
+| `services/contact/status_check.py`, `status.py` + `test_status.py` | The 5-minute uptime checker, the public status API, and their 11 tests. |
 | `infra/bootstrap/` | One-time setup you run by hand: the Terraform state bucket and the GitHub→AWS trust (OIDC). |
 | `infra/contact/` | The backend itself, one file per concern: `api.tf`, `lambda.tf`, `storage_email.tf`, `domain.tf`, `monitoring.tf`, `admin.tf` (the private inbox). |
 | `.github/workflows/contact-backend.yml` | The CI/CD pipeline. |
@@ -100,6 +101,23 @@ flowchart LR
 - **Costs, for free.** The same page has a **Costs** tab (`GET /costs`). It reads **CloudWatch billing metrics** (estimated month-to-date charges per service) and **AWS Budgets** (total, forecast, limit). Both are free to read, unlike the Cost Explorer API ($0.01 a call). One-time switch: Billing and Cost Management → Billing preferences → Alert preferences → **Receive CloudWatch billing alerts**.
 - **Analytics.** The **Analytics** tab embeds a Looker Studio report of the site's Google Analytics data. Google only shows that data to accounts the report is shared with; none of it passes through AWS.
 - **Hidden.** The page isn't linked, is `noindex`, is disallowed in `robots.txt` and is left out of the sitemap and analytics. That's tidiness, not security: the security is the login.
+
+### Uptime checks and the public status page
+`juasoh.com/status` shows live uptime, response times, recent deploys and this month's AWS cost (`infra/contact/status.tf`):
+
+```mermaid
+flowchart LR
+    EB[EventBridge<br/>every 5 min] --> C[status-check Lambda] -- "GET" --> W[juasoh.com] & A[aws.juasoh.com/health]
+    C -- "Up, LatencyMs" --> CW[(CloudWatch<br/>juasoh/Status)]
+    CW -- "down 2 checks in a row" --> SNS[SNS] --> J[alert email]
+    B[Browser<br/>juasoh.com/status] -- "GET /status (public)" --> S[status Lambda] -- read --> CW
+    B -- "recent runs on main" --> GH[GitHub Actions API]
+```
+
+- **Synthetic checks, not traffic.** The checker requests both endpoints every 5 minutes whether or not anyone visits, and checks the response body too (the page title, `{"ok": true}`), not just the status code.
+- **Alarms** email me (SNS) when a target fails two checks in a row (10 minutes), and again when it recovers.
+- **Public but harmless.** `GET /status` has no login. It's read-only (`cloudwatch:GetMetricStatistics` only), cached for 60 seconds and throttled, and it shows one cost total, never the per-service breakdown.
+- **$0.** Four custom metrics and two more alarms stay inside CloudWatch's free 10 + 10; the checks fit Lambda's free tier; scheduled EventBridge rules are free.
 
 ## Infrastructure as code (Terraform)
 
@@ -187,6 +205,13 @@ The deploy role needs permission to manage Cognito, so re-run the bootstrap firs
 2. Run the `contact-backend` workflow and approve it. It creates the login and the inbox routes, and Cognito emails you a **temporary password**.
 3. Put the `inbox_client_id` output into `src/data/site.ts` (`INBOX_AUTH.clientId`) and deploy the site.
 4. Open `juasoh.com/inbox` → **Sign in** with your email and the temporary password. Cognito asks for a new password, then shows a QR code: scan it with an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password…) and enter the 6-digit code.
+
+### Adding the status page (one time)
+The 5-minute schedule is an EventBridge rule, which the deploy role can't manage yet. In CloudShell:
+```bash
+cd ~/joshua-asoh-portfolio-website && git checkout -q main && git pull -q && cd infra/bootstrap && terraform init && terraform apply
+```
+The plan should show one change: the deploy role gains `events:*Rule*`/`*Targets*` permissions on rules named `juasoh-contact-*`. Then merge the change and approve the deploy.
 
 ## Running it locally
 ```bash

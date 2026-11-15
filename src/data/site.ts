@@ -17,6 +17,13 @@ export const CONTACT_API_URL: string =
 /** The private admin API (GET/DELETE /messages, GET /costs), on the same API as the form. */
 export const ADMIN_API_URL = CONTACT_API_URL.replace(/\/contact$/, "");
 
+/** The public status API behind juasoh.com/status (no login). */
+export const STATUS_API_URL = `${ADMIN_API_URL}/status`;
+
+/** This site's repository, for the status page's deploy history. */
+export const GITHUB_REPO_URL = "https://github.com/ctmadejosh/joshua-asoh-portfolio-website";
+export const GITHUB_REPO_API = "https://api.github.com/repos/ctmadejosh/joshua-asoh-portfolio-website";
+
 /**
  * The Looker Studio report shown on the inbox's Analytics tab: its embed URL
  * (File → Embed report → Embed URL). Only Google accounts the report is shared

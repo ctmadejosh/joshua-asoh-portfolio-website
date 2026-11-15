@@ -1,0 +1,37 @@
+# Dependabot opens pull requests when dependencies have updates or security
+# fixes. Each one runs the normal checks (site build and browser tests,
+# Terraform validate and Checkov, Cloudflare preview) before anything merges.
+version: 2
+updates:
+  # Website packages. Minor and patch updates arrive as one weekly PR.
+  # Note: Cloudflare builds with Bun 1.2.15; if an update writes a lockfile
+  # that version can't read, the "site" check fails on the PR.
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # Actions used by the workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Terraform providers (AWS, archive) for both stacks.
+  - package-ecosystem: terraform
+    directories: ["/infra/contact", "/infra/bootstrap"]
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      terraform:
+        patterns: ["*"]

@@ -9,6 +9,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import ContactPage from "./pages/ContactPage";
 import InboxPage from "./pages/InboxPage";
+import StatusPage from "./pages/StatusPage";
 import NotFound from "./pages/NotFound";
 
 /** Routes only; the router itself comes from main.tsx (browser) or entry-server.tsx (pre-render). */
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/experience" element={<ExperiencePage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/status" element={<StatusPage />} />
         <Route path="/inbox" element={<InboxPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
