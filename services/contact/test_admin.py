@@ -7,8 +7,11 @@ Run from the repo root:  python -m unittest discover -s services/contact -v
 import json
 import os
 import unittest
+from datetime import datetime, timezone
 
-os.environ.update(TABLE_NAME="test-table", OWNER_SUB="owner-sub")
+os.environ.update(
+    TABLE_NAME="test-table", OWNER_SUB="owner-sub", ACCOUNT_ID="123456789012", BUDGET_NAME="monthly"
+)
 
 import admin  # noqa: E402
 
@@ -80,6 +83,7 @@ class InboxTest(unittest.TestCase):
             [message(ID_1, "2026-11-14T10:00:00+00:00"), message(ID_2, "2026-11-15T10:00:00+00:00")]
         )
         admin._clients.clear()
+        admin._cost_cache.clear()
         admin._clients["table"] = self.table
 
     def test_lists_newest_first(self):
@@ -146,6 +150,127 @@ class InboxTest(unittest.TestCase):
         resp = admin.handler(event("GET /messages"))
         self.assertEqual(resp["statusCode"], 500)
         self.assertNotIn("secret", resp["body"])
+
+
+NOW = datetime(2026, 11, 15, 12, 0, tzinfo=timezone.utc)
+
+
+def day(month, d):
+    return datetime(2026, month, d, tzinfo=timezone.utc)
+
+
+class FakeCloudWatch:
+    """Billing metrics: a running month-to-date total per service."""
+
+    def __init__(self, series):
+        self.series = series  # {service or None: [(timestamp, value), ...]}
+        self.reads = 0
+
+    def list_metrics(self, **kwargs):
+        metrics = []
+        for service in self.series:
+            dims = [{"Name": "Currency", "Value": "USD"}]
+            if service:
+                dims.append({"Name": "ServiceName", "Value": service})
+            metrics.append({"Dimensions": dims})
+        # A linked-account series and a non-USD series must both be ignored.
+        metrics.append({"Dimensions": [{"Name": "Currency", "Value": "USD"}, {"Name": "LinkedAccount", "Value": "1"}]})
+        metrics.append({"Dimensions": [{"Name": "Currency", "Value": "EUR"}]})
+        return {"Metrics": metrics}
+
+    def get_metric_statistics(self, Dimensions, **kwargs):
+        self.reads += 1
+        dims = {d["Name"]: d["Value"] for d in Dimensions}
+        points = self.series[dims.get("ServiceName")]
+        return {"Datapoints": [{"Timestamp": t, "Maximum": v} for t, v in points]}
+
+
+class FakeBudgets:
+    def __init__(self, fail=False):
+        self.fail = fail
+
+    def describe_budget(self, AccountId, BudgetName):
+        if self.fail:
+            raise RuntimeError("no access")
+        assert (AccountId, BudgetName) == ("123456789012", "monthly")
+        return {
+            "Budget": {
+                "BudgetLimit": {"Amount": "5.0", "Unit": "USD"},
+                "CalculatedSpend": {
+                    "ActualSpend": {"Amount": "0.0123", "Unit": "USD"},
+                    "ForecastedSpend": {"Amount": "0.03", "Unit": "USD"},
+                },
+            }
+        }
+
+
+class CostsTest(unittest.TestCase):
+    def setUp(self):
+        self.cloudwatch = FakeCloudWatch(
+            {
+                None: [(day(10, 20), 0.01), (day(10, 31), 0.02), (day(11, 3), 0.001), (day(11, 14), 0.0123)],
+                "AWSLambda": [(day(10, 31), 0.0), (day(11, 14), 0.0)],
+                "AmazonApiGateway": [(day(10, 31), 0.02), (day(11, 2), 0.0001), (day(11, 14), 0.0003)],
+                "AmazonCognito": [(day(11, 14), 0.012)],
+            }
+        )
+        self.budgets = FakeBudgets()
+        admin._clients.clear()
+        admin._cost_cache.clear()
+        admin._clients.update(cloudwatch=self.cloudwatch, budgets=self.budgets)
+
+    def costs(self):
+        return body(admin.get_costs(now=NOW))
+
+    def test_monthly_values_are_the_peak_of_each_month(self):
+        data = self.costs()
+        self.assertEqual(data["total"], {"this_month": 0.0123, "last_month": 0.02})
+        api = next(s for s in data["services"] if s["service"] == "AmazonApiGateway")
+        self.assertEqual(api, {"service": "AmazonApiGateway", "this_month": 0.0003, "last_month": 0.02})
+
+    def test_service_new_this_month_has_no_last_month(self):
+        cognito = next(s for s in self.costs()["services"] if s["service"] == "AmazonCognito")
+        self.assertIsNone(cognito["last_month"])
+
+    def test_services_sorted_by_this_month(self):
+        names = [s["service"] for s in self.costs()["services"]]
+        self.assertEqual(names, ["AmazonCognito", "AmazonApiGateway", "AWSLambda"])
+
+    def test_ignores_linked_accounts_and_other_currencies(self):
+        self.assertEqual(len(self.costs()["services"]), 3)
+
+    def test_budget_totals(self):
+        self.assertEqual(self.costs()["budget"], {"limit": 5.0, "actual": 0.0123, "forecast": 0.03})
+
+    def test_billing_metrics_off_is_reported(self):
+        self.cloudwatch.series = {}
+        data = self.costs()
+        self.assertIn("BILLING_METRICS_OFF", data["notes"])
+        self.assertEqual(data["services"], [])
+        self.assertEqual(data["budget"]["limit"], 5.0)
+
+    def test_budget_failure_still_returns_services(self):
+        self.budgets.fail = True
+        data = self.costs()
+        self.assertIsNone(data["budget"])
+        self.assertIn("BUDGET_UNAVAILABLE", data["notes"])
+        self.assertEqual(len(data["services"]), 3)
+
+    def test_results_are_cached(self):
+        self.costs()
+        reads = self.cloudwatch.reads
+        self.costs()
+        self.assertEqual(self.cloudwatch.reads, reads)
+
+    def test_costs_route_requires_owner(self):
+        resp = admin.handler(event("GET /costs", sub="someone-else"))
+        self.assertEqual(resp["statusCode"], 403)
+        self.assertEqual(self.cloudwatch.reads, 0)
+
+    def test_costs_route(self):
+        resp = admin.handler(event("GET /costs"))
+        self.assertEqual(resp["statusCode"], 200)
+        self.assertTrue(body(resp)["ok"])
 
 
 if __name__ == "__main__":

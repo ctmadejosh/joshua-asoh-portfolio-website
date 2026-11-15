@@ -14,8 +14,16 @@ export const GITHUB_URL = "https://github.com/ctmadejosh";
 export const CONTACT_API_URL: string =
   (import.meta.env.VITE_CONTACT_API_URL as string | undefined) || "https://aws.juasoh.com/contact";
 
-/** The private inbox's API (GET/DELETE /messages), on the same API as the form. */
-export const INBOX_API_URL = CONTACT_API_URL.replace(/\/contact$/, "/messages");
+/** The private admin API (GET/DELETE /messages, GET /costs), on the same API as the form. */
+export const ADMIN_API_URL = CONTACT_API_URL.replace(/\/contact$/, "");
+
+/**
+ * The Looker Studio report shown on the inbox's Analytics tab: its embed URL
+ * (File → Embed report → Embed URL). Only Google accounts the report is shared
+ * with can see its data, so it can sit in the page source.
+ */
+export const LOOKER_STUDIO_EMBED_URL: string =
+  (import.meta.env.VITE_LOOKER_STUDIO_EMBED_URL as string | undefined) || "";
 
 /**
  * Sign-in for juasoh.com/inbox: Cognito's hosted login page and the app

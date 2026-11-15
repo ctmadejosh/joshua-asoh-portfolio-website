@@ -24,7 +24,7 @@ flowchart LR
 |---|---|
 | `services/contact/handler.py` | The Lambda function: about 150 lines of Python. |
 | `services/contact/test_handler.py` | 17 unit tests, run with fake DynamoDB and SES, so no AWS account is needed. |
-| `services/contact/admin.py` + `test_admin.py` | The private inbox's Lambda (list and delete messages) and its 12 tests. |
+| `services/contact/admin.py` + `test_admin.py` | The private admin Lambda (messages and costs) and its 22 tests. |
 | `infra/bootstrap/` | One-time setup you run by hand: the Terraform state bucket and the GitHub→AWS trust (OIDC). |
 | `infra/contact/` | The backend itself, one file per concern: `api.tf`, `lambda.tf`, `storage_email.tf`, `domain.tf`, `monitoring.tf`, `admin.tf` (the private inbox). |
 | `.github/workflows/contact-backend.yml` | The CI/CD pipeline. |
@@ -97,6 +97,8 @@ flowchart LR
 - **The website never sees the password.** Cognito's hosted page handles it. The page uses the OAuth authorization-code flow with **PKCE**: it proves it started the sign-in, so a stolen code is useless.
 - **Checked twice.** API Gateway's **JWT authorizer** rejects a missing, expired or forged token before Lambda runs. The admin Lambda then checks the token belongs to my user (`OWNER_SUB`), so even another account in the pool would get 403.
 - **A separate Lambda.** The public form's function stays write-only (`PutItem`). Only the admin function can `Scan` and `DeleteItem`, and only behind login. Every read and delete is logged.
+- **Costs, for free.** The same page has a **Costs** tab (`GET /costs`). It reads **CloudWatch billing metrics** (estimated month-to-date charges per service) and **AWS Budgets** (total, forecast, limit). Both are free to read, unlike the Cost Explorer API ($0.01 a call). One-time switch: Billing and Cost Management → Billing preferences → Alert preferences → **Receive CloudWatch billing alerts**.
+- **Analytics.** The **Analytics** tab embeds a Looker Studio report of the site's Google Analytics data. Google only shows that data to accounts the report is shared with; none of it passes through AWS.
 - **Hidden.** The page isn't linked, is `noindex`, is disallowed in `robots.txt` and is left out of the sitemap and analytics. That's tidiness, not security: the security is the login.
 
 ## Infrastructure as code (Terraform)
