@@ -25,7 +25,6 @@ export default tseslint.config(
       // effect after hydration, or the server HTML and first render disagree.
       // Data loads that start on mount use the same pattern.
       "react-hooks/set-state-in-effect": "warn",
-      // Only flags an unused shadcn template (ui/sidebar.tsx).
       "react-hooks/purity": "warn",
       "react-refresh/only-export-components": [
         "warn",
