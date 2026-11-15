@@ -34,3 +34,8 @@ infra/**/terraform.tfvars
 # Python
 __pycache__/
 *.pyc
+
+# Playwright
+/test-results/
+/playwright-report/
+/.lighthouseci/

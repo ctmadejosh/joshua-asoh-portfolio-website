@@ -1,0 +1,73 @@
+# Checks for the website itself (the React app Cloudflare deploys).
+#
+# On every pull request and every push to main:
+#   1. Install with the same Bun version Cloudflare uses, from the lockfile.
+#   2. Lint, then build exactly what Cloudflare builds (pre-rendered pages).
+#   3. Browser tests (Playwright, e2e/): every sitemap page loads cleanly on
+#      desktop and phone, the contact form works (API faked), the private
+#      admin page stays out of search.
+#   4. Lighthouse: accessibility, best practices and SEO must stay >= 90-95;
+#      performance only warns, because timing on shared CI machines is noisy.
+#
+# Cloudflare still does the actual deploy; this workflow is the quality gate.
+name: site
+
+on:
+  pull_request:
+    paths-ignore: ["infra/**", "services/**", "docs/**", "**/*.md"]
+  push:
+    branches: [main]
+    paths-ignore: ["infra/**", "services/**", "docs/**", "**/*.md"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, build, browser tests, Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.15 # the version Cloudflare's build uses
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies (exactly as locked)
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Build (same as Cloudflare)
+        run: bun run build
+
+      - name: Install the test browser
+        run: bunx playwright install --with-deps chromium
+
+      - name: Browser tests
+        run: bun run test:e2e
+
+      - name: Lighthouse
+        run: npx --yes @lhci/cli@0.15.1 autorun
+
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-reports
+          path: |
+            playwright-report/
+            .lighthouseci/
+          retention-days: 14
+          if-no-files-found: ignore
