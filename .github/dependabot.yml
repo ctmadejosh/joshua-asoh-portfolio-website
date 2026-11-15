@@ -20,6 +20,10 @@ updates:
       # can't run with it. Remove this once typescript-eslint adds support.
       - dependency-name: typescript
         update-types: ["version-update:semver-major"]
+      # Tailwind 4 rewrites how styles are configured (CSS-first config, new
+      # build plugin). That's a planned migration, not a version bump.
+      - dependency-name: tailwindcss
+        update-types: ["version-update:semver-major"]
 
   # Actions used by the workflows.
   - package-ecosystem: github-actions

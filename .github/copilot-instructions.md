@@ -23,4 +23,4 @@ The site is public and recruiter-facing:
 - No claims or numbers that aren't already on the site.
 
 ## Not worth flagging
-Style nits that ESLint or Prettier would catch, and the shadcn template components in `src/components/ui/` that the site doesn't use.
+Style nits that ESLint or Prettier would catch. Do flag a newly added UI component or package that nothing imports: unused template code was removed once, and should stay out.

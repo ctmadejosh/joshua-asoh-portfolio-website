@@ -37,7 +37,7 @@ A contact form is available for professional inquiries and networking.
 ## Tech Stack
 - **Framework:** React (with Vite), pre-rendered to static HTML at build time
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS, shadcn-ui
+- **Styling:** Tailwind CSS, with a few Radix-based components (dialog, command palette, toasts)
 - **State/UI:** Custom hooks, Radix UI, Lucide icons
 - **Other:** PostCSS, ESLint
 
