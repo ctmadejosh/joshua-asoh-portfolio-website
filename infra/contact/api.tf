@@ -14,8 +14,8 @@ resource "aws_apigatewayv2_api" "contact" {
   # never reach (or bill) the Lambda.
   cors_configuration {
     allow_origins = var.allowed_origins
-    allow_methods = ["GET", "POST", "OPTIONS"]
-    allow_headers = ["content-type"]
+    allow_methods = ["GET", "POST", "DELETE", "OPTIONS"]
+    allow_headers = ["content-type", "authorization"] # authorization: the inbox's login token
     max_age       = 3600
   }
 

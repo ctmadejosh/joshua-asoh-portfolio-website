@@ -23,11 +23,13 @@ flowchart LR
 | Path | What it is |
 |---|---|
 | `services/contact/handler.py` | The Lambda function: about 150 lines of Python. |
-| `services/contact/test_handler.py` | 15 unit tests, run with fake DynamoDB and SES, so no AWS account is needed. |
+| `services/contact/test_handler.py` | 17 unit tests, run with fake DynamoDB and SES, so no AWS account is needed. |
+| `services/contact/admin.py` + `test_admin.py` | The private inbox's Lambda (list and delete messages) and its 12 tests. |
 | `infra/bootstrap/` | One-time setup you run by hand: the Terraform state bucket and the GitHub→AWS trust (OIDC). |
-| `infra/contact/` | The backend itself, one file per concern: `api.tf`, `lambda.tf`, `storage_email.tf`, `domain.tf`, `monitoring.tf`. |
+| `infra/contact/` | The backend itself, one file per concern: `api.tf`, `lambda.tf`, `storage_email.tf`, `domain.tf`, `monitoring.tf`, `admin.tf` (the private inbox). |
 | `.github/workflows/contact-backend.yml` | The CI/CD pipeline. |
 | `src/components/ContactForm.tsx` | The website side: posts to the API, with an email fallback. |
+| `src/pages/InboxPage.tsx`, `src/lib/inboxAuth.ts` | The private inbox page at juasoh.com/inbox and its sign-in. |
 
 ## Each AWS service, and why
 
@@ -79,6 +81,24 @@ Three alarms email you (after you confirm the SNS subscription):
 ### AWS Budgets: no surprise bills
 It emails you if the account's monthly bill passes 80% of $5, or is *forecast* to pass $5. It watches the whole account, which on a personal account is the safest net.
 
+### Cognito: the private inbox's login
+`juasoh.com/inbox` lists every message and can delete them, for me only:
+
+```mermaid
+flowchart LR
+    B[Browser<br/>juasoh.com/inbox] -- "1. sign in: password + authenticator code" --> C[Cognito<br/>hosted login]
+    C -- "2. short-lived token (1 hour)" --> B
+    B -- "3. GET/DELETE /messages + token" --> AG[API Gateway<br/>JWT authorizer]
+    AG -- "token valid?" --> A[admin Lambda<br/>is it Joshua?] -- "Scan / DeleteItem" --> D[(DynamoDB)]
+```
+
+- **No sign-up.** The user pool only allows accounts created by an admin; Terraform creates exactly one (mine).
+- **Two factors.** Every sign-in needs the password and a 6-digit code from an authenticator app (TOTP MFA).
+- **The website never sees the password.** Cognito's hosted page handles it. The page uses the OAuth authorization-code flow with **PKCE**: it proves it started the sign-in, so a stolen code is useless.
+- **Checked twice.** API Gateway's **JWT authorizer** rejects a missing, expired or forged token before Lambda runs. The admin Lambda then checks the token belongs to my user (`OWNER_SUB`), so even another account in the pool would get 403.
+- **A separate Lambda.** The public form's function stays write-only (`PutItem`). Only the admin function can `Scan` and `DeleteItem`, and only behind login. Every read and delete is logged.
+- **Hidden.** The page isn't linked, is `noindex`, is disallowed in `robots.txt` and is left out of the sitemap and analytics. That's tidiness, not security: the security is the login.
+
 ## Infrastructure as code (Terraform)
 
 Everything above is defined in `infra/contact/*.tf`, so the whole backend can be reviewed in a PR, re-created from scratch, or destroyed with one command. Practices worth calling out:
@@ -112,6 +132,7 @@ At portfolio traffic (a few messages a month), almost everything sits inside AWS
 | API Gateway, Lambda, DynamoDB, SES, SNS, X-Ray | $0 at this volume (pennies even if the free tier has expired) |
 | CloudWatch logs (30-day retention) | ~$0 |
 | ACM certificate | Free |
+| Cognito (one user) | $0: the first 10,000 monthly users are free |
 | S3 state bucket | < $0.01 |
 | **Total** | **≈ $0–1/month** |
 
@@ -149,6 +170,21 @@ You need an AWS account and access to the Cloudflare dashboard for juasoh.com.
    That should print `{"ok": true}`. Then send yourself a message from juasoh.com/contact.
 
 Until step 6 is done, the website's form simply falls back to opening the visitor's email app, so it's safe to deploy the website first.
+
+### Adding the private inbox (one time)
+The deploy role needs permission to manage Cognito, so re-run the bootstrap first:
+
+1. In [AWS CloudShell](https://console.aws.amazon.com/cloudshell) (us-east-1), reinstall Terraform if it's gone (CloudShell clears installed software, but keeps your home folder):
+   ```bash
+   sudo yum install -y yum-utils && sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && sudo yum -y install terraform
+   ```
+   ```bash
+   cd ~/joshua-asoh-portfolio-website && git pull && cd infra/bootstrap && terraform init && terraform apply
+   ```
+   The plan should show one change: the deploy role's policy gains the Cognito permissions.
+2. Run the `contact-backend` workflow and approve it. It creates the login and the inbox routes, and Cognito emails you a **temporary password**.
+3. Put the `inbox_client_id` output into `src/data/site.ts` (`INBOX_AUTH.clientId`) and deploy the site.
+4. Open `juasoh.com/inbox` → **Sign in** with your email and the temporary password. Cognito asks for a new password, then shows a QR code: scan it with an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password…) and enter the 6-digit code.
 
 ## Running it locally
 ```bash

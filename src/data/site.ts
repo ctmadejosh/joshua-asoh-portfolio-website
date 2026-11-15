@@ -14,6 +14,21 @@ export const GITHUB_URL = "https://github.com/ctmadejosh";
 export const CONTACT_API_URL: string =
   (import.meta.env.VITE_CONTACT_API_URL as string | undefined) || "https://aws.juasoh.com/contact";
 
+/** The private inbox's API (GET/DELETE /messages), on the same API as the form. */
+export const INBOX_API_URL = CONTACT_API_URL.replace(/\/contact$/, "/messages");
+
+/**
+ * Sign-in for juasoh.com/inbox: Cognito's hosted login page and the app
+ * client ID (both public, not secrets), from `terraform output` in
+ * infra/contact. An empty clientId shows "not set up yet" on the page.
+ */
+export const INBOX_AUTH = {
+  domain:
+    (import.meta.env.VITE_INBOX_AUTH_DOMAIN as string | undefined) ||
+    "juasoh-inbox.auth.us-east-1.amazoncognito.com",
+  clientId: (import.meta.env.VITE_INBOX_CLIENT_ID as string | undefined) || "",
+};
+
 export const SITE_DESCRIPTION =
   "Joshua Asoh is a platform engineer at The Hartford building ATLAS, a developer platform used by 4,000+ engineers: its CLI, desktop agent, VS Code extension, telemetry, and self-service onboarding.";
 

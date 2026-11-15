@@ -12,7 +12,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 const SITE_URL = "https://juasoh.com";
 
-const { render, routes } = await import(pathToFileURL(path.join(root, "dist-ssr", "entry-server.js")).href);
+const { render, routes, privateRoutes = [] } = await import(pathToFileURL(path.join(root, "dist-ssr", "entry-server.js")).href);
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 
 const escapeAttr = (value) =>
@@ -68,7 +68,7 @@ function page(url) {
 
 const outFile = (url) => (url === "/" ? "index.html" : `${url.slice(1)}.html`);
 
-for (const url of routes) {
+for (const url of [...routes, ...privateRoutes]) {
   const file = path.join(dist, outFile(url));
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, page(url));

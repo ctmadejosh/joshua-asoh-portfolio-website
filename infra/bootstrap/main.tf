@@ -231,6 +231,24 @@ data "aws_iam_policy_document" "deploy" {
     resources = ["*"]
   }
   statement {
+    # The private inbox's login. Listed one by one (not cognito-idp:*) so the
+    # deploy role can manage the pool and its one user, but can't sign in as
+    # anyone, read tokens, or change passwords.
+    sid = "InboxLogin"
+    actions = [
+      "cognito-idp:CreateUserPool", "cognito-idp:DescribeUserPool", "cognito-idp:UpdateUserPool",
+      "cognito-idp:DeleteUserPool", "cognito-idp:GetUserPoolMfaConfig", "cognito-idp:SetUserPoolMfaConfig",
+      "cognito-idp:CreateUserPoolClient", "cognito-idp:DescribeUserPoolClient",
+      "cognito-idp:UpdateUserPoolClient", "cognito-idp:DeleteUserPoolClient",
+      "cognito-idp:CreateUserPoolDomain", "cognito-idp:DescribeUserPoolDomain",
+      "cognito-idp:UpdateUserPoolDomain", "cognito-idp:DeleteUserPoolDomain",
+      "cognito-idp:AdminCreateUser", "cognito-idp:AdminGetUser", "cognito-idp:AdminDeleteUser",
+      "cognito-idp:AdminUpdateUserAttributes", "cognito-idp:AdminEnableUser", "cognito-idp:AdminDisableUser",
+      "cognito-idp:TagResource", "cognito-idp:UntagResource", "cognito-idp:ListTagsForResource",
+    ]
+    resources = ["*"]
+  }
+  statement {
     sid = "OwnIamRolesOnly"
     actions = [
       "iam:CreateRole", "iam:DeleteRole", "iam:GetRole", "iam:UpdateRole",
