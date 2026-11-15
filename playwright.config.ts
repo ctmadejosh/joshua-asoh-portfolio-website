@@ -18,6 +18,9 @@ export default defineConfig({
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
     trace: "retain-on-failure",
+    // Optional: use an already-installed Chromium instead of Playwright's own
+    // download (e.g. PW_CHROMIUM_PATH=/opt/pw-browsers/chromium). CI leaves it unset.
+    ...(process.env.PW_CHROMIUM_PATH ? { launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH } } : {}),
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },

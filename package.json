@@ -12,6 +12,7 @@
     "resume": "node scripts/build-resume.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test:e2e": "playwright test",
     "preview": "vite preview"
   },
@@ -61,12 +62,11 @@
     "react-hook-form": "^7.92.0",
     "react-resizable-panels": "^2.1.3",
     "react-router-dom": "^6.26.2",
-    "recharts": "^2.12.7",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.3",
-    "zod": "^3.23.8"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -78,7 +78,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.6.2",
     "eslint": "^9.9.0",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^15.9.0",
     "postcss": "^8.5.32",

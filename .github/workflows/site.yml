@@ -2,7 +2,8 @@
 #
 # On every pull request and every push to main:
 #   1. Install with the same Bun version Cloudflare uses, from the lockfile.
-#   2. Lint, then build exactly what Cloudflare builds (pre-rendered pages).
+#   2. Lint, type-check, then build exactly what Cloudflare builds
+#      (pre-rendered pages).
 #   3. Browser tests (Playwright, e2e/): every sitemap page loads cleanly on
 #      desktop and phone, the contact form works (API faked), the private
 #      admin page stays out of search.
@@ -48,6 +49,11 @@ jobs:
 
       - name: Lint
         run: bun run lint
+
+      # Vite builds without checking types, so type errors would otherwise
+      # slip through (e.g. a dependency update that changes its typings).
+      - name: Type check
+        run: bun run typecheck
 
       - name: Build (same as Cloudflare)
         run: bun run build

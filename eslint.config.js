@@ -19,6 +19,14 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // React-Compiler-era rules (eslint-plugin-react-hooks 7). Kept on, as
+      // warnings: this site pre-renders every page, so values only the browser
+      // knows (URL hash, screen size, reduced-motion) must be read in an
+      // effect after hydration, or the server HTML and first render disagree.
+      // Data loads that start on mount use the same pattern.
+      "react-hooks/set-state-in-effect": "warn",
+      // Only flags an unused shadcn template (ui/sidebar.tsx).
+      "react-hooks/purity": "warn",
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
