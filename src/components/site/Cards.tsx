@@ -109,7 +109,7 @@ export const ProjectCard = ({ project, index = 0 }: { project: Project; index?: 
         rel="noopener noreferrer"
         className={`group inline-flex items-center gap-1 text-sm font-medium text-primary-ink ${project.caseStudy ? "pt-2" : "mt-auto pt-6"}`}
       >
-        View the code on GitHub
+        {project.linkLabel ?? "View the code on GitHub"}
         <span className="sr-only"> (opens in a new tab)</span>
         <ArrowUpRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </a>
