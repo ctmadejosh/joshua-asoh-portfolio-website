@@ -16,7 +16,7 @@ export const projects: Project[] = [
     description:
       "A redesign of my parents' home care agency site, moved off Weebly to a static site on Cloudflare Workers. Built for readers over 60: large type, the phone number on every screen, mega menus, a caregiver portal, and a documented design system.",
     stack: ["HTML/CSS", "JavaScript", "Cloudflare Workers", "Design system"],
-    link: "https://vnscaregivers.juasoh.com",
+    link: "https://vnscaregivers.com",
     linkLabel: "Visit the site",
   },
   {
