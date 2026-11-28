@@ -4,10 +4,21 @@ export type Project = {
   description: string;
   stack: string[];
   link?: string;
+  /** Link text; defaults to "View the code on GitHub". */
+  linkLabel?: string;
   caseStudy?: string;
 };
 
 export const projects: Project[] = [
+  {
+    title: "VNS Caregivers website",
+    context: "Family business, 2026",
+    description:
+      "A redesign of my parents' home care agency site, moved off Weebly to a static site on Cloudflare Workers. Built for readers over 60: large type, the phone number on every screen, mega menus, a caregiver portal, and a documented design system.",
+    stack: ["HTML/CSS", "JavaScript", "Cloudflare Workers", "Design system"],
+    link: "https://vnscaregivers.com",
+    linkLabel: "Visit the site",
+  },
   {
     title: "AI-Powered Lead Generation",
     context: "Personal",
